@@ -1,0 +1,33 @@
+.crmCustomerCard {
+    border: 3px solid rgb(0, 255, 0);
+    border-radius: 10px;
+    align-items: center;
+    position: relative;
+    padding: 10px 10px;
+    width: 100%;
+    margin: 10px auto;
+    background-color: #686868;
+    height: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 6fr 2fr;
+}
+.topOfCrmPage {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    padding: 10px;
+}
+.crmSearchInput {
+    height: 40px;
+}
+.crmAddCustomerButton {
+    height: 40px;
+    background-color: #686868;
+    border: 1px solid black;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}

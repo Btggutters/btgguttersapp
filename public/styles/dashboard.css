@@ -1,0 +1,82 @@
+/* Start of dateCard */
+
+.dateCard {
+    border: 3px solid rgb(0, 255, 0);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px 10px;
+    width: 100%;
+    margin: 10px auto;
+    background-color: #686868;
+}
+
+.dateCardCalander {
+    left: 2%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 20%;
+    transform: translateY(-50%);
+}
+
+.dateCardInventory {
+    right: 2%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+}
+
+.content {
+    text-align: center;
+    width: 100%;
+}
+
+h1, h2 {
+    font-size: 2rem;
+}
+
+.leftArrow {
+    font-size: 54px;
+    vertical-align: middle;
+    margin-right: 20px;
+
+}
+.rightArrow {
+    font-size: 54px;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+.todayOrTommorrow {
+    font-size: 2rem;
+    margin: 0;
+}
+
+/* End of dateCard */
+/* Start of customerCard */
+
+.customerCard {
+    border: 3px solid rgb(0, 255, 0);
+    border-radius: 10px;
+    align-items: center;
+    position: relative;
+    padding: 10px 10px;
+    width: 100%;
+    margin: 10px auto;
+    background-color: #686868;
+    height: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.customerCardStatusandTime {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}

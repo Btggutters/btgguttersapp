@@ -1,0 +1,16 @@
+{
+  "name": "My Web App",
+  "short_name": "WebApp",
+  "description": "A simple mobile web app",
+  "start_url": "/pages/index.html",
+  "display": "standalone",
+  "background_color": "#f4f4f4",
+  "theme_color": "#333",
+  "icons": [
+    {
+      "src": "images/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
