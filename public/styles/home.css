@@ -1,0 +1,40 @@
+
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.buttonContainer a {
+    color: rgb(0, 255, 13);
+    border: 5px var(--main-color) solid;
+    text-align: center;
+    text-decoration: none;
+    font-size: 7vw; /* Adjust font size based on viewport width */
+    cursor: pointer;
+    margin: 15px 15px;
+    transition: background-color 0.3s ease;
+    width: 50%;
+    height: 40vw; /* Set height based on viewport width to keep square shape */
+    box-sizing: border-box;
+    border-radius: 20px; /* Add border radius */
+    background-color: var(--secondary-color);
+    position: relative;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonContainer a::after {
+    content: "";
+    position: absolute;
+    top: 2%; /* adjust as needed */
+    left: 2%; /* adjust as needed */
+    width: 97%; /* adjust as needed */
+    height: 96%; /* adjust as needed */
+    background-color: rgba(0,0,0,0);
+}

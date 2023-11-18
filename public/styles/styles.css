@@ -1,4 +1,5 @@
 /* Reset some default browser styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,19 +11,17 @@ body {
     background-color: #f4f4f4;
     color: #ffffff;
 }
+:root {
+    --main-color: #39ff14; /* Neon green */
+    --secondary-color: #646464; /* Dark grey */
+    --tertiary-color: #c9c9c9;
+     /* White */
+    
+}
 
 /* Start of Header */
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 10vh;
-}
+
 .companyName {
     text-decoration: none; /* Removes the underline */
     color: white; /* Sets the text color to white */
@@ -31,69 +30,33 @@ header {
     font-weight: bold; /* Makes the text bold */
   
 }
-.hamburgerIcon {
-    position: relative;
-    height: 8vh;
-    transition: transform 0.3s;
-}
-.rotate {
-    transform: rotate(90deg);
-}
-
-.nav-menu {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
-    position: absolute;
-    right: 0;
-    width: 40%; /* Adjust as needed */
-    top: 10%;
-    background-color: #333;
-    height: 600px;
-    border: 1px solid #ccc;
-    z-index: 9999;
-    /* rest of your styles */
-}
-main.blur {
-    backdrop-filter: blur(5px);
-}
-main.blur::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
-    z-index: 9998;
-}
-
-main {
-    position: relative;
-}
-
-.nav-menu.show {
-    opacity: 1;
-    visibility: visible;
-}
-.nav-menu ul {
-    list-style-type: none;
-    
-}
-.nav-menu ul li a {
-    text-decoration: none;
-    color: #39ff14; /* Neon green */
-    font-size: 1.5em; /* Bigger */
-    font-weight: bold; /* Bold */
-    
-}
-.nav-menu ul li {
-    margin-top: 25px;
+header {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 15px;
     text-align: center;
-    border: 1.5px solid #ccc;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
-    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    border-bottom: 3px var(--main-color) solid;
 }
+.loginButton {
+    height: 10vw;
+    width: 15vw;
+    text-align: center;
+    align-items: center;    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-color);   
+
+    color: white; /* Sets the text color to white */
+
+}
+.loginText {
+    font-size: 18vw;
+    font-weight: bold;
+    text-decoration: none; /* Removes the underline */
+    color: red;
+}
+/* End of Header */

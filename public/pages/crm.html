@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+    <link rel="stylesheet" href="/public/styles/styles.css">
+    <link rel="stylesheet" href="/public/styles/crm.css">
+</head>
+<body>
+    <header>
+        <a href="home.html" class="companyName">BTG Gutters</a>
+        <div class="loginButton">
+            <a href="/login" class="loginText">!</a>
+        </div>
+    </header>     
+    <main>
+        <div class="crmPage">
+            <div class="topOfCrmPage">
+                <input type="text" id="crmSearchInput" class="crmSearchInput">
+                <button class="crmAddCustomerButton" onclick="addCustomer()">Add +</button>
+            </div>
+            <div class="crmCustomerCard">
+                <div class="crmCustomerCardName">John Doe</div>
+                <div class="crmCustomerCardLeadStatus">Estimate</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2022 My Web App</p>
+    </footer>
+    <script src="/main.js"></script>
+</body>
+</html>

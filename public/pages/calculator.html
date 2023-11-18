@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+    <link rel="stylesheet" href="/public/styles/styles.css">
+    <link rel="stylesheet" href="/public/styles/calculator.css">
+</head>
+<body>
+    <header>
+        <a href="home.html" class="companyName">BTG Gutters</a>
+        <div class="loginButton">
+            <a href="/login" class="loginText">!</a>
+        </div>
+    </header>     
+    <main>
+        <div class="smallCard">
+            <div id="typeOfCalculation" class="typeOfCalculation">
+                <span>Cost & Charge</span>
+            </div>
+            <input type="number" class="pricePerFoot" id="pricePerFoot" min="1" max="99">
+            <div class="calculatorRows">
+                <div class="toggleContainer">
+                    <button id="toggleButton1" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputField1">
+                    <label for="inputField" class="inputLabel">ft</label>
+                    <output class="firstOutputField" id="firstOutputField1"></output>
+                    <output class="secondOutputField" id="secondOutputField1"></output>
+                </div>
+                <div class="toggleContainer">
+                    <button id="toggleButton2" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputField2">
+                    <label for="inputField" class="inputLabel">DS</label>
+                    <output class="firstOutputField" id="firstOutputField2"></output>
+                    <output class="secondOutputField" id="secondOutputField2"></output>
+                </div>
+                <div class="toggleContainer">
+                    <button id="toggleButton3" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputField3">
+                    <label for="inputField" class="inputLabel">A</label>
+                    <output class="firstOutputField" id="firstOutputField3"></output>
+                    <output class="secondOutputField" id="secondOutputField3"></output>
+                </div>
+                <div class="toggleContainer">
+                    <button id="toggleButton4" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputField4">
+                    <label for="inputField" class="inputLabel">B</label>
+                    <output class="firstOutputField" id="firstOutputField4"></output>
+                    <output class="secondOutputField" id="secondOutputField4"></output>
+                </div>
+                <div class="toggleContainer">
+                    <button id="toggleButton5" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputField5">
+                    <label for="inputField" class="inputLabel">In</label>
+                    <output class="firstOutputField" id="firstOutputField5"></output>
+                    <output class="secondOutputField" id="secondOutputField5"></output>
+                </div>
+                <div class="toggleContainer">
+                    <button id="toggleButton6" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputField6">
+                    <label for="inputField" class="inputLabel">Out</label>
+                    <output class="firstOutputField" id="firstOutputField6"></output>
+                    <output class="secondOutputField" id="secondOutputField6"></output>
+                </div>
+                <div class="toggleContainer">
+                    <button id="toggleButton7" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputField7">
+                    <label for="inputField" class="inputLabel">Sets</label>
+                    <output class="firstOutputField" id="firstOutputField7"></output>
+                    <output class="secondOutputField" id="secondOutputField7"></output>
+                </div>
+                <div class="toggleContainer">
+                    <label for="inputField" class="inputLabel">Accessories</label>
+                    <output class="firstOutputField" id="firstOutputField8"></output>
+                    <output class="secondOutputField" id="secondOutputField8"></output>
+                </div>
+
+
+                <div class="price" id="currentPrices">
+                    <output class="materialCostPrice" id="materialCostPrice"></output>
+                    <output class="materialChargePrice" id="materialChargePrice"></output>
+
+                </div>
+
+
+            </div>
+        </div>
+
+      
+    </main>
+    <script src="/main.js"></script>
+    <script src="/public/javascript/calculator.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>

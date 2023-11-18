@@ -1,0 +1,163 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.kwmCard {
+    border: 3px solid var(--main-color);
+    border-radius: 10px;
+    position: relative;
+    padding: 10px 10px;
+    width: 100%;
+    margin: 10px auto;
+    background-color: var(--secondary-color);
+    height: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    box-sizing: border-box;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.conversionsButton {
+    padding: 5px 10px;
+    border: 2px solid var(--main-color);
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 12vw;
+    height: 100%;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+.inputBox {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid black;
+    font-size: 2rem;
+}
+
+.toLabel {
+    margin: 0 10px;
+}
+
+.conversionsOutputBox {
+    width: 80%;
+    border: none;
+    background-color: var(--secondary-color);
+    font-size: 2rem;
+    text-align: center;
+}
+.sizeRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 60px;
+}
+
+.smallCard {
+    border: 3px solid var(--main-color);
+    border-radius: 10px;
+    position: relative;
+    padding: 10px 10px;
+    width: 100%;
+    margin: 10px auto;
+    background-color: var(--secondary-color);
+    height: 100vh;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+    box-sizing: border-box;
+}
+/* same as other buttons */
+.typeOfCalculation {
+    height: 5vh;
+    background-color: var(--main-color); /* neon green background */
+    color: rgb(0, 0, 0); /* white text */
+    border: none; /* remove default border */
+    border-radius: 50px; /* fully rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* subtle shadow for depth */
+    transition: all 0.3s ease; /* smooth transition */
+    font-size: 2rem; /* slightly larger text */
+    font-weight: bold; /* bold text */
+    width: 70%; /* full width */
+    display: flex; /* display as flex */
+    justify-content: space-between; /* space out the children */
+    align-items: center; /* center align the children vertically */
+}
+.toggleContainer {
+
+
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--tertiary-color);
+    
+}
+.inputField {
+    width: 80px ;
+    margin-right: 8px;
+    font-size: 2rem;
+}
+.toggleButton {
+    padding: 5px 10px;
+    border: 2px solid var(--main-color);
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 12vw;
+    height: 100%;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.firstOutputField {
+    
+}
+.secondOutputField {
+    
+}
+.price {
+    font-size: 2rem;
+    text-align: right;
+    
+}
+.ignoreButton {
+    padding: 5px 10px;
+    border: none;
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 12vw;
+    height: 100%;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.pricePerFoot {
+    width: 25vw;
+    height: 5vh;
+    font-size: 2rem;
+    text-align: center;
+    border: 2px solid black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
