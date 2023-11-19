@@ -5,11 +5,4 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded and parsed');
-
-    document.querySelector('.hamburgerIcon').addEventListener('click', function() {
-        var navMenu = document.querySelector('.nav-menu');
-        this.classList.toggle('rotate');
-        navMenu.classList.toggle('show');
-        document.querySelector('main').classList.toggle('blur');
-    });
 });

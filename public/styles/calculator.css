@@ -5,7 +5,48 @@ main {
     align-items: center;
     height: 100%;
 }
+.toLabel {
+  font-size: 2.2rem;
+  font-weight: bold;
+  MARgin-left:10px;
+  width: 20%;
+}
 .kwmCard {
+    border: 3px solid var(--main-color);
+    border-radius: 10px;
+    padding: 10px 10px;
+    width: 98%;
+    margin: 6px auto;
+    background-color: var(--secondary-color);
+    height: auto;
+    display: grid;
+    grid-template-rows: 4fr 4fr 4fr;
+}
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.inputBox {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid black;
+    font-size: 2rem;
+}
+.conversionsOutputBox {
+    width: 80%;
+    border: none;
+    background-color: var(--secondary-color);
+    font-size: 2rem;
+    text-align: center;
+}
+.sizeRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.smallCard {
     border: 3px solid var(--main-color);
     border-radius: 10px;
     position: relative;
@@ -17,68 +58,6 @@ main {
     font-size: 1.5rem;
     font-weight: bold;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    box-sizing: border-box;
-}
-.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.conversionsButton {
-    padding: 5px 10px;
-    border: 2px solid var(--main-color);
-    background-color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 12vw;
-    height: 100%;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-
-.inputBox {
-    width: 80px;
-    padding: 5px;
-    border: 1px solid black;
-    font-size: 2rem;
-}
-
-.toLabel {
-    margin: 0 10px;
-}
-
-.conversionsOutputBox {
-    width: 80%;
-    border: none;
-    background-color: var(--secondary-color);
-    font-size: 2rem;
-    text-align: center;
-}
-.sizeRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 60px;
-}
-
-.smallCard {
-    border: 3px solid var(--main-color);
-    border-radius: 10px;
-    position: relative;
-    padding: 10px 10px;
-    width: 100%;
-    margin: 10px auto;
-    background-color: var(--secondary-color);
-    height: 100vh;
-    font-size: 1.5rem;
-    font-weight: bold;
-    display: grid;
     grid-template-rows: 1fr 10fr;
     box-sizing: border-box;
 }
@@ -87,52 +66,75 @@ main {
     height: 5vh;
     background-color: var(--main-color); /* neon green background */
     color: rgb(0, 0, 0); /* white text */
-    border: none; /* remove default border */
+    border: 2px white; /* remove default border */
     border-radius: 50px; /* fully rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* subtle shadow for depth */
-    transition: all 0.3s ease; /* smooth transition */
     font-size: 2rem; /* slightly larger text */
     font-weight: bold; /* bold text */
     width: 70%; /* full width */
-    display: flex; /* display as flex */
-    justify-content: space-between; /* space out the children */
-    align-items: center; /* center align the children vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .toggleContainer {
-
-
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid var(--tertiary-color);
-    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+    grid-auto-flow: column;
+}
+.AccessoriesToggleCotainer {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--tertiary-color);
+    display: grid;
+    grid-template-columns: 6fr 3fr 2fr;
+    grid-auto-flow: column;
+}
+.accessoriesButton {
+
+    padding: 5px 5px;
+    border: 2px solid var(--main-color);
+    background-color: white;
+    height: 7vh;
+    width: auto;
+    border-radius: 10px;
+    font-size: 1.8rem;
+    font-weight: bold;
+
 }
 .inputField {
     width: 80px ;
-    margin-right: 8px;
     font-size: 2rem;
 }
-.toggleButton {
-    padding: 5px 10px;
-    border: 2px solid var(--main-color);
-    background-color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.calculatorTitle {
+    width: 90%;
+
+}
+.kwmButtonArea {
+    width: 20%;
+    text-align: right
+}
+.toggleButton , .toggleButtonKwm {
+
+    padding: 5px 5px;
+    border: 4px solid var(--main-color);
+    background-color: var(--secondary-color);
+    height: 7vh;
     width: 12vw;
-    height: 100%;
     border-radius: 50%;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
+    color: var(--main-color);
+
 }
-.firstOutputField {
-    
-}
-.secondOutputField {
-    
-}
+
 .price {
     font-size: 2rem;
     text-align: right;
-    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
 .ignoreButton {
     padding: 5px 10px;
@@ -160,4 +162,17 @@ main {
     justify-content: center;
     align-items: center;
     
+}
+.firstOutputField {
+    text-align: center;
+}
+.secondOutputField {
+    width: 100%;
+    text-align: right;
+}
+.outputField {
+    font-size: 2rem;
+    width: 70%;
+    text-align: right;
+    overflow: hidden;
 }

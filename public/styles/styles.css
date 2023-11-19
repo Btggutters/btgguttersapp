@@ -39,7 +39,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 10vh;
-    border-bottom: 3px var(--main-color) solid;
+    box-shadow: 0 3px 0 var(--main-color);
 }
 .loginButton {
     height: 10vw;

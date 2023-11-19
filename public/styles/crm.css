@@ -8,10 +8,7 @@
     margin: 10px auto;
     background-color: #686868;
     height: auto;
-    font-size: 1.5rem;
-    font-weight: bold;
-    display: grid;
-    grid-template-columns: 6fr 2fr;
+    display: inline-flex;
 }
 .topOfCrmPage {
     display: grid;
@@ -30,4 +27,14 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+.crmCustomerCardLeadStatus {
+    width: 100%;
+    text-align: left;
+    font-size: 1.2rem;
+}
+.crmCustomerCardName {
+    width: 100%;
+    text-align: left;
+    font-size: 1.5rem;
 }
