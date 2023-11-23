@@ -1,0 +1,17 @@
+CREATE TABLE guttermaterialstorage (
+    id SERIAL PRIMARY KEY,
+    size INT CHECK (size = 5 OR size = 6),
+    color VARCHAR(255),
+    item VARCHAR(255),
+    qty INT CHECK (qty >= 0)
+);
+
+
+CREATE TABLE subcontractors (
+    id SERIAL PRIMARY KEY,
+    company_name VARCHAR(255),
+    sales_name VARCHAR(255),
+    sales_number VARCHAR(255),
+    company_street_address VARCHAR(255),
+    company_price_per_foot NUMERIC
+);

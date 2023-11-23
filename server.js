@@ -70,3 +70,52 @@ app.get('/get-subcontractors', (req, res) => {
     }
   });
 });
+app.post('/add-guttermaterial', (req, res) => {
+  // Get the form data from the request body
+  var formDataArray = req.body;
+
+  // Check if formDataArray is an array
+  if (!Array.isArray(formDataArray)) {
+      formDataArray = [formDataArray];
+  }
+
+  // Create a promise for each insert query
+  var promises = formDataArray.map(({ size, color, item, qty }) => {
+      // Create an INSERT INTO query
+      var insertQuery = `
+          INSERT INTO guttermaterialstorage (size, color, item, qty)
+          VALUES ($1, $2, $3, $4)
+      `;
+
+      // Return a promise that resolves when the query is executed
+      return pool.query(insertQuery, [size, color, item, qty]);
+  });
+
+  // Execute all queries
+  Promise.all(promises)
+  .then(() => {
+      console.log('Data inserted');
+      res.status(200).json({ message: 'Data inserted' });
+  })
+  .catch(err => {
+      console.log('Error executing query', err.stack);
+      res.status(500).json({ error: err.stack });
+  });
+});
+app.get('/get-unique-colors', (req, res) => {
+  // Create a SELECT DISTINCT query
+  var selectQuery = `
+      SELECT DISTINCT color FROM guttermaterialstorage
+  `;
+
+  // Execute the query
+  pool.query(selectQuery, (err, result) => {
+      if (err) {
+          console.log('Error executing query', err.stack);
+          res.status(500).json({ error: err.stack });
+      } else {
+          console.log('Data retrieved');
+          res.status(200).json(result.rows);
+      }
+  });
+});

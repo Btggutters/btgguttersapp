@@ -1,44 +1,68 @@
 document.getElementById("subcontractorForm").onsubmit = function(e) {
-    e.preventDefault();
-  
-    // Get the form data
-    var modal = document.getElementById("myModal");
-    var companyName = document.getElementById("companyName").value;
-    var salesName = document.getElementById("salesName").value;
-    var salesNumber = document.getElementById("salesNumber").value;
-    var salesEmail = document.getElementById("salesEmail").value;
-    var companyStreetAddress = document.getElementById("companyStreetAddress").value;
-    var companyPricePerFoot = document.getElementById("companyPricePerFoot").value;
-  
-    // Send a POST request to the server
-    fetch('/add-subcontractor', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        companyName: companyName,
-        salesName: salesName,
-        salesNumber: salesNumber,
-        salesEmail: salesEmail,
-        companyStreetAddress: companyStreetAddress,
-        companyPricePerFoot: companyPricePerFoot,
-      }),
+  e.preventDefault();
+
+  // Get the form data
+  var modal = document.getElementById("myModal");
+  var companyName = document.getElementById("companyName").value;
+  var salesName = document.getElementById("salesName").value;
+  var salesNumber = document.getElementById("salesNumber").value;
+  var salesEmail = document.getElementById("salesEmail").value;
+  var companyStreetAddress = document.getElementById("companyStreetAddress").value;
+  var companyPricePerFoot = document.getElementById("companyPricePerFoot").value;
+
+  // Send a POST request to the server
+  fetch('/add-subcontractor', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      companyName: companyName,
+      salesName: salesName,
+      salesNumber: salesNumber,
+      salesEmail: salesEmail,
+      companyStreetAddress: companyStreetAddress,
+      companyPricePerFoot: companyPricePerFoot,
+    }),
+  })
+  .then(response => {
+      console.log(response);
+      return response.json();
     })
-    .then(response => {
-        console.log(response);
-        return response.json();
-      })
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  
-    // Close the modal
-    modal.style.display = "none";
-  }
+  .then(data => {
+    console.log('Success:', data);
+    
+    // Create a new subcontractor card
+    var subcontractorContainer = document.querySelector('.subcontractorContainer');
+    var subcontractorCard = document.createElement('div');
+    subcontractorCard.className = 'subcontractorCard';
+    subcontractorCard.innerHTML = `
+      <div class="subcontractorRow">
+        <span>${companyName}</span>
+      </div>
+      <div class="subcontractorRow">
+        <span>${salesName}</span>
+        <span class="subcontractCompanyPricePerFoot">${companyPricePerFoot}</span>
+      </div>
+      <div class="subcontractorRow">
+        <span>${salesNumber}</span>
+      </div>
+      <div class="subcontractorRow">
+        <span>${salesEmail}</span>
+      </div>
+      <div class="subcontractorRow">
+        <span>${companyStreetAddress}</span>
+      </div>
+    `;
+    subcontractorContainer.appendChild(subcontractorCard);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+
+  // Close the modal
+  modal.style.display = "none";
+}
   
   document.getElementById("fakeSubmit").onclick = function() {
     // Fill the form with fake data
@@ -89,3 +113,9 @@ window.onload = function() {
       console.error('Error:', error);
     });
 };
+document.getElementById('addSubcontractorButton').addEventListener('click', function() {
+  document.getElementById('myModal').style.display = 'block';
+});
+document.querySelector('.close').addEventListener('click', function() {
+  document.getElementById('myModal').style.display = 'none';
+});
