@@ -19,39 +19,84 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Event listeners for material buttons
-    ['gutter', 'fascia', 'accessories'].forEach(material => {
+    ['colored', 'other'].forEach(material => {
         document.getElementById(`${material}MaterialButton`).addEventListener('click', function() {
             hideAllContent();
             document.getElementById(`${material}Content`).style.display = 'block';
         });
     });
-    document.getElementById('gutterContentAddAnotherRow').addEventListener('click', addRowAndButton);
     // Event listener for gutter add button
     document.getElementById('gutterAddButton').addEventListener('click', function() {
         console.log('Gutter add button clicked');
         document.getElementById('myModal').style.display = 'block';
     });
-    // Event listener for close button
-    document.querySelector('.close').addEventListener('click', function() {
-        console.log('Close button clicked');
-        document.getElementById('myModal').style.display = 'none';
+
+
+
+// Fetch unique colors from the server
+fetch('/get-unique-colors')
+.then(response => response.json())
+.then(colors => {
+    // Get the gutterContentColorCardFeild element
+    var colorCardField = document.querySelector('.gutterContentColorCardFeild');
+
+    // Create a gutterContentColorCard for each color
+    colors.forEach(({ color }) => {
+        var colorCard = document.createElement('div');
+        colorCard.className = 'gutterContentColorCard';
+        colorCard.innerText = color;
+        colorCardField.appendChild(colorCard);
+
+        colorCard.addEventListener('click', function() {
+            // Fetch the items of this color from the server
+            fetch(`/get-items-of-color?color=${encodeURIComponent(color)}`)
+            .then(response => response.json())
+            .then(items => {
+                console.log(`Items of color ${color}:`, items);
+        
+                // Get the itemsContainer elements
+                var itemsContainer1 = document.getElementById('itemsContainer1');
+                var itemsContainer2 = document.getElementById('itemsContainer2');
+                var itemsContainer3 = document.getElementById('itemsContainer3');
+        
+                // Clear the itemsContainers
+                itemsContainer1.innerHTML = '';
+                itemsContainer2.innerHTML = '';
+                itemsContainer3.innerHTML = '';
+        
+                // Get the colorCardModalColor span and update its text
+                var colorSpan = document.querySelector('.colorCardModalColor');
+                colorSpan.innerText = `${color}`;
+        
+                // Create a new div for each item property and append it to the corresponding itemsContainer
+                items.forEach((item) => {
+                    var sizeDiv = document.createElement('div');
+                    sizeDiv.innerText = `${item.size} in`;
+                    itemsContainer1.appendChild(sizeDiv);
+        
+                    var itemDiv = document.createElement('div');
+                    itemDiv.innerText = `${item.item}`;
+                    itemsContainer2.appendChild(itemDiv);
+        
+                    var qtyDiv = document.createElement('div');
+                    qtyDiv.innerText = `${item.qty}`;
+                    itemsContainer3.appendChild(qtyDiv);
+                });
+        
+                // Show the modal
+                var itemsModal = document.getElementById('itemsModal');
+                itemsModal.style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error));
+        });
     });
-     // Fetch unique colors from the server
-     fetch('/get-unique-colors')
-     .then(response => response.json())
-     .then(colors => {
-         // Get the gutterContentColorCardFeild element
-         var colorCardField = document.querySelector('.gutterContentColorCardFeild');
- 
-         // Create a gutterContentColorCard for each color
-         colors.forEach(({ color }) => {
-             var colorCard = document.createElement('div');
-             colorCard.className = 'gutterContentColorCard';
-             colorCard.innerText = color;
-             colorCardField.appendChild(colorCard);
-         });
-     })
-     .catch(error => console.error('Error:', error));
+})
+.catch(error => console.error('Error:', error));
+
+
+
+
+
 
 });
 function hideAllContent() {
@@ -174,23 +219,31 @@ function addRowAndButton() {
     oldButtons.forEach(function(button) {
         button.remove();
     });
+        // Get the switchButton and colorDropdown of the cloned row
+    let clonedSwitchButton = clonedRow.querySelector('.gutterContentSizeSwitchButton');
+    let clonedColorDropdown = clonedRow.querySelector('.modalColorDropdown');
+
+    // Update the dropdown for the cloned row
+    updateColorDropdown(clonedSwitchButton, clonedColorDropdown);
+
 
     // Create new buttons
     var buttons = ['Another One', 'Fake', 'Submit'];
     buttons.forEach(function(buttonText) {
-    var newButton = document.createElement('button');
-    newButton.className = 'addRowButton';
-    newButton.id = 'gutterContent' + buttonText.replace(' ', '') + 'Row';
-    newButton.innerHTML = buttonText;
+        var newButton = document.createElement('button');
+        newButton.className = 'addRowButton';
+        newButton.id = 'gutterContent' + buttonText.replace(' ', '') + 'Row';
+        newButton.innerHTML = buttonText;
 
-    // Append the new button to the parent
-    rowToClone.parentNode.appendChild(newButton);
+        // Append the new button to the parent
+        rowToClone.parentNode.appendChild(newButton);
 
-    // Add the event listener to the new button
-    if (buttonText === 'Another One') {
-        newButton.addEventListener('click', addRowAndButton);
-    } else if (buttonText === 'Fake') {
-        newButton.addEventListener('click', function() {
+        // Add the event listener to the new button
+        if (buttonText === 'Another One') {
+            newButton.addEventListener('click', addRowAndButton);
+        } else if (buttonText === 'Fake') {
+            newButton.addEventListener('click', function() {
+                
             // Fill the fields with random data
             var fields = document.querySelectorAll('.modalNumberFeild, .modalColorDropdown, .modalLabelDropdown, .gutterContentSizeSwitchButton');
             fields.forEach(function(field) {
@@ -203,10 +256,9 @@ function addRowAndButton() {
                 }
             });
         });
-    }
-    else if (buttonText === 'Submit') {
+    } else if (buttonText === 'Submit') {
         newButton.addEventListener('click', function() {
-            // Get all rows
+                // Get all rows
             var rows = document.querySelectorAll('.gutterContentRow');
     
             // Collect the form data for each row
@@ -242,4 +294,121 @@ function addRowAndButton() {
     console.log('Row added');
 }
 
-document.getElementById('gutterContentAddAnotherRow').addEventListener('click', addRowAndButton);
+
+
+
+
+
+
+// Event listener for addOtherButton
+document.getElementById('addOtherButton').addEventListener('click', function() {
+    console.log('Add Other button clicked');
+    document.getElementById('otherModal').style.display = 'block';
+});
+document.getElementById('otherForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from being submitted normally
+    var name = document.getElementById('name').value;
+    var qty = document.getElementById('qty').value;
+    console.log('Form submitted:', name, qty);
+    // You can add your code here to handle the form submission
+});
+
+document.getElementById('addAnotherRowOtherContent').addEventListener('click', addRow);
+
+function addRow() {
+    // Get the parent element
+    var parentElement = document.getElementById('otherForm');
+
+    // Create new row
+    var newRow = document.createElement('div');
+    newRow.className = 'nameAndQTYInputsModalAdd';
+
+    // Create new select element
+    var newSelect = document.createElement('select');
+    newSelect.id = 'name';
+    newSelect.name = 'name';
+    newSelect.className = 'nameDropdown';
+
+    // Add options to the select element
+    var options = ["5 in hangers", "6 in Hangers", "Caulk Tubes", "Big Screws", "1x8 Fascia", "1x6 Fascia", "2x3 Couplers", "3x4 Couplers", "Straps", "Wedges", "Fascia Screws", "metal Trim Nails"];
+    for(var i = 0; i < options.length; i++) {
+        var option = document.createElement('option');
+        option.value = options[i];
+        option.text = options[i];
+        newSelect.appendChild(option);
+    }
+
+    // Create new input element
+    var newInput = document.createElement('input');
+    newInput.type = 'number';
+    newInput.id = 'qty';
+    newInput.name = 'qty';
+    newInput.className = 'qtyInput';
+
+    // Append the select and input elements to the new row
+    newRow.appendChild(newSelect);
+    newRow.appendChild(newInput);
+
+    // Append the new row to the parent element
+    parentElement.appendChild(newRow);
+}
+// Call the function on page load
+// addRowAndButton(); // Remove this line
+
+// Call the function on page load
+addRowAndButton();
+
+document.getElementById('otherForm').addEventListener('submit', function(event) {
+    // Prevent the form from submitting normally
+    event.preventDefault();
+
+    // Get all rows in the form
+    var rows = document.querySelectorAll('#otherForm .nameAndQTYInputsModalAdd');
+
+    // Prepare an array to hold all row data
+    var formDataArray = [];
+
+    // Iterate over each row
+    rows.forEach(function(row) {
+        // Get the item and quantity from the row
+        var item = row.querySelector('.nameDropdown').value;
+        var qty = row.querySelector('.qtyInput').value;
+
+        // Create an object to represent the row
+        var rowData = {
+            size: null,
+            color: null,
+            item: item,
+            qty: qty
+        };
+
+        // Add the row data to the array
+        formDataArray.push(rowData);
+    });
+
+    // Send a POST request to the server
+    fetch('/add-guttermaterial', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataArray),
+    })
+    .then(response => response.json())
+    .then(data => console.log('Success:', data))
+    .catch((error) => console.error('Error:', error));
+});
+
+// Select all close buttons
+var closeButtons = document.querySelectorAll('.close');
+
+// Add an event listener to each close button
+closeButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        // Get the modal that contains this close button
+        var modal = button.closest('.modal');
+
+        // Hide the modal
+        modal.style.display = 'none';
+    });
+});

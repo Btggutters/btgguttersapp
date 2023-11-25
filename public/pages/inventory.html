@@ -16,9 +16,8 @@
     </header>
     <main>
         <div class="typeOfMaterialSwitchFeild">
-            <button id="gutterMaterialButton" class="typeOfMaterialButton">Gutter</button>
-            <button id="fasciaMaterialButton" class="typeOfMaterialButton">Fascia</button>
-            <button id="accessoriesMaterialButton" class="typeOfMaterialButton">Accessories</button>
+            <button id="coloredMaterialButton" class="typeOfMaterialButton">Colored</button>
+            <button id="otherMaterialButton" class="typeOfMaterialButton">Other</button>
         </div>
 
 
@@ -27,48 +26,116 @@
 
 
 
-        <div id="gutterContent" class="content">
+        <div id="coloredContent" class="content">
             <div class="gutterContentTopFeild">
                 <input type="text" id="colorSearch" class="colorSearch" placeholder="Search for color">
-                <button id="gutterAddButton" class="AddButton">Add +</button>
+                <button id="gutterAddButton" class="addButton">Add +</button>
             </div>
             <div class="gutterContentColorCardFeild">
             </div>
-        <div id="fasciaContent" class="content">Fascia Content...</div>
-        <div id="accessoriesContent" class="content">Accessories Content...</div>
+        </div>
+
+        <div id="otherContent" class="content">
+
+            <div class="otherContentTopRow">
+                <button class="addButton" id="addOtherButton">Add +</button>
+            </div>
+            <div class="otherContentLabel">
+                <div>Item</div>
+                <div>Qty</div>
+            </div>
+            <div class="otherContentFeild">
+                <div>5 in Hangers</div>
+                <div>86</div>
+            </div>
+
+        </div>
+        <div id="otherModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="otherForm">
+                    <div class="nameAndQTYLabelsModalAdd">
+                        <div class="label">Name</div>
+                        <div class="label">QTY</div>
+                    </div>
+                    <div class="nameAndQTYInputsModalAdd">
+                        <select id="otherModalItemOptions" name="name" class="nameDropdown">        
+                            <option value="5 in hangers">5 in hangers</option>
+                            <option value="6 in Hangers">6 in Hangers</option>
+                            <option value="Caulk Tubes">Caulk Tubes</option>
+                            <option value="Big Screws">Big Screws</option>
+                            <option value="1x8 Fascia">1x8 Fascia</option>
+                            <option value="1x6 Fascia">1x6 Fascia</option>
+                            <option value="2x3 Couplers">2x3 Couplers</option>
+                            <option value="3x4 Couplers">3x4 Couplers</option>
+                            <option value="Straps">Straps</option>
+                            <option value="Wedges">Wedges</option>
+                            <option value="Fascia Screws">Fascia Screws</option>
+                            <option value="metal Trim Nails">metal Trim Nails</option>
+                        </select>
+                        <input type="number" id="otherModalQty" name="qty" class="qtyInput">
+                    </div>
+                </form>
+                <button class="addAnotherRowButton" id="addAnotherRowOtherContent">Another One</button>
+                <input type="submit" value="Submit" class="submitButtonforOther" form="otherForm">
+            </div>
+        </div>
+
+
 
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                
                 <div class="gutterContentRow" id="rowToClone">
                     <div class="row">
                         <button class="sizeButton gutterContentSizeSwitchButton">5</button>
                         <select class="modalDropdown modalColorDropdown"></select>
                         <select class="modalDropdown modalLabelDropdown">
-                            <option value="gutterLbOption">Gutter Lb</option>
-                            <option value="downspoutOption ">Downspout</option>
-                            <option value="aOption">A</option>
-                            <option value="bOption">B</option>
-                            <option value="inStripMOption">In Strip</option>
-                            <option value="outStripOption">Out Strip</option>
-                            <option value="inBayOption">In Bay</option>
-                            <option value="outBayOption">Out Bay</option>
-                            <option value="inBoxOption">In Box</option>
-                            <option value="outBoxOption">Out Box</option>
-                            <option value="trimftOption">Trim</option></select>
+                            <option value="Gutter Lb">Gutter Lb</option>
+                            <option value="Downspout ">Downspout</option>
+                            <option value="A Eblow">A</option>
+                            <option value="B Elbow">B</option>
+                            <option value="In Strip">In Strip</option>
+                            <option value="Out Strip">Out Strip</option>
+                            <option value="In Bay">In Bay</option>
+                            <option value="Out Bay">Out Bay</option>
+                            <option value="In Box">In Box</option>
+                            <option value="Out Box">Out Box</option>
+                            <option value="Trim Coil Ft">Trim</option>
+                            <option value="Little Screw">Lil Screw</option>
+                        </select>
                         <input type="number" class="modalDropdown modalNumberFeild" min="1" max="100">
                         <button class="gutterContentAddBox">Box</button>
                     </div>           
                 </div>
                 <button class="addRowButton" id="gutterContentAddAnotherRow">Another One</button>
                 <button class="addRowButton" id="gutterContentFakeInfo">Fake</button>
-                <button class="addRowButton" id="gutterContentSubmit">Submit</button>
-
             </div>
-            
         </div>
 
+
+
+
+
+
+
+
+
+
+
+        <div id="itemsModal" class="modal">
+            <div class="modal-content">
+                <div>
+                <span class="colorCardModalColor"></span>
+                <span class="close">&times;</span>
+                </div>
+                <div id="itemsContainer" class="colorCardClickModalField">
+                    <div id="itemsContainer1" class="colorCardModalSize"></div>
+                    <div id="itemsContainer2" class="colorCardModalItem"></div>
+                    <div id="itemsContainer3" class="colorCardModalQty"></div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -93,9 +160,6 @@
 
 
     </main>
-    <footer>
-        <p>© 2022 My Web App</p>
-    </footer>
     <script src="../javascript/inventory.js"></script>
     <script src="../javascript/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -2,11 +2,11 @@
 
   .typeOfMaterialSwitchFeild {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-between;
     align-items: center;
     justify-items: center;
-    margin-top: 10px;
+    height: 10vh;
   }
   .typeOfMaterialButton {
     background-color: var(--main-color);
@@ -18,6 +18,9 @@
     font-size: 16px;
     cursor: pointer;
     width: 85%;
+    height: 70%;
+    font-weight: bold;
+    font-size: 1.8rem;
   }
 .content {
   display: none;
@@ -51,13 +54,26 @@
   justify-content: center;
   transition: background-color 0.3s ease;
 }
-.AddButton {
+.addButton {
     width: 20%;
     padding: 5px 0;
     margin-right: 10px;
+    font-size: 1.8rem;
+    font-weight: bold;
 }
 .modal {
   display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .itemsModal {
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -79,7 +95,7 @@
     color: white;
   }
   
-  .close {
+  .close, .closeForColorCard, .closeAddModal {
     color: white;
     position: absolute;
     top: 2px;
@@ -87,13 +103,7 @@
     font-size: 2.4rem;
     font-weight: bold;
   }
-  
-  .close:hover,
-  .close:focus {
-    color: var(--main-color);
-    text-decoration: none;
-    cursor: pointer;
-  }
+
   .modalDropdown {
     width: 100%;
     padding: 5px 0;
@@ -136,7 +146,94 @@
   width: 70%;
   padding: 5px 0;
 }
-.addRowButton {
+.colorCardClickModalField {
+  display: flex;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+
+.colorCardModalColor {
+  color: rgb(20, 20, 20);
+  position: absolute;
+  top: 2px;
+  left: 15px;
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+.colorCardModalSize{
+  width: 33%;
+  font-size: 2rem;
+}
+
+.colorCardModalItem{
+  width: 33%;
+  font-size: 2rem;
+}
+
+.colorCardModalQty{
+    width: 30%;
+    font-size: 2rem;
+}
+.nameAndQTYInputsModalAdd, .nameAndQTYLabelsModalAdd {
+  display: flex;
+  justify-content: space-between;
+}
+.submitButtonforOther, .addAnotherRowButton, .submitButton, .addRowButton, .addButton{
   width: 100%;
-  padding: 5px 0;
+  height: 6vh;
+  margin-top: 10px;
+  
+  
+}
+.nameAndQTYLabelsModalAdd {
+  width: 100%;
+  text-align: center;
+}
+.qtyInput {
+  margin-top: 8px;
+  width: 50%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.label {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: black;
+}
+.nameDropdown {
+  margin-top: 8px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.otherContentTopRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.addButton {
+  margin: auto;
+}
+.otherContentFeild {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  border: 2px solid var(--main-color);
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  width: 60%;
+  margin: 10px auto;
+  height: 6vh;
+  align-items: center;
+}
+.otherContentLabel {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 190px;
+  color: var(--main-color);
+  font-weight: bold;
+
 }
