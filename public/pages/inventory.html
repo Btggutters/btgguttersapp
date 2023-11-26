@@ -8,26 +8,25 @@
     <link rel="stylesheet" href="../styles/inventory.css">
 </head>
 <body>
+
     <header>
         <a href="home.html" class="companyName">BTG Gutters</a>
         <div class="loginButton">
             <a href="/login" class="loginText">!</a>
         </div>
     </header>
+
     <main>
+        <!-- Nav Bar -->
         <div class="typeOfMaterialSwitchFeild">
             <button id="coloredMaterialButton" class="typeOfMaterialButton">Colored</button>
             <button id="otherMaterialButton" class="typeOfMaterialButton">Other</button>
         </div>
+        
 
-
-
-
-
-
-
+        <!-- Colored Content Page -->
         <div id="coloredContent" class="content">
-            <div class="gutterContentTopFeild">
+            <div class="coloredContentTopFeild">
                 <input type="text" id="colorSearch" class="colorSearch" placeholder="Search for color">
                 <button id="gutterAddButton" class="addButton">Add +</button>
             </div>
@@ -35,8 +34,9 @@
             </div>
         </div>
 
-        <div id="otherContent" class="content">
 
+        <!-- Other Content Page -->
+        <div id="otherContent" class="content">
             <div class="otherContentTopRow">
                 <button class="addButton" id="addOtherButton">Add +</button>
             </div>
@@ -46,8 +46,40 @@
             </div>
             <div class="otherContentFeild">
             </div>
-
         </div>
+
+        <!-- Colored Content Add Modal -->
+        <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div class="gutterContentRow" id="rowToClone">
+                            <div class="row">
+                                <button class="sizeButton gutterContentSizeSwitchButton">5</button>
+                                <select class="modalDropdown modalColorDropdown"></select>
+                                <select class="modalDropdown modalLabelDropdown">
+                                    <option value="Gutter Lb">Gutter Lb</option>
+                                    <option value="Downspout ">Downspout</option>
+                                    <option value="A Eblow">A</option>
+                                    <option value="B Elbow">B</option>
+                                    <option value="In Strip">In Strip</option>
+                                    <option value="Out Strip">Out Strip</option>
+                                    <option value="In Bay">In Bay</option>
+                                    <option value="Out Bay">Out Bay</option>
+                                    <option value="In Box">In Box</option>
+                                    <option value="Out Box">Out Box</option>
+                                    <option value="Trim Coil Ft">Trim</option>
+                                    <option value="Little Screw">Lil Screw</option>
+                                </select>
+                                <input type="number" class="modalDropdown modalNumberFeild" min="1" max="100">
+                                <button class="gutterContentAddBox">Box</button>
+                            </div>           
+                        </div>
+                        <button class="addRowButton" id="gutterContentAddAnotherRow">Another One</button>
+                        <button class="addRowButton" id="gutterContentFakeInfo">Fake</button>
+                    </div>
+        </div>
+
+        <!-- Other Content Add Modal -->
         <div id="otherModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -81,46 +113,8 @@
 
 
 
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="gutterContentRow" id="rowToClone">
-                    <div class="row">
-                        <button class="sizeButton gutterContentSizeSwitchButton">5</button>
-                        <select class="modalDropdown modalColorDropdown"></select>
-                        <select class="modalDropdown modalLabelDropdown">
-                            <option value="Gutter Lb">Gutter Lb</option>
-                            <option value="Downspout ">Downspout</option>
-                            <option value="A Eblow">A</option>
-                            <option value="B Elbow">B</option>
-                            <option value="In Strip">In Strip</option>
-                            <option value="Out Strip">Out Strip</option>
-                            <option value="In Bay">In Bay</option>
-                            <option value="Out Bay">Out Bay</option>
-                            <option value="In Box">In Box</option>
-                            <option value="Out Box">Out Box</option>
-                            <option value="Trim Coil Ft">Trim</option>
-                            <option value="Little Screw">Lil Screw</option>
-                        </select>
-                        <input type="number" class="modalDropdown modalNumberFeild" min="1" max="100">
-                        <button class="gutterContentAddBox">Box</button>
-                    </div>           
-                </div>
-                <button class="addRowButton" id="gutterContentAddAnotherRow">Another One</button>
-                <button class="addRowButton" id="gutterContentFakeInfo">Fake</button>
-            </div>
-        </div>
 
-
-
-
-
-
-
-
-
-
-
+        <!-- Colored Content Click Modal -->
         <div id="itemsModal" class="modal">
             <div class="modal-content">
                 <div>
@@ -135,29 +129,10 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <!-- There's no Other Content Click Modal -->
 
     </main>
+
     <script src="../javascript/inventory.js"></script>
     <script src="../javascript/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
