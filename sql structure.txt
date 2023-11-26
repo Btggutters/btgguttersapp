@@ -6,12 +6,38 @@ CREATE TABLE guttermaterialstorage (
     qty INT CHECK (qty >= 0)
 );
 
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    phone_number VARCHAR(255)
+);
 
 CREATE TABLE subcontractors (
     id SERIAL PRIMARY KEY,
     company_name VARCHAR(255),
     sales_name VARCHAR(255),
     sales_number VARCHAR(255),
-    company_street_address VARCHAR(255),
+    company_address VARCHAR(255),
     company_price_per_foot NUMERIC
+);
+
+
+CREATE TABLE jobs (
+    drawing_upload BYTEA,
+    entity_type VARCHAR(255), (sub or customers)
+    id SERIAL PRIMARY KEY,
+    address VARCHAR(255),
+    job_description VARCHAR(255),
+    job_status VARCHAR(255),
+    estimate_date DATE,
+    estimate_start_time TIME,
+    estimate_end_time TIME,
+    estimate_duration AS (estimate_end_time - estimate_start_time),
+    first_price NUMERIC
+    install_date DATE,
+    install_start_time TIME,
+    install_end_time TIME,
+    install_duration AS (install_end_time - install_start_time),
+    final_price NUMERIC
 );
