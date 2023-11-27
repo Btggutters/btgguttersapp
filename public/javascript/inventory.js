@@ -30,6 +30,26 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Gutter add button clicked');
         document.getElementById('myModal').style.display = 'block';
     });
+    // Get the OtherContentField element
+    var otherContentField = document.querySelector('.otherContentFeild');
+// Fetch the items from the server
+fetch('/get-items-with-null-color-and-storage-location')
+  .then(response => response.json())
+  .then(items => {
+    // Create an OtherContentCard for each item and add it to the OtherContentField
+    items.forEach(item => {
+      var otherContentCard = `
+        <div class="otherContentCard">
+          <p class="otherContentCardItem">${item.item}</p>
+          <p class="otherContentCardQTY">${item.qty}</p>
+        </div>
+      `;
+      otherContentField.innerHTML += otherContentCard;
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 
 
 

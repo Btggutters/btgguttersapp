@@ -171,3 +171,21 @@ var promises = formDataArray.map(({ size, color, item, qty }) => {
       res.status(500).json({ error: err.stack });
   });
 });
+
+app.get('/get-items-with-null-color-and-storage-location', (req, res) => {
+  // Create a SELECT query
+  var selectQuery = `
+    SELECT * FROM material WHERE color IS NULL AND location = 'storage'
+  `;
+
+  // Execute the query
+  pool.query(selectQuery, (err, result) => {
+    if (err) {
+      console.log('Error executing query', err.stack);
+      res.status(500).json({ error: err.stack });
+    } else {
+      console.log('Data retrieved');
+      res.status(200).json(result.rows);
+    }
+  });
+});

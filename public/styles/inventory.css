@@ -114,7 +114,7 @@
     width: 30%;
     padding: 5px 0;
   }
-  .gutterContentColorCard {
+  .gutterContentColorCard, .otherContentCard {
     width: 90%;
     box-shadow: 0 0 0 2px var(--main-color);
     border-radius: 15px;
@@ -217,15 +217,15 @@
 }
 .otherContentFeild {
   font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  gap: 70px;
-  border: 2px solid var(--main-color);
-  background-color: var(--secondary-color);
+  display: grid;
+  grid-template-rows: 1fr;
+
+  background-color: rgb(238, 238, 238);
   border-radius: 20px;
-  width: 60%;
+  width: 95%;
   margin: 10px auto;
-  height: 6vh;
+  max-height: auto;
+  min-height: 24vh;
   align-items: center;
 }
 .otherContentLabel {
@@ -236,4 +236,18 @@
   color: var(--main-color);
   font-weight: bold;
 
+}
+.otherContentCard {
+  display: flex;
+  align-items: center;
+}
+.otherContentCardQTY {
+  width: 40%;
+  text-align: right;
+  font-size: 1.8rem;
+}
+.otherContentCardItem {
+  width: 60%;
+  text-align: left;
+  font-size: 1.8rem;
 }
