@@ -1,17 +1,4 @@
-CREATE TABLE guttermaterialstorage (
-    id SERIAL PRIMARY KEY,
-    size INT CHECK (size = 5 OR size = 6),
-    color VARCHAR(255),
-    item VARCHAR(255),
-    qty INT CHECK (qty >= 0)
-);
 
-CREATE TABLE customers (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    phone_number VARCHAR(255)
-);
 
 CREATE TABLE subcontractors (
     id SERIAL PRIMARY KEY,
@@ -22,22 +9,48 @@ CREATE TABLE subcontractors (
     company_price_per_foot NUMERIC
 );
 
+CREATE TABLE material (
+    id SERIAL PRIMARY KEY,
+    size INT CHECK (size = 5 OR size = 6),
+    color VARCHAR(255),
+    item VARCHAR(255),
+    qty INT CHECK (qty >= 0),
+    location VARCHAR(255),
+    job_id INT,
+    FOREIGN KEY (job_id) REFERENCES jobs(id)
+);
+
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    phone_number VARCHAR(255)
+);
+
 
 CREATE TABLE jobs (
-    drawing_upload BYTEA,
-    entity_type VARCHAR(255), (sub or customers)
     id SERIAL PRIMARY KEY,
+    drawing_upload BYTEA,
+    entity_type VARCHAR(255) CHECK (entity_type IN ('sub', 'customers')),
+    customer_id INT,
+    subcontractor_id INT,
     address VARCHAR(255),
     job_description VARCHAR(255),
     job_status VARCHAR(255),
     estimate_date DATE,
     estimate_start_time TIME,
     estimate_end_time TIME,
-    estimate_duration AS (estimate_end_time - estimate_start_time),
-    first_price NUMERIC
+    estimate_duration NUMERIC,
+    first_price NUMERIC,
     install_date DATE,
     install_start_time TIME,
     install_end_time TIME,
-    install_duration AS (install_end_time - install_start_time),
-    final_price NUMERIC
+    install_duration NUMERIC,
+    final_price NUMERIC,
+    FOREIGN KEY (customer_id) REFERENCES customers(id),
+    FOREIGN KEY (subcontractor_id) REFERENCES subcontractors(id),
+    CHECK (
+        (customer_id IS NOT NULL AND subcontractor_id IS NULL) OR 
+        (customer_id IS NULL AND subcontractor_id IS NOT NULL)
+    )
 );

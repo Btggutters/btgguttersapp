@@ -196,10 +196,18 @@ function updateColorDropdown(switchButton, colorDropdown) {
 
     console.log('Color dropdown updated');
 }
-function addRowAndButton() {
+function addRowAndButton(cloneRow = true) {
     var rowToClone = document.getElementById('rowToClone');
-    var clonedRow = rowToClone.cloneNode(true);
-    clonedRow.id = ""; // remove the id from the cloned row
+    var clonedRow;
+
+    if (cloneRow) {
+        clonedRow = rowToClone.cloneNode(true);
+        clonedRow.id = ""; // remove the id from the cloned row
+        clonedRow.classList.add('clonedRow'); // add a class to the cloned row
+        rowToClone.parentNode.appendChild(clonedRow); // append the cloned row to the parent
+    } else {
+        clonedRow = rowToClone;
+    }
 
     // Remove ids from all child elements
     clonedRow.querySelectorAll('*[id]').forEach(function(node) {
@@ -212,20 +220,18 @@ function addRowAndButton() {
         clonedModalNumberFeild.value = "";
     }
 
-    rowToClone.parentNode.appendChild(clonedRow); // append the cloned row to the parent
-
     // Remove the old buttons
     var oldButtons = document.querySelectorAll('.addRowButton');
     oldButtons.forEach(function(button) {
         button.remove();
     });
-        // Get the switchButton and colorDropdown of the cloned row
+
+    // Get the switchButton and colorDropdown of the cloned row
     let clonedSwitchButton = clonedRow.querySelector('.gutterContentSizeSwitchButton');
     let clonedColorDropdown = clonedRow.querySelector('.modalColorDropdown');
 
     // Update the dropdown for the cloned row
     updateColorDropdown(clonedSwitchButton, clonedColorDropdown);
-
 
     // Create new buttons
     var buttons = ['Another One', 'Fake', 'Submit'];
@@ -240,60 +246,58 @@ function addRowAndButton() {
 
         // Add the event listener to the new button
         if (buttonText === 'Another One') {
-            newButton.addEventListener('click', addRowAndButton);
+            newButton.addEventListener('click', () => addRowAndButton(true));
         } else if (buttonText === 'Fake') {
             newButton.addEventListener('click', function() {
-                
-            // Fill the fields with random data
-            var fields = document.querySelectorAll('.modalNumberFeild, .modalColorDropdown, .modalLabelDropdown, .gutterContentSizeSwitchButton');
-            fields.forEach(function(field) {
-                if (field instanceof HTMLSelectElement) {
-                    var options = field.options;
-                    var randomOptionIndex = Math.floor(Math.random() * options.length);
-                    field.selectedIndex = randomOptionIndex;
-                } else if (field instanceof HTMLInputElement) {
-                    field.value = Math.floor(Math.random() * 100) + 1; // random number between 1 and 100
-                }
+                // Fill the fields with random data
+                var fields = document.querySelectorAll('.modalNumberFeild, .modalColorDropdown, .modalLabelDropdown, .gutterContentSizeSwitchButton');
+                fields.forEach(function(field) {
+                    if (field instanceof HTMLSelectElement) {
+                        var options = field.options;
+                        var randomOptionIndex = Math.floor(Math.random() * options.length);
+                        field.selectedIndex = randomOptionIndex;
+                    } else if (field instanceof HTMLInputElement) {
+                        field.value = Math.floor(Math.random() * 100) + 1; // random number between 1 and 100
+                    }
+                });
             });
-        });
-    } else if (buttonText === 'Submit') {
-        newButton.addEventListener('click', function() {
+        } else if (buttonText === 'Submit') {
+            newButton.addEventListener('click', function() {
                 // Get all rows
-            var rows = document.querySelectorAll('.gutterContentRow');
-    
-            // Collect the form data for each row
-            var formData = Array.from(rows).map(row => ({
-                size: Number(row.querySelector('.gutterContentSizeSwitchButton').innerText),
-                color: row.querySelector('.modalColorDropdown').value,
-                item: row.querySelector('.modalLabelDropdown').value,
-                qty: Number(row.querySelector('.modalNumberFeild').value)
-            }));
-    
-            // Send the form data to the server-side script
-            fetch('/add-guttermaterial', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            })
-            .then(response => {
-                console.log(response);
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
+                var rows = document.querySelectorAll('.gutterContentRow');
+
+                // Collect the form data for each row
+                var formData = Array.from(rows).map(row => ({
+                    size: Number(row.querySelector('.gutterContentSizeSwitchButton').innerText),
+                    color: row.querySelector('.modalColorDropdown').value,
+                    item: row.querySelector('.modalLabelDropdown').value,
+                    qty: Number(row.querySelector('.modalNumberFeild').value)
+                }));
+
+                // Send the form data to the server-side script
+                fetch('/add-guttermaterial', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                })
+                .then(response => {
+                    console.log(response);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
             });
-        });
-    }
-});
+        }
+    });
 
     console.log('Row added');
 }
-
 
 
 
@@ -356,7 +360,7 @@ function addRow() {
 // addRowAndButton(); // Remove this line
 
 // Call the function on page load
-addRowAndButton();
+addRowAndButton(false);
 
 document.getElementById('otherForm').addEventListener('submit', function(event) {
     // Prevent the form from submitting normally

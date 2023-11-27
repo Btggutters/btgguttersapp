@@ -83,12 +83,12 @@ app.post('/add-guttermaterial', (req, res) => {
   var promises = formDataArray.map(({ size, color, item, qty }) => {
       // Create an INSERT INTO query
       var insertQuery = `
-          INSERT INTO guttermaterialstorage (size, color, item, qty)
-          VALUES ($1, $2, $3, $4)
+          INSERT INTO material (size, color, item, qty, location, job_id)
+          VALUES ($1, $2, $3, $4, $5, $6)
       `;
 
       // Return a promise that resolves when the query is executed
-      return pool.query(insertQuery, [size, color, item, qty]);
+      return pool.query(insertQuery, [size, color, item, qty, 'storage', null]);
   });
 
   // Execute all queries
@@ -105,7 +105,7 @@ app.post('/add-guttermaterial', (req, res) => {
 app.get('/get-unique-colors', (req, res) => {
   // Create a SELECT DISTINCT query
   var selectQuery = `
-      SELECT DISTINCT color FROM guttermaterialstorage WHERE color IS NOT NULL
+      SELECT DISTINCT color FROM material WHERE color IS NOT NULL AND location = 'storage'
   `;
 
   // Execute the query
@@ -125,7 +125,7 @@ app.get('/get-items-of-color', (req, res) => {
 
   // Create a SELECT query
   var selectQuery = `
-    SELECT * FROM guttermaterialstorage WHERE color = $1
+    SELECT * FROM material WHERE color = $1 AND location = 'storage'
   `;
 
   // Execute the query
@@ -148,17 +148,17 @@ app.post('/add-guttermaterial', (req, res) => {
       formDataArray = [formDataArray];
   }
 
-  // Create a promise for each insert query
-  var promises = formDataArray.map(({ size, color, item, qty }) => {
-      // Create an INSERT INTO query
-      var insertQuery = `
-          INSERT INTO guttermaterialstorage (size, color, item, qty)
-          VALUES ($1, $2, $3, $4)
-      `;
+// Create a promise for each insert query
+var promises = formDataArray.map(({ size, color, item, qty }) => {
+  // Create an INSERT INTO query
+  var insertQuery = `
+      INSERT INTO material (size, color, item, qty, location, job_id)
+      VALUES ($1, $2, $3, $4, $5, $6)
+  `;
 
-      // Return a promise that resolves when the query is executed
-      return pool.query(insertQuery, [size, color, item, qty]);
-  });
+  // Return a promise that resolves when the query is executed
+  return pool.query(insertQuery, [size, color, item, qty, 'storage', null]);
+});
 
   // Execute all queries
   Promise.all(promises)
