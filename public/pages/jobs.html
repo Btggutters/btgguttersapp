@@ -21,15 +21,135 @@
                 <button class="jobsAddCustomerButton" onclick="addCustomer()">Add</button>
             </div>
             <div class="jobsCustomerCardFront">
-                <div class="jobsCustomerCardFrontName">John Doe</div>
-                <div class="jobsCustomerCardFrontStatus">Estimate Scheduled</div>
+                <div class="jobsCustomerCardNameandStatus">
+                    <div class="jobsCustomerCardFrontName">John Doe</div>
+                    <div class="jobsCustomerCardFrontStatus">Estimate Scheduled</div>
+                </div>
+                <div>
+                    <div class="jobsCustomerCardFrontAddress">32080 Parkwood st, Westland, MI 48186</div>
+                </div>
+            </div>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form>
+                    <label for="job">Job #</label>
+                    <input type="text" id="job" name="job" class="smallInput">
 
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+
+                    <label for="status">Status</label>
+                    <input type="text" id="status" name="status">
+        
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+        
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address">
+                    
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company">
+        
+
+                    <label for="drawing">Drawing</label>
+                    <input type="file" id="drawing" name="drawing" class="smallInput">
+        
+                    <label for="estimateDate">Estimate Date</label>
+                    <input type="date" id="estimateDate" name="estimateDate" class="smallInput">
+
+                    <label for="installDate">Install Date</label>
+                    <input type="date" id="installDate" name="installDate" class="smallInput">
+                            
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" class="smallInput">
+
+                    <label for="notes">Notes</label>
+                    <input type="text" id="notes" name="notes">
+
+                </form>
+                <div class="materialsAddtoJobFeild">
+                    <div class="MaterialCard">
+                        <div class="materialCardFront">
+                            <div class="materialCardFrontName">Gutters</div>
+                        </div>
+                        <div id="guttersMaterialCardContent" class="materialCardBack">
+                            <div class="guttersMaterialCardContentTop">
+                                <button>5</button>
+                                <select id="dropdown">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="guttersMaterialCardContentUnderTop">
+                                <span>Item</span>
+                                <span>QTY</span>
+                            </div>
+                            <div class="guttersMaterialCardContentBelow">
+                                <label for="gutterFTInput">Gutter FT</label>
+                                <input type="number" name="gutterFTInput" id="gutterFTInput">
+                                
+                                <label for="downspoutInput">Downspout</label>
+                                <input type="number" name="downspoutInput" id="downspoutInput">
+                                
+                                <label for="aElbowInput">A Elbow</label>
+                                <input type="number" name="aElbowInput" id="aElbowInput">
+                                
+                                <label for="bElbowInput">B Elbow</label>
+                                <input type="number" name="bElbowInput" id="bElbowInput">
+                                
+                                <label for="inMiterInput">In Miter</label>
+                                <input type="number" name="inMiterInput" id="inMiterInput">
+                                
+                                <label for="inBayMiterInput">In Bay Miter</label>
+                                <input type="number" name="inBayMiterInput" id="inBayMiterInput">
+                                
+                                <label for="outMiterInput">Out Miter</label>
+                                <input type="number" name="outMiterInput" id="outMiterInput">
+                                
+                                <label for="outBayMiterInput">Out Bay Miter</label>
+                                <input type="number" name="outBayMiterInput" id="outBayMiterInput">
+                                
+                                <label for="strapInput">Strap</label>
+                                <input type="number" name="strapInput" id="strapInput">
+                                
+                                <label for="wedgesInput">Wedges</label>
+                                <input type="number" name="wedgesInput" id="wedgesInput">
+                            </div>
+                        </div>
+                    </div>                 
+                    <div class="MaterialCard">
+                        <div class="materialCardFront">
+                            <div class="materialCardFrontName">Leaf Protection</div>
+                        </div>
+                        <div id="leafProtectionMaterialCardContent" class="materialCardBack">
+
+                        </div>
+                    </div>                 
+                    <div class="MaterialCard">
+                        <div class="materialCardFront">
+                            <div class="materialCardFrontName">Fascia Wood</div>
+                        </div>
+                        <div id="fasciaWoodMaterialCardContent" class="materialCardBack">
+                            sdf
+                        </div>
+                    </div>                 
+                    <div class="MaterialCard">
+                        <div class="materialCardFront">
+                            <div class="materialCardFrontName">Fascia Trim</div>
+                        </div>
+                        <div id="fasciaTrimMaterialCardContent" class="materialCardBack">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-    <footer>
-        <p>© 2022 My Web App</p>
-    </footer>
-    <script src="/javascript/main.js"></script>
+    <script src="../javascript/main.js"></script>
+    <script src="../javascript/jobs.js"></script>
 </body>
 </html>

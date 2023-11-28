@@ -122,7 +122,6 @@
     padding: 8px;
     background: var(--secondary-color);
     font-size: 1.2rem;
-    
   }
 
 .gutterContentColorCardFeild {
@@ -219,7 +218,6 @@
   font-size: 2rem;
   display: grid;
   grid-template-rows: 1fr;
-
   background-color: rgb(238, 238, 238);
   border-radius: 20px;
   width: 95%;
