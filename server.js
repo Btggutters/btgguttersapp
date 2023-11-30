@@ -12,11 +12,8 @@ const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
+  password: String(process.env.DB_PASSWORD),
   port: process.env.DB_PORT,
-  ssl: {
-    rejectUnauthorized: false
-  }
 });
 
 app.use(express.json());
@@ -29,18 +26,18 @@ app.get('/', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
 
     if (result.rows.length > 0) {
-      const user = result.rows[0];
+      const userForSignup = result.rows[0];
 
-      const passwordMatch = await bcrypt.compare(password, user.password);
+      const passwordMatch = await bcrypt.compare(password, userForSignup.password);
 
       if (passwordMatch) {
-        if (user.isFirstLogin) {
+        if (userForSignup.isFirstLogin) {
           res.json({ status: 'success', message: 'Please change your password', isFirstLogin: true });
         } else {
           res.json({ status: 'success', message: 'Login successful' });

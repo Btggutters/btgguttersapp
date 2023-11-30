@@ -21,18 +21,17 @@ function openSignupModal() {
                             type="text"
                             id="username"
                             name="username"
-                            autocomplete="off"
                             placeholder="Your Username"
                             required
                         >
                     </label>
                 </div>
                 <div class="text-field">
-                    <label for="password">Password:
+                    <label for="passwordForSignup">Password:
                         <input
-                            id="password"
+                            id="passwordForSignup"
                             type="password"
-                            name="password"
+                            name="passwordForSignup"
                             placeholder="Your Password"
                             required
                         >
@@ -59,7 +58,7 @@ function openSignupModal() {
  
          // Get the username and password entered by the user
         var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
+        var password = document.getElementById('passwordForSignup').value;
  
         fetch('/login', {
             method: 'POST',
@@ -98,7 +97,7 @@ function openSignupModal() {
     modal.style.opacity = 1;
     modal.style.pointerEvents = 'auto';
 
-    document.getElementById('password').onchange = function () {
+    document.getElementById('passwordForSignup').onchange = function () {
         var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/; // adjust this to match your password rules
         if (!passwordPattern.test(this.value)) {
             // the password doesn't match the pattern, set a custom validation message
