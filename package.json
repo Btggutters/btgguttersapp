@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "build-css": "postcss public/styles/styles.css -o public/styles/output.css",
-    "postinstall": "npm rebuild bcrypt --build-from-source"
+    "build-css": "postcss public/styles/styles.css -o public/styles/output.css"
   },
   "author": "",
   "license": "ISC",
@@ -18,10 +17,9 @@
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.0.1",
     "pg": "^8.7.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0"
-    
   }
 }
