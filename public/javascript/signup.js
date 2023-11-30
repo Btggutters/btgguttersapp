@@ -91,6 +91,15 @@ function openSignupModal() {
         document.getElementById('signupModal').style.display = 'none';
     });
 
+// Display the modal
+var modal = document.getElementById('signupModal');
+if (modal) {
+    modal.style.display = 'block';
+    modal.style.opacity = 1;
+    modal.style.pointerEvents = 'auto';
+} else {
+    console.error('signupModal not found!');
+}
     // Display the modal
     var modal = document.getElementById('signupModal');
     modal.style.display = 'block';

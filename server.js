@@ -2,18 +2,21 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
-const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
 
 const cors = require('cors');
 app.use(cors());
 
+const Pool = require('pg').Pool;
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: String(process.env.DB_PASSWORD),
   port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 app.use(express.json());
