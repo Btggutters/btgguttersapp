@@ -34,9 +34,6 @@ function openSignupModal() {
                             type="password"
                             name="password"
                             placeholder="Your Password"
-                            title="Minimum 6 characters at 
-                                least 1 Alphabet and 1 Number"
-                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
                             required
                         >
                     </label>
