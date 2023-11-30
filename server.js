@@ -3,16 +3,17 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const { Pool } = require('pg');
+const bcrypt = require('bcrypt');
 
 const cors = require('cors');
 app.use(cors());
 
 const pool = new Pool({
-  user: 'neon',
-  host: 'ep-dawn-dew-50528787.us-east-2.aws.neon.tech',
-  database: 'neondb',
-  password: 'dIptZLhvHK10',
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
   ssl: {
     rejectUnauthorized: false
   }
@@ -25,6 +26,35 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/home.html'));
+});
+
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+
+    if (result.rows.length > 0) {
+      const user = result.rows[0];
+
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (passwordMatch) {
+        if (user.isFirstLogin) {
+          res.json({ status: 'success', message: 'Please change your password', isFirstLogin: true });
+        } else {
+          res.json({ status: 'success', message: 'Login successful' });
+        }
+      } else {
+        res.json({ status: 'error', message: 'Invalid password' });
+      }
+    } else {
+      res.json({ status: 'error', message: 'User not found' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.json({ status: 'error', message: 'An error occurred' });
+  }
 });
 
 app.post('/add-subcontractor', (req, res) => {
