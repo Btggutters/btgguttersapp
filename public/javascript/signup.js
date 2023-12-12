@@ -106,14 +106,4 @@ if (modal) {
     modal.style.opacity = 1;
     modal.style.pointerEvents = 'auto';
 
-    document.getElementById('passwordForSignup').onchange = function () {
-        var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/; // adjust this to match your password rules
-        if (!passwordPattern.test(this.value)) {
-            // the password doesn't match the pattern, set a custom validation message
-            this.setCustomValidity('Your password must contain at least 8 characters, including uppercase, lowercase, and a number.');
-        } else {
-            // the password matches the pattern, clear any previous custom validation message
-            this.setCustomValidity('');
-        }
-    };
 }
