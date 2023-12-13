@@ -44,66 +44,75 @@ function openSignupModal() {
             </div>
         </div>
     `;
-
-    // Insert the modal HTML into the page
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-
-     // Get the form element
-    var form = document.querySelector('.my-form');
-
-     // Add an event listener for the form's submit event
-    form.addEventListener('submit', function(event) {
-         // Prevent the form from being submitted normally
-        event.preventDefault();
- 
-         // Get the username and password entered by the user
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('passwordForSignup').value;
- 
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username: username, password: password }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // Login was successful
-                // Store the token in the local storage
-                localStorage.setItem('token', data.token);
-        
-                // Show the header
-                document.getElementById('header').style.display = 'block';
+    
+        // Insert the modal HTML into the page
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        console.log("Modal HTML inserted into the page");
+    
+        // Delay the execution of the rest of the code until the next event loop iteration
+        setTimeout(() => {
+            console.log("Inside setTimeout callback");
+            // Get the form element
+            var form = document.querySelector('.my-form');
+            console.log("Form element retrieved", form);
+    
+            // Add an event listener for the form's submit event
+            form.addEventListener('submit', function(event) {
+                console.log("Form submit event triggered");
+                // Prevent the form from being submitted normally
+                event.preventDefault();
+    
+                // Get the username and password entered by the user
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('passwordForSignup').value;
+    
+                fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username: username, password: password }),
+                })
+                .then(response => {
+                    console.log("Received response from server", response);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Received data from server", data);
+                    if (data.status === 'success') {
+                        // Login was successful
+                        // Store the token in a cookie
+                        document.cookie = `token=${data.token}; path=/; max-age=43200`; // 12 hours
+                        console.log('Login successful');
+                
+                        // Close the modal
+                        document.getElementById('signupModal').style.display = 'none';
+                    } else {
+                        // Login failed
+                        // Display an error message
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
+    
+            // Add event listener to close the modal when the close button is clicked
+            document.querySelector('.closeForSignup').addEventListener('click', function() {
+                console.log("Close button clicked");
+                document.getElementById('signupModal').style.display = 'none';
+            });
+    
+            // Display the modal
+            var modal = document.getElementById('signupModal');
+            if (modal) {
+                console.log("Displaying the modal");
+                modal.style.display = 'block';
+                modal.style.opacity = 1;
+                modal.style.pointerEvents = 'auto';
             } else {
-                // Login failed
-                // Show an error message
+                console.error('signupModal not found!');
             }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    });
-
-    // Add event listener to close the modal when the close button is clicked
-    document.querySelector('.closeForSignup').addEventListener('click', function() {
-        document.getElementById('signupModal').style.display = 'none';
-    });
-
-// Display the modal
-var modal = document.getElementById('signupModal');
-if (modal) {
-    modal.style.display = 'block';
-    modal.style.opacity = 1;
-    modal.style.pointerEvents = 'auto';
-} else {
-    console.error('signupModal not found!');
-}
-    // Display the modal
-    var modal = document.getElementById('signupModal');
-    modal.style.display = 'block';
-    modal.style.opacity = 1;
-    modal.style.pointerEvents = 'auto';
-
-}
+        }, 0);
+    }

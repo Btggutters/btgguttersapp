@@ -1,4 +1,4 @@
-
+These are all the postgres query's i used to make my database, so if something needs to be changed give sql query to do so
 
 CREATE TABLE subcontractors (
     id SERIAL PRIMARY KEY,
@@ -53,4 +53,11 @@ CREATE TABLE jobs (
         (customer_id IS NOT NULL AND subcontractor_id IS NULL) OR 
         (customer_id IS NULL AND subcontractor_id IS NOT NULL)
     )
+);
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255),
+    password VARCHAR(255)
 );

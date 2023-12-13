@@ -30,10 +30,24 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Gutter add button clicked');
         document.getElementById('myModal').style.display = 'block';
     });
-    // Get the OtherContentField element
-    var otherContentField = document.querySelector('.otherContentFeild');
-// Fetch the items from the server
-fetch('/get-items-with-null-color-and-storage-location')
+
+
+
+var otherContentField = document.querySelector('.otherContentFeild');
+var jwtCookie = document.cookie.split('; ').find(row => row.startsWith('jwt'));
+var token;
+if (jwtCookie) {
+    token = jwtCookie.split('=')[1];
+} else {
+    console.error('JWT cookie not found');
+    // Handle the error appropriately
+}
+
+fetch('/get-items-with-null-color-and-storage-location', {
+    headers: {
+        'Authorization': 'Bearer ' + token, 
+    },
+})
   .then(response => response.json())
   .then(items => {
     // Create an OtherContentCard for each item and add it to the OtherContentField
@@ -54,7 +68,11 @@ fetch('/get-items-with-null-color-and-storage-location')
 
 
 // Fetch unique colors from the server
-fetch('/get-unique-colors')
+fetch('/get-unique-colors', {
+    headers: {
+        'Authorization': 'Bearer ' + token, 
+    },
+})
 .then(response => response.json())
 .then(colors => {
     // Get the gutterContentColorCardFeild element
@@ -299,6 +317,7 @@ function addRowAndButton(cloneRow = true) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token, 
                     },
                     body: JSON.stringify(formData),
                 })
@@ -415,6 +434,7 @@ document.getElementById('otherForm').addEventListener('submit', function(event) 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token, 
         },
         body: JSON.stringify(formDataArray),
     })
