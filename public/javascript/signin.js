@@ -1,8 +1,8 @@
-function openSignupModal() {
+function openSigninModal() {
     const modalHTML = `
-        <div id="signupModal" class="signUpModal">
-            <div class="signUpModalmodalContent">
-                <span class="closeForSignup">&times;</span>
+        <div id="SigninModal" class="SigninModal">
+            <div class="SigninModalmodalContent">
+                <span class="closeForSignin">&times;</span>
                 <form class="my-form">
                 <div class="socials-row">
                     <a href="#" title="Use Google">
@@ -27,11 +27,11 @@ function openSignupModal() {
                     </label>
                 </div>
                 <div class="text-field">
-                    <label for="passwordForSignup">Password:
+                    <label for="passwordForSignin">Password:
                         <input
-                            id="passwordForSignup"
+                            id="passwordForSignin"
                             type="password"
-                            name="passwordForSignup"
+                            name="passwordForSignin"
                             placeholder="Your Password"
                             required
                         >
@@ -64,7 +64,7 @@ function openSignupModal() {
     
                 // Get the username and password entered by the user
                 var username = document.getElementById('username').value;
-                var password = document.getElementById('passwordForSignup').value;
+                var password = document.getElementById('passwordForSignin').value;
     
                 fetch('/login', {
                     method: 'POST',
@@ -84,7 +84,7 @@ function openSignupModal() {
                         console.log('Login successful');
                 
                         // Close the modal
-                        document.getElementById('signupModal').style.display = 'none';
+                        document.getElementById('SigninModal').style.display = 'none';
                     } else {
                         // Login failed
                         // Display an error message
@@ -97,20 +97,33 @@ function openSignupModal() {
             });
     
             // Add event listener to close the modal when the close button is clicked
-            document.querySelector('.closeForSignup').addEventListener('click', function() {
+            document.querySelector('.closeForSignin').addEventListener('click', function() {
                 console.log("Close button clicked");
-                document.getElementById('signupModal').style.display = 'none';
+                document.getElementById('SigninModal').style.display = 'none';
             });
     
             // Display the modal
-            var modal = document.getElementById('signupModal');
+            var modal = document.getElementById('SigninModal');
             if (modal) {
                 console.log("Displaying the modal");
                 modal.style.display = 'block';
                 modal.style.opacity = 1;
                 modal.style.pointerEvents = 'auto';
             } else {
-                console.error('signupModal not found!');
+                console.error('SigninModal not found!');
             }
         }, 0);
     }
+    window.onload = function() {
+        // Get the login button
+        var loginButton = document.querySelector('.loginButton');
+      
+        // Check if the token cookie is present
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
+          // The user is logged in, set the button's image to user.png
+          loginButton.style.backgroundImage = 'url("../images/user.png")';
+        } else {
+          // The user is not logged in, set the button's image to exclamation.png
+          loginButton.style.backgroundImage = 'url("../images/exclamation.png")';
+        }
+      };

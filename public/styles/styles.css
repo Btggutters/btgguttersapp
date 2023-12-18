@@ -27,7 +27,7 @@ body {
 }
 
 
-.closeForSignup {
+.closeForSignin {
     color: var(--primary);
     font-size: 3rem;
     position: absolute;
@@ -43,7 +43,7 @@ body {
 
 /* Start of Header */
 
-.signUpModal {
+.SigninModal {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -60,7 +60,7 @@ body {
     -webkit-transition: all .3s ease;
     padding: 4%;
 }
-.signUpModalmodalContent {
+.SigninModalmodalContent {
     position: relative;
     background-color: white;
     padding: 32px;
@@ -87,17 +87,14 @@ header {
     box-shadow: 0 3px 0 var(--main-color);
 }
 .loginButton {
-    height: 10vw;
-    width: 15vw;
-    text-align: center;
-    align-items: center;    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--main-color);   
-
-    color: white; /* Sets the text color to white */
-
-}
+    width: 50px; /* adjust as needed */
+    height: 50px; /* adjust as needed */
+    background-size: cover;
+    border: none; /* remove default button border */
+    padding: 0; /* remove default button padding */
+    background-color: transparent; /* make the button background transparent */
+    filter: invert(33%) sepia(20%) saturate(1748%) hue-rotate(186deg) brightness(92%) contrast(101%);
+  }
 .loginText {
     font-size: 18vw;
     font-weight: bold;
@@ -298,19 +295,19 @@ header {
     justify-content: space-between;
 }
 
-.my-form__signup {
+.my-form__signin {
     display: flex;
     justify-content: center;
 }
 
-.my-form__signup a {
+.my-form__signin a {
     color: var(--primary);
     font-weight: 800;
     text-decoration: none;
     font-size: 18px;
 }
 
-.my-form__signup a:hover {
+.my-form__signin a:hover {
     text-decoration: underline;
 }
 
