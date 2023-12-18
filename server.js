@@ -157,7 +157,7 @@ app.post('/add-guttermaterial', checkUserLoggedIn, (req, res) => {
       res.status(500).json({ error: err.stack });
   });
 });
-app.get('/get-unique-colors', (req, res) => {
+app.get('/get-unique-colors', checkUserLoggedIn, (req, res) => {
   // Create a SELECT DISTINCT query
   var selectQuery = `
       SELECT DISTINCT color FROM material WHERE color IS NOT NULL AND location = 'storage'
