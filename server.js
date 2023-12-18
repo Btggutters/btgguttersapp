@@ -5,11 +5,12 @@ const app = express();
 const port = 3000;
 const path = require('path');
 
+// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-const bcrypt = require('bcryptjs');
-
-const jwt = require('jsonwebtoken');
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'pages', 'home.html'));
+});
 
 const cors = require('cors');
 app.use(cors());
