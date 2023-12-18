@@ -114,7 +114,7 @@ function openSigninModal() {
             }
         }, 0);
     }
-    window.onload = function() {
+    document.addEventListener('DOMContentLoaded', function() {
         // Get the login button
         var loginButton = document.querySelector('.loginButton');
       
@@ -126,4 +126,4 @@ function openSigninModal() {
           // The user is not logged in, set the button's image to exclamation.png
           loginButton.style.backgroundImage = 'url("../images/exclamation.png")';
         }
-      };
+      });
