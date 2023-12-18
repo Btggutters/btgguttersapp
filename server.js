@@ -5,6 +5,8 @@ const app = express();
 const port = 3000;
 const path = require('path');
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
@@ -26,61 +28,8 @@ const pool = new Pool({
 
 app.use(express.json());
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/pages/home.html'));
-});
-function authenticateToken(req, res, next) {
-  // Get the auth header value
-  const authHeader = req.headers['authorization'];
-  // Check if authHeader is not null
-  if (authHeader) {
-      // The auth header is in the format: 'Bearer TOKEN'
-      const token = authHeader.split(' ')[1];
-      if (token == null) return res.sendStatus(401); // If there's no token, return 401 (Unauthorized)
-
-      jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-          if (err) return res.sendStatus(403); // If token is not valid, return 403 (Forbidden)
-          req.user = user; // Save the user info in the request for use in other routes
-          next(); // Call the next middleware or route handler
-      });
-  } else {
-      // If there's no authHeader, return 401 (Unauthorized)
-      res.sendStatus(401);
-  }
-}
-
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
-
-    if (result.rows.length > 0) {
-      const user = result.rows[0];
-
-      const passwordMatch = await bcrypt.compare(password, user.password);
-
-      if (passwordMatch) {
-        // Create a token
-        const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, { expiresIn: '12h' });
-
-        res.json({ status: 'success', message: 'Login successful', token: token });
-      } else {
-        res.json({ status: 'error', message: 'Invalid password' });
-      }
-    } else {
-      res.json({ status: 'error', message: 'User not found' });
-    }
-  } catch (err) {
-    console.error(err);
-    res.json({ status: 'error', message: 'An error occurred' });
-  }
-});
-
-app.post('/add-subcontractor', authenticateToken, (req, res) => {
+app.post('/add-subcontractor', (req, res) => {
   // Get the form data from the request body
   var { companyName, salesName, salesNumber, salesEmail, companyStreetAddress, companyPricePerFoot } = req.body;
 
@@ -106,7 +55,7 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-app.get('/get-subcontractors', authenticateToken, (req, res) => {
+app.get('/get-subcontractors', (req, res) => {
   // Create a SELECT query
   var selectQuery = `
     SELECT * FROM subcontractors
@@ -123,7 +72,7 @@ app.get('/get-subcontractors', authenticateToken, (req, res) => {
     }
   });
 });
-app.post('/add-guttermaterial', authenticateToken, (req, res) => {
+app.post('/add-guttermaterial', (req, res) => {
   // Get the form data from the request body
   var formDataArray = req.body;
 
@@ -155,7 +104,7 @@ app.post('/add-guttermaterial', authenticateToken, (req, res) => {
       res.status(500).json({ error: err.stack });
   });
 });
-app.get('/get-unique-colors', authenticateToken, (req, res) => {
+app.get('/get-unique-colors', (req, res) => {
   // Create a SELECT DISTINCT query
   var selectQuery = `
       SELECT DISTINCT color FROM material WHERE color IS NOT NULL AND location = 'storage'
@@ -172,7 +121,7 @@ app.get('/get-unique-colors', authenticateToken, (req, res) => {
       }
   });
 });
-app.get('/get-items-of-color', authenticateToken, (req, res) => {
+app.get('/get-items-of-color', (req, res) => {
   // Get the color from the query parameters
   var color = req.query.color;
 
@@ -192,7 +141,7 @@ app.get('/get-items-of-color', authenticateToken, (req, res) => {
     }
   });
 });
-app.post('/add-guttermaterial', authenticateToken, (req, res) => {
+app.post('/add-guttermaterial', (req, res) => {
   // Get the form data from the request body
   var formDataArray = req.body;
 
@@ -225,7 +174,7 @@ var promises = formDataArray.map(({ size, color, item, qty }) => {
   });
 });
 
-app.get('/get-items-with-null-color-and-storage-location', authenticateToken, (req, res) => {
+app.get('/get-items-with-null-color-and-storage-location', (req, res) => {
   // Create a SELECT query
   var selectQuery = `
     SELECT * FROM material WHERE color IS NULL AND location = 'storage'

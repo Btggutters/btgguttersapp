@@ -34,19 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 var otherContentField = document.querySelector('.otherContentFeild');
-var jwtCookie = document.cookie.split('; ').find(row => row.startsWith('jwt'));
-var token;
-if (jwtCookie) {
-    token = jwtCookie.split('=')[1];
-} else {
-    console.error('JWT cookie not found');
-    // Handle the error appropriately
-}
+
 
 fetch('/get-items-with-null-color-and-storage-location', {
-    headers: {
-        'Authorization': 'Bearer ' + token, 
-    },
 })
   .then(response => response.json())
   .then(items => {
@@ -69,9 +59,6 @@ fetch('/get-items-with-null-color-and-storage-location', {
 
 // Fetch unique colors from the server
 fetch('/get-unique-colors', {
-    headers: {
-        'Authorization': 'Bearer ' + token, 
-    },
 })
 .then(response => response.json())
 .then(colors => {
@@ -317,7 +304,6 @@ function addRowAndButton(cloneRow = true) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token, 
                     },
                     body: JSON.stringify(formData),
                 })
@@ -433,8 +419,7 @@ document.getElementById('otherForm').addEventListener('submit', function(event) 
     fetch('/add-guttermaterial', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token, 
+            'Content-Type': 'application/json', 
         },
         body: JSON.stringify(formDataArray),
     })

@@ -81,8 +81,6 @@ function openSignupModal() {
                     console.log("Received data from server", data);
                     if (data.status === 'success') {
                         // Login was successful
-                        // Store the token in a cookie
-                        document.cookie = `token=${data.token}; path=/; max-age=43200`; // 12 hours
                         console.log('Login successful');
                 
                         // Close the modal
