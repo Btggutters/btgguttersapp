@@ -1,0 +1,133 @@
+
+.addButton {
+    height: 40px;
+    width: 87%;
+    margin: 20px;
+    font-size: 1.3rem;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal-content {
+    margin: 2%;
+    margin-top: 10%;
+    width: 95%;
+  }
+  
+  .close {
+    color: #ff0000;
+    margin-bottom: 10px;
+    font-size: var(--large); /* Adjusted to use variable */
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  .modalLabel {
+    font-size: var(--medium); /* Adjusted to use variable */
+    font-weight: bold;
+    color: black;
+    display: block; /* Ensure the label is on its own line */
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+  .companyCard {
+    width: 85%;
+    box-shadow: 0 0 0 2px var(--main-color);
+    border-radius: 15px;
+    margin: 10px auto;
+    padding: 8px;
+    background: var(--secondary-color);
+    font-size: var(--medium);
+  }
+  .jobButton, .otherButton {
+    width: 100%;
+    height: 40px;
+    font-size: var(--medium);
+    margin: 10px;
+  }
+
+  .companyCardRow {
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+  }
+
+ .companyformSingle, .companyformGrid {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out children */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px;
+}
+
+.priceInput,
+.filterInput {
+    flex-basis: calc(50% - 5px); /* Flex basis to control width */
+    margin-right: 10px; /* Space between side by side inputs */
+    margin-bottom: 0; /* Override if necessary */
+    text-align: center;
+}
+
+/* Ensure the last input in a row doesn't have a right margin */
+.priceInput:last-child,
+.filterInput:last-child {
+    margin-right: 0;
+}
+.modalSmallInputField {
+    width: 30vw; /* This ensures the input is not too narrow */
+    box-sizing: border-box; /* Include padding and border in the element's width */
+    height: 40px;
+    text-align: center;
+    font-size: var(--medium);
+}
+.modalLargeInputField {
+    width: 100%; /* Adjust width as needed */
+    box-sizing: border-box; /* Include padding and border in the element's width */
+    height: 40px;
+    text-align: left;
+    font-size: var(--medium);
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+
+
+.companyformBottom {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.fullButton{
+    width: 92%;
+    height: 40px;
+    font-size: var(--medium);
+    
+}
+.companyformSingle {
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.companyFormInfoSection, .companyFormPricingSection {
+
+    margin-bottom: 10px;
+    border: 2px solid var(--main-color);
+    border-radius: 15px;
+    background: var(--secondary-color);
+    padding: 10px;
+
+}

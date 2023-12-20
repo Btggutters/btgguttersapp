@@ -1,6 +1,11 @@
+.content {
+  display: none;
+}
+
+  /* Nav Bar */
 
 
-  .typeOfMaterialSwitchFeild {
+  .typeOfMaterialSwitchFeild, .contentTopFeild {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
@@ -8,35 +13,59 @@
     justify-items: center;
     height: 10vh;
   }
+  .contentTopFeild {
+    grid-template-columns: 8fr 3fr;
+  }
   .typeOfMaterialButton {
     background-color: var(--main-color);
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border: 2px solid black;
     border-radius: 5px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
-    width: 85%;
+    width: 40vw;
     height: 70%;
     font-weight: bold;
     font-size: 1.8rem;
   }
-.content {
-  display: none;
+
+
+.searchBar {
+  background-color: var(--main-color);
+  color: rgb(255, 255, 255);
+  border: 2px solid black;
+  border-radius: 5px;
+  text-align: left;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 85%;
+  height: 70%;
+  font-weight: bold;
+  font-size: 1.8rem;
+  padding: 2px;
 }
-.coloredContentTopFeild {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    justify-items: center;
-    margin-top: 10px;
-    height: 5vh;
-    gap: 10px;
+
+.searchBar::placeholder {
+  text-align: center; /* Center the placeholder text */
+  color: #ffffff; /* White color for placeholder text */
+  opacity: .8; /* Optional: Full opacity to ensure the color is not translucent */
 }
-.colorSearch {
-    width: 100%;
-    padding: 5px 0;
+.addButton {
+  background-color: var(--main-color);
+  color: rgb(255, 255, 255);
+  border: 2px solid black;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 85%;
+  height: 70%;
+  font-weight: bold;
+  font-size: 1.8rem;
 }
 .sizeButton {
   padding: 4px 4px;
@@ -54,15 +83,9 @@
   justify-content: center;
   transition: background-color 0.3s ease;
 }
-.addButton {
-    width: 20%;
-    padding: 5px 0;
-    margin-right: 10px;
-    font-size: 1.8rem;
-    font-weight: bold;
-}
+
 .modal {
-  display: none;
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -110,12 +133,12 @@
     border-radius: 5px;
   }
 
-  .gutterContentAddBox {
+  .coloredContentAddBox {
     width: 30%;
     padding: 5px 0;
   }
-  .gutterContentColorCard, .otherContentCard {
-    width: 90%;
+  .coloredContentCard, .otherContentCard {
+    width: 85%;
     box-shadow: 0 0 0 2px var(--main-color);
     border-radius: 15px;
     margin: 10px auto;
@@ -124,8 +147,8 @@
     font-size: 1.2rem;
   }
 
-.gutterContentColorCardFeild {
-    text-align: center;
+.coloredContentCardFeild {
+    text-align: left;
 }
 .row {
   display: flex;
@@ -137,7 +160,7 @@
   text-align: center;
   width: 25%;
 }
-.gutterContentSizeSwitchButton {
+.coloredContentSizeSwitchButton {
   width: 25%;
 
 }
@@ -149,7 +172,30 @@
   display: flex;
   gap: 10px;
   font-size: 1.2rem;
+  padding: 8px;
+  justify-content: center; /* Center the items horizontally */
 }
+.colorCardModalColor, .colorCardModalItem, .colorCardModalQty {
+  white-space: nowrap; /* Prevents the text from wrapping */
+  overflow: hidden; /* Hides any content that overflows the element's box */
+  text-overflow: ellipsis; /* Adds an ellipsis to any text that overflows */
+}
+
+.colorCardModalColor {
+  flex: 0 0 30%; /* Do not grow or shrink, set basis to 30% */
+  text-align: left; /* Align text to the left */
+}
+
+.colorCardModalItem {
+  flex: 0 0 40%; /* Do not grow or shrink, set basis to 40% */
+  text-align: center; /* Align text to the center */
+}
+
+.colorCardModalQty {
+  flex: 0 0 30%; /* Do not grow or shrink, set basis to 30% */
+  text-align: right; /* Align text to the right */
+}
+
 
 .colorCardModalColor {
   color: rgb(20, 20, 20);
@@ -159,25 +205,16 @@
   font-size: 2.4rem;
   font-weight: bold;
 }
-.colorCardModalSize{
+.colorCardModalSize, .colorCardModalItem, .colorCardModalQty {
   width: 33%;
   font-size: 2rem;
 }
 
-.colorCardModalItem{
-  width: 33%;
-  font-size: 2rem;
-}
-
-.colorCardModalQty{
-    width: 30%;
-    font-size: 2rem;
-}
-.nameAndQTYInputsModalAdd, .nameAndQTYLabelsModalAdd {
+.otherContentAddRow, .nameAndQTYLabelsModalAdd {
   display: flex;
   justify-content: space-between;
 }
-.submitButtonforOther, .addAnotherRowButton, .submitButton, .addRowButton, .addButton{
+.submitButtonforOther, .addAnotherRowButton, .submitButton, .addRowButton {
   width: 100%;
   height: 6vh;
   margin-top: 10px;
@@ -195,7 +232,7 @@
   font-size: 1.5rem;
 }
 .label {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: black;
 }
@@ -204,15 +241,6 @@
   width: 100%;
   text-align: center;
   font-size: 1.5rem;
-}
-.otherContentTopRow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-.addButton {
-  margin: auto;
 }
 .otherContentFeild {
   font-size: 2rem;

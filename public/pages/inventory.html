@@ -22,27 +22,16 @@
         </div>
         
 
+        <!-- Colored Content -->
+
+
         <!-- Colored Content Page -->
         <div id="coloredContent" class="content">
-            <div class="coloredContentTopFeild">
-                <input type="text" id="colorSearch" class="colorSearch" placeholder="Search for color">
+            <div class="contentTopFeild">
+                <input type="text" id="colorSearch" class="searchBar" placeholder="Search for Color">
                 <button id="gutterAddButton" class="addButton">Add +</button>
             </div>
-            <div class="gutterContentColorCardFeild">
-            </div>
-        </div>
-
-
-        <!-- Other Content Page -->
-        <div id="otherContent" class="content">
-            <div class="otherContentTopRow">
-                <button class="addButton" id="addOtherButton">Add +</button>
-            </div>
-            <div class="otherContentLabel">
-                <div>Item</div>
-                <div>Qty</div>
-            </div>
-            <div class="otherContentFeild">
+            <div class="coloredContentCardFeild">
             </div>
         </div>
 
@@ -50,9 +39,9 @@
         <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
-                        <div class="gutterContentRow" id="rowToClone">
+                        <div class="coloredContentRow" id="rowToClone">
                             <div class="row">
-                                <button class="sizeButton gutterContentSizeSwitchButton">5</button>
+                                <button class="sizeButton coloredContentSizeSwitchButton">5</button>
                                 <select class="modalDropdown modalColorDropdown"></select>
                                 <select class="modalDropdown modalLabelDropdown">
                                     <option value="Gutter Lb">Gutter Lb</option>
@@ -69,12 +58,30 @@
                                     <option value="Little Screw">Lil Screw</option>
                                 </select>
                                 <input type="number" class="modalDropdown modalNumberFeild" min="1" max="100">
-                                <button class="gutterContentAddBox">Box</button>
+                                <button class="coloredContentAddBox">Box</button>
                             </div>           
                         </div>
-                        <button class="addRowButton" id="gutterContentAddAnotherRow">Another One</button>
-                        <button class="addRowButton" id="gutterContentFakeInfo">Fake</button>
+                        <button class="addRowButton" id="coloredContentAddAnotherRow">Another One</button>
+                        <button class="addRowButton" id="coloredContentFakeInfo">Fake</button>
                     </div>
+        </div>
+
+
+        <!-- Other Content -->
+
+
+        <!-- Other Content Page -->
+        <div id="otherContent" class="content">
+            <div class="contentTopFeild">
+                <input type="text" id="otherSearch" class="searchBar" placeholder="Search for Other">
+                <button class="addButton" id="addOtherButton">Add +</button>
+            </div>
+            <div class="otherContentLabel">
+                <div>Item</div>
+                <div>Qty</div>
+            </div>
+            <div class="otherContentFeild">
+            </div>
         </div>
 
         <!-- Other Content Add Modal -->
@@ -86,8 +93,8 @@
                         <div class="label">Name</div>
                         <div class="label">QTY</div>
                     </div>
-                    <div class="nameAndQTYInputsModalAdd">
-                        <select id="otherModalItemOptions" name="name" class="nameDropdown">        
+                    <div class="otherContentAddRow">
+                        <select id="otherModalItemOptions" name="name" class="modalDropdown nameDropdown">        
                             <option value="5 in hangers">5 in hangers</option>
                             <option value="6 in Hangers">6 in Hangers</option>
                             <option value="Caulk Tubes">Caulk Tubes</option>
@@ -99,9 +106,9 @@
                             <option value="Straps">Straps</option>
                             <option value="Wedges">Wedges</option>
                             <option value="Fascia Screws">Fascia Screws</option>
-                            <option value="metal Trim Nails">metal Trim Nails</option>
+                            <option value="metal Trim Nails">Trim Staples</option>
                         </select>
-                        <input type="number" id="otherModalQty" name="qty" class="qtyInput">
+                        <input type="number" id="otherModalQty" name="qty" class="modalDropdown qtyInput">
                     </div>
                 </form>
                 <button class="addAnotherRowButton" id="addAnotherRowOtherContent">Another One</button>

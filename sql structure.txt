@@ -1,13 +1,5 @@
 These are all the postgres query's i used to make my database, so if something needs to be changed give sql query to do so
 
-CREATE TABLE subcontractors (
-    id SERIAL PRIMARY KEY,
-    company_name VARCHAR(255),
-    sales_name VARCHAR(255),
-    sales_number VARCHAR(255),
-    company_address VARCHAR(255),
-    company_price_per_foot NUMERIC
-);
 
 CREATE TABLE material (
     id SERIAL PRIMARY KEY,
@@ -20,44 +12,54 @@ CREATE TABLE material (
     FOREIGN KEY (job_id) REFERENCES jobs(id)
 );
 
-CREATE TABLE customers (
+CREATE TABLE customer (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    phone_number VARCHAR(255)
+    companyId INT,
+    customerName VARCHAR(255),
+    customerPhoneNumber VARCHAR(255),
+    customerEmail VARCHAR(255),
+    obtainedHow VARCHAR(255),
+    FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE SET NULL
 );
-
+CREATE TABLE company (
+    id SERIAL PRIMARY KEY,
+    companyName VARCHAR(255),
+    companyAddress VARCHAR(255)
+);
 
 CREATE TABLE jobs (
     id SERIAL PRIMARY KEY,
-    drawing_upload BYTEA,
-    entity_type VARCHAR(255) CHECK (entity_type IN ('sub', 'customers')),
-    customer_id INT,
-    subcontractor_id INT,
+    customerId INT NOT NULL,
     address VARCHAR(255),
-    job_description VARCHAR(255),
-    job_status VARCHAR(255),
-    estimate_date DATE,
-    estimate_start_time TIME,
-    estimate_end_time TIME,
-    estimate_duration NUMERIC,
-    first_price NUMERIC,
-    install_date DATE,
-    install_start_time TIME,
-    install_end_time TIME,
-    install_duration NUMERIC,
-    final_price NUMERIC,
-    FOREIGN KEY (customer_id) REFERENCES customers(id),
-    FOREIGN KEY (subcontractor_id) REFERENCES subcontractors(id),
-    CHECK (
-        (customer_id IS NOT NULL AND subcontractor_id IS NULL) OR 
-        (customer_id IS NULL AND subcontractor_id IS NOT NULL)
-    )
+    installId INT,
+    estimateId INT,
+    drawing VARCHAR(255),
+    notes TEXT,
+    status VARCHAR(255),
+    typeOfWork VARCHAR(255),
+    materialId INT,
+    FOREIGN KEY (customerId) REFERENCES customer(id),
+    FOREIGN KEY (installId) REFERENCES install(id),
+    FOREIGN KEY (estimateId) REFERENCES estimate(id),
+    FOREIGN KEY (materialId) REFERENCES material(id)
 );
 
-
-CREATE TABLE users (
+CREATE TABLE install (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(255),
-    password VARCHAR(255)
+    jobId INT NOT NULL,
+    date DATE,
+    startTime TIME,
+    endTime TIME,
+    price NUMERIC,
+    FOREIGN KEY (jobId) REFERENCES jobs(id)
+);
+
+CREATE TABLE estimate (
+    id SERIAL PRIMARY KEY,
+    jobId INT NOT NULL,
+    date DATE,
+    startTime TIME,
+    endTime TIME,
+    price NUMERIC,
+    FOREIGN KEY (jobId) REFERENCES jobs(id)
 );

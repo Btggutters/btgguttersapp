@@ -82,49 +82,10 @@ app.post('/login', (req, res) => {
 });
 
 
-app.post('/add-subcontractor', checkUserLoggedIn, (req, res) => {
-  // Get the form data from the request body
-  var { companyName, salesName, salesNumber, salesEmail, companyStreetAddress, companyPricePerFoot } = req.body;
-
-  // Create an INSERT INTO query
-  var insertQuery = `
-    INSERT INTO subcontractors (company_name, sales_name, sales_number, sales_email, company_street_address, company_price_per_foot)
-    VALUES ($1, $2, $3, $4, $5, $6)
-  `;
-
-  // Execute the query
-  pool.query(insertQuery, [companyName, salesName, salesNumber, salesEmail, companyStreetAddress, companyPricePerFoot], (err, result) => {
-    if (err) {
-      console.log('Error executing query', err.stack);
-      res.status(500).json({ error: err.stack });
-    } else {
-      console.log('Data inserted');
-      res.status(200).json({ message: 'Data inserted' });
-    }
-  });
-});
-
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-app.get('/get-subcontractors', checkUserLoggedIn, (req, res) => {
-  // Create a SELECT query
-  var selectQuery = `
-    SELECT * FROM subcontractors
-  `;
-
-  // Execute the query
-  pool.query(selectQuery, (err, result) => {
-    if (err) {
-      console.log('Error executing query', err.stack);
-      res.status(500).json({ error: err.stack });
-    } else {
-      console.log('Data retrieved');
-      res.status(200).json(result.rows);
-    }
-  });
-});
 app.post('/add-guttermaterial', checkUserLoggedIn, (req, res) => {
   // Get the form data from the request body
   var formDataArray = req.body;

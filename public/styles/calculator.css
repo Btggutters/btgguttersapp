@@ -113,19 +113,25 @@ main {
 }
 .kwmButtonArea {
     width: 20%;
-    text-align: right
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .toggleButton , .toggleButtonKwm {
 
     padding: 5px 5px;
     border: 4px solid var(--main-color);
     background-color: var(--secondary-color);
-    height: 7vh;
-    width: 12vw;
     border-radius: 50%;
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* Adjust as needed */
+    height: 50px; /* Adjust as needed */
 
 }
 

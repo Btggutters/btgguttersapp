@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/companies.css">
+    <link rel="icon" href="../images/btglogo.png" type="images/x-icon">
+</head>
+<body>
+    <header>
+        <a href="home.html" class="companyName">BTG Gutters</a>
+        <button class="loginButton" onclick="openSigninModal()"></button>
+    </header>  
+    <main>
+        <div class="buttonFeild">
+            <button class="addButton" id="addCompanyButton">Add company</button>
+        </div>
+        <div class="companyContainer">
+            <div class="companyCard">
+                <div class="companyCardRow">
+                    <p class="companyCardName">Company Name</p>
+                </div>
+                <div class="companyCardRow">
+                    <button class="jobButton">Jobs</button>
+                    <button class="otherButton">Others</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <form id="companyForm" class="companyForm">
+                <div class="companyFormInfoSection">
+                    <input class="modalLargeInputField" type="text" id="companyName" name="companyName" placeholder="Company Name" required>
+                    <input class="modalLargeInputField" type="text" id="companyStreetAddress" name="companyStreetAddress" placeholder="Street Address" required>
+                    <input class="modalLargeInputField" type="text" id="salesName" name="salesName" placeholder="Sales Name" required>
+                    <input class="modalLargeInputField" type="text" id="salesNumber" name="salesNumber" placeholder="Sales Number" required>
+                    <input class="modalLargeInputField" type="email" id="billingEmail" name="billingEmail" placeholder="Billing Email" required>
+                </div>
+                <div class="companyFormPricingSection">
+                    <!-- Grouped fields for prices -->
+                    <div class="companyformGrid">
+                        <div class="priceInput">
+                            <label class="modalLabel" for="fiveInchPrice">5" Price:</label>
+                            <input class="modalSmallInputField" type="text" id="fiveInchPrice" name="fiveInchPrice" required>
+                        </div>
+                        <div class="priceInput">
+                            <label class="modalLabel" for="sixInchPrice">6" Price:</label>
+                            <input class="modalSmallInputField" type="text" id="sixInchPrice" name="sixInchPrice" required>
+                        </div>
+                    </div>
+
+                    <!-- Grouped fields for filters -->
+                    <div class="companyformGrid">
+                        <div class="filterInput">
+                            <label class="modalLabel" for="fiveInchFilter">5" Filter:</label>
+                            <input class="modalSmallInputField" type="text" id="fiveInchFilter" name="fiveInchFilter" required>
+                        </div>
+                        <div class="filterInput">
+                            <label class="modalLabel" for="sixInchFilter">6" Filter:</label>
+                            <input class="modalSmallInputField" type="text" id="sixInchFilter" name="sixInchFilter" required>
+                        </div>
+                    </div>
+                    <div class="companyformSingle">
+                        <label class="modalLabel"  for="fasciaWood">Fascia Wood</label>
+                        <input class="modalSmallInputField" type="text" id="fasciaWood" name="fasciaWood" required>
+                    </div>
+                    <div class="companyformSingle">
+                        <label class="modalLabel"  for="trimMetal">Trim Metal</label>
+                        <input class="modalSmallInputField" type="text" id="trimMetal" name="trimMetal" required>
+                    </div>
+                </div>
+                <button class="fullButton" id="companyAddFakeInfo">Fake</button>
+                <input class="fullButton" type="submit" value="Submit" id="Submit">
+
+
+              </form>
+            </div>
+          </div>
+    </main>
+    <script src="../javascript/companies.js"></script>
+    <script src="../javascript/signin.js"></script>  
+</body>
+</html>

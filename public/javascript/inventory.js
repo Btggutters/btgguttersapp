@@ -2,16 +2,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach event listener to parent element
 
     // Get the initial state of the button and dropdown
-    let initialSwitchButton = document.querySelector('.gutterContentSizeSwitchButton');
+    let initialSwitchButton = document.querySelector('.coloredContentSizeSwitchButton');
     let initialColorDropdown = initialSwitchButton.parentNode.querySelector('.modalColorDropdown');
 
     // Update the dropdown for the initial state
     updateColorDropdown(initialSwitchButton, initialColorDropdown);
 
-    // Event delegation for gutterContentSizeSwitchButton
+    // Event delegation for coloredContentSizeSwitchButton
     document.querySelector('body').addEventListener('click', function(event) {
-        if (event.target.classList.contains('gutterContentSizeSwitchButton')) {
-            console.log('gutterContentSizeSwitchButton clicked');
+        if (event.target.classList.contains('coloredContentSizeSwitchButton')) {
+            console.log('coloredContentSizeSwitchButton clicked');
             event.target.innerHTML = event.target.innerHTML === '5' ? '6' : '5';
             let colorDropdown = event.target.parentNode.querySelector('.modalColorDropdown');
             updateColorDropdown(event.target, colorDropdown);
@@ -62,13 +62,13 @@ fetch('/get-unique-colors', {
 })
 .then(response => response.json())
 .then(colors => {
-    // Get the gutterContentColorCardFeild element
-    var colorCardField = document.querySelector('.gutterContentColorCardFeild');
+    // Get the coloredContentCardFeild element
+    var colorCardField = document.querySelector('.coloredContentCardFeild');
 
-    // Create a gutterContentColorCard for each color
+    // Create a coloredContentCard for each color
     colors.forEach(({ color }) => {
         var colorCard = document.createElement('div');
-        colorCard.className = 'gutterContentColorCard';
+        colorCard.className = 'coloredContentCard';
         colorCard.innerText = color;
         colorCardField.appendChild(colorCard);
 
@@ -117,12 +117,6 @@ fetch('/get-unique-colors', {
     });
 })
 .catch(error => console.error('Error:', error));
-
-
-
-
-
-
 });
 function hideAllContent() {
     var contentDivs = document.getElementsByClassName('content');
@@ -155,7 +149,7 @@ function updateColorDropdown(switchButton, colorDropdown) {
             '780  Coppertone',
             '791  Norwood',
             '819  Herringbone',
-            '2  Linen',
+            '002  Linen',
             '111  Heather',
             '138  Shell',
             '173  Olive Green',
@@ -252,7 +246,7 @@ function addRowAndButton(cloneRow = true) {
     });
 
     // Get the switchButton and colorDropdown of the cloned row
-    let clonedSwitchButton = clonedRow.querySelector('.gutterContentSizeSwitchButton');
+    let clonedSwitchButton = clonedRow.querySelector('.coloredContentSizeSwitchButton');
     let clonedColorDropdown = clonedRow.querySelector('.modalColorDropdown');
 
     // Update the dropdown for the cloned row
@@ -263,7 +257,7 @@ function addRowAndButton(cloneRow = true) {
     buttons.forEach(function(buttonText) {
         var newButton = document.createElement('button');
         newButton.className = 'addRowButton';
-        newButton.id = 'gutterContent' + buttonText.replace(' ', '') + 'Row';
+        newButton.id = 'coloredContent' + buttonText.replace(' ', '') + 'Row';
         newButton.innerHTML = buttonText;
 
         // Append the new button to the parent
@@ -275,7 +269,7 @@ function addRowAndButton(cloneRow = true) {
         } else if (buttonText === 'Fake') {
             newButton.addEventListener('click', function() {
                 // Fill the fields with random data
-                var fields = document.querySelectorAll('.modalNumberFeild, .modalColorDropdown, .modalLabelDropdown, .gutterContentSizeSwitchButton');
+                var fields = document.querySelectorAll('.modalNumberFeild, .modalColorDropdown, .modalLabelDropdown, .coloredContentSizeSwitchButton');
                 fields.forEach(function(field) {
                     if (field instanceof HTMLSelectElement) {
                         var options = field.options;
@@ -289,11 +283,11 @@ function addRowAndButton(cloneRow = true) {
         } else if (buttonText === 'Submit') {
             newButton.addEventListener('click', function() {
                 // Get all rows
-                var rows = document.querySelectorAll('.gutterContentRow');
+                var rows = document.querySelectorAll('.coloredContentRow');
 
                 // Collect the form data for each row
                 var formData = Array.from(rows).map(row => ({
-                    size: Number(row.querySelector('.gutterContentSizeSwitchButton').innerText),
+                    size: Number(row.querySelector('.coloredContentSizeSwitchButton').innerText),
                     color: row.querySelector('.modalColorDropdown').value,
                     item: row.querySelector('.modalLabelDropdown').value,
                     qty: Number(row.querySelector('.modalNumberFeild').value)
@@ -313,6 +307,14 @@ function addRowAndButton(cloneRow = true) {
                 })
                 .then(data => {
                     console.log('Success:', data);
+                    // Close the modal here
+                    var itemsModal = document.getElementById('myModal'); // Replace 'itemsModal' with the actual ID of your modal
+                    if (itemsModal) {
+                        itemsModal.style.display = 'none';
+                    }
+                    // Refresh the page
+                    window.location.reload();
+                    
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -350,7 +352,7 @@ function addRow() {
 
     // Create new row
     var newRow = document.createElement('div');
-    newRow.className = 'nameAndQTYInputsModalAdd';
+    newRow.className = 'otherContentAddRow';
 
     // Create new select element
     var newSelect = document.createElement('select');
@@ -392,7 +394,7 @@ document.getElementById('otherForm').addEventListener('submit', function(event) 
     event.preventDefault();
 
     // Get all rows in the form
-    var rows = document.querySelectorAll('#otherForm .nameAndQTYInputsModalAdd');
+    var rows = document.querySelectorAll('#otherForm .otherContentAddRow');
 
     // Prepare an array to hold all row data
     var formDataArray = [];
@@ -441,3 +443,33 @@ closeButtons.forEach(function(button) {
         modal.style.display = 'none';
     });
 });
+
+function setupSearch(inputId, cardClass) {
+    var input = document.getElementById(inputId);
+
+    input.addEventListener('focus', function() {
+        this.placeholder = '';
+    });
+
+    input.addEventListener('blur', function() {
+        this.placeholder = 'Search for ' + inputId.replace('Search', '');
+    });
+
+    input.addEventListener('input', function() {
+        var searchValue = this.value.toLowerCase();
+        var cards = document.querySelectorAll(cardClass);
+
+        cards.forEach(function(card) {
+            var itemName = card.innerText.toLowerCase();
+            if (itemName.includes(searchValue)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Call the function for each set of inputs and cards
+setupSearch('colorSearch', '.coloredContentCard');
+setupSearch('otherSearch', '.otherContentCard');
