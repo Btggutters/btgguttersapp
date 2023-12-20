@@ -27,6 +27,11 @@ function checkUserLoggedIn(req, res, next) {
     res.status(401).json({ message: 'Not logged in' });
   }
 }
+// server.js
+app.get('/check-login', checkUserLoggedIn, (req, res) => {
+  // If the middleware did not send a response, the user is logged in
+  res.json({ isLoggedIn: true });
+});
 
 const Pool = require('pg').Pool;
 const pool = new Pool({
@@ -67,7 +72,7 @@ app.post('/login', (req, res) => {
             // Set a cookie that expires in 1 month
             res.cookie('token', process.env.SECRET_KEY, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
             console.log('Login successful');
-            res.status(200).json({ message: 'Login successful' });
+            res.status(200).json({ status: 'success' }); // Add this line
           } else {
             console.log('Invalid username or password');
             res.status(401).json({ message: 'Invalid username or password' });
