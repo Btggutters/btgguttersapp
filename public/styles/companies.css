@@ -1,9 +1,9 @@
 
 .addButton {
-    height: 40px;
+    height: 50px;
     width: 87%;
     margin: 20px;
-    font-size: 1.3rem;
+    font-size: var(--medium);
 }
 
 .modal {
@@ -42,11 +42,11 @@
 
   .companyCard {
     width: 85%;
-    box-shadow: 0 0 0 2px var(--main-color);
+    box-shadow: 0 0 0 2px var(--first-color);
     border-radius: 15px;
     margin: 10px auto;
     padding: 8px;
-    background: var(--secondary-color);
+    background: var(--second-color);
     font-size: var(--medium);
   }
   .jobButton, .otherButton {
@@ -96,7 +96,7 @@
     height: 40px;
     text-align: left;
     font-size: var(--medium);
-    border: 2px solid var(--main-color);
+    border: 2px solid var(--first-color);
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -125,9 +125,23 @@
 .companyFormInfoSection, .companyFormPricingSection {
 
     margin-bottom: 10px;
-    border: 2px solid var(--main-color);
+    border: 2px solid var(--first-color);
     border-radius: 15px;
-    background: var(--secondary-color);
+    background: var(--second-color);
     padding: 10px;
 
 }
+
+
+companyName =  table(company).companyName
+companyAddress = table(company).companyAddress
+salesName = table (customer (related to the Company inserted)).customerName
+salesNumber =  table (customer (related to the Company inserted)).customerPhoneNumber
+billingEmail =  table (customer (related to the Company inserted)).customerEmail
+fiveInchPrice =  table (company_prices (related to the Company inserted)).five_inch_gutter
+sixInchPrice =  table (company_prices(related to the Company inserted)).six_inch_gutter
+fiveInchFilterPrice =  table (company_prices(related to the Company inserted)).five_inch_filter
+sixInchFilterPrice = table (company_prices(related to the Company inserted)).six_inch_filter
+fasciaWoodPrice = table (company_prices(related to the Company inserted)).fascia_wood
+trimMetalPrice = table (company_prices(related to the Company inserted)).trim_metal
+

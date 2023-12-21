@@ -210,3 +210,80 @@ app.get('/get-items-with-null-color-and-storage-location', checkUserLoggedIn, (r
     }
   });
 });
+app.post('/add-company-and-prices', checkUserLoggedIn, (req, res) => {
+  console.log('Form data:', req.body); 
+  // Get the form data from the request body
+  var { companyName, companyAddress, salesName, salesNumber, billingEmail, fiveInchPrice, sixInchPrice, fiveInchFilterPrice, sixInchFilterPrice, fasciaWoodPrice, trimMetalPrice } = req.body;
+
+  // Define companyId outside of the promise chain
+  var companyId;
+
+  // Start a database transaction
+  pool.query('BEGIN')
+    .then(() => {
+      // Insert into the company table
+      var insertCompanyQuery = `
+        INSERT INTO company (companyName, companyAddress)
+        VALUES ($1, $2)
+        RETURNING id
+      `;
+      return pool.query(insertCompanyQuery, [companyName, companyAddress]);
+    })
+    .then(result => {
+      // Assign the ID of the newly inserted company to companyId
+      companyId = result.rows[0].id;
+
+      // Insert into the customer table
+      var insertCustomerQuery = `
+        INSERT INTO customer (customerName, customerPhoneNumber, customerEmail, companyId)
+        VALUES ($1, $2, $3, $4)
+      `;
+      return pool.query(insertCustomerQuery, [salesName, salesNumber, billingEmail, companyId]);
+    })
+    .then(() => {
+      // Insert into the company_prices table
+      var insertCompanyPricesQuery = `
+        INSERT INTO company_prices (company_id, five_inch_gutter, six_inch_gutter, five_inch_filter, six_inch_filter, fascia_wood, trim_metal)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
+      `;
+      return pool.query(insertCompanyPricesQuery, [companyId, fiveInchPrice, sixInchPrice, fiveInchFilterPrice, sixInchFilterPrice, fasciaWoodPrice, trimMetalPrice]);
+    })
+    .then(() => {
+      // Commit the transaction
+      return pool.query('COMMIT');
+    })
+    .then(() => {
+      console.log('Data inserted');
+      res.status(200).json({ message: 'Data inserted' });
+    })
+    .catch(err => {
+      // Rollback the transaction in case of error
+      pool.query('ROLLBACK');
+      console.log('Error executing query', err.stack);
+      res.status(500).json({ error: err.stack });
+    });
+});
+
+app.get('/get-companies-and-prices', checkUserLoggedIn, (req, res) => {
+  // Create a SELECT query
+  var selectQuery = `
+    SELECT 
+      c.companyName, c.companyAddress, 
+      cu.customerName, cu.customerPhoneNumber, cu.customerEmail, cu.companyId, 
+      cp.company_id, cp.five_inch_gutter, cp.six_inch_gutter, cp.five_inch_filter, cp.six_inch_filter, cp.fascia_wood, cp.trim_metal 
+    FROM company c
+    JOIN customer cu ON c.id = cu.companyId
+    JOIN company_prices cp ON c.id = cp.company_id
+  `;
+
+  // Execute the query
+  pool.query(selectQuery, (err, result) => {
+    if (err) {
+      console.log('Error executing query', err.stack);
+      res.status(500).json({ error: err.stack });
+    } else {
+      console.log('Data retrieved');
+      res.status(200).json(result.rows);
+    }
+  });
+});

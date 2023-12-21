@@ -6,14 +6,10 @@ function openSigninModal() {
         <div id="SigninModal" class="SigninModal">
             <div class="SigninModalmodalContent">
                 <span class="closeForSignin">&times;</span>
-                <form id="loginForm">
-                    <div class="text-field">
-                        <label for="username">Username:<input type="text" id="username" name="username" placeholder="Your Username" required></label>
-                    </div>
-                    <div class="text-field">
-                        <label for="passwordForSignin">Password:<input id="passwordForSignin" type="password" name="passwordForSignin" placeholder="Your Password" required></label>
-                    </div>
-                    <button type="submit" class="my-form__button">Login</button>
+                <form class="loginForm" id="loginForm">
+                    <input class="inputForSignup" type="text" id="username" name="username" placeholder="Your Username" required>
+                    <input class="inputForSignup" id="passwordForSignin" type="password" name="passwordForSignin" placeholder="Your Password" required>
+                    <button type="submit" class="btgButton loginSubmitButton">Login</button>
                 </form>
             </div>
         </div>

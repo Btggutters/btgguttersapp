@@ -15,18 +15,12 @@
     </header>  
     <main>
         <div class="buttonFeild">
-            <button class="addButton" id="addCompanyButton">Add company</button>
+            <button class="btgButton addButton" id="addCompanyButton">Add company</button>
         </div>
-        <div class="companyContainer">
-            <div class="companyCard">
-                <div class="companyCardRow">
-                    <p class="companyCardName">Company Name</p>
-                </div>
-                <div class="companyCardRow">
-                    <button class="jobButton">Jobs</button>
-                    <button class="otherButton">Other</button>
-                </div>
-            </div>
+        <div class="companyContainer" id="companyContainer">
+            
+             <!-- Company cards insert here with js -->
+
         </div>
 
 
@@ -35,57 +29,58 @@
 
         <div id="myModal" class="modal">
             <div class="modal-content">
-              <span class="close">&times;</span>
-              <form id="companyForm" class="companyForm">
-                <div class="companyFormInfoSection">
-                    <input class="modalLargeInputField" type="text" id="companyName" name="companyName" placeholder="Company Name" required>
-                    <input class="modalLargeInputField" type="text" id="companyAddress" name="companyAddress" placeholder="Company Address" required>
-                    <input class="modalLargeInputField" type="text" id="salesName" name="salesName" placeholder="Sales Name" required>
-                    <input class="modalLargeInputField" type="text" id="salesNumber" name="salesNumber" placeholder="Sales Number" required>
-                    <input class="modalLargeInputField" type="email" id="billingEmail" name="billingEmail" placeholder="Billing Email" required>
-                </div>
-                <div class="companyFormPricingSection">
-                    <!-- Grouped fields for prices -->
-                    <div class="companyformGrid">
-                        <div class="priceInput">
-                            <label class="modalLabel" for="fiveInchPrice">5" Price:</label>
-                            <input class="modalSmallInputField" type="text" id="fiveInchPrice" name="fiveInchPrice" required>
-                        </div>
-                        <div class="priceInput">
-                            <label class="modalLabel" for="sixInchPrice">6" Price:</label>
-                            <input class="modalSmallInputField" type="text" id="sixInchPrice" name="sixInchPrice" required>
-                        </div>
+            <span class="close">&times;</span>
+                <form id="companyForm" class="companyForm">
+                    <div class="companyFormInfoSection">
+                        <input class="modalLargeInputField" type="text" id="companyName" name="companyName" placeholder="Company Name" >
+                        <input class="modalLargeInputField" type="text" id="companyAddress" name="companyAddress" placeholder="Company Address" >
+                        <input class="modalLargeInputField" type="text" id="salesName" name="salesName" placeholder="Sales Name" >
+                        <input class="modalLargeInputField" type="text" id="salesNumber" name="salesNumber" placeholder="Sales Number" >
+                        <input class="modalLargeInputField" type="email" id="billingEmail" name="billingEmail" placeholder="Billing Email" >
                     </div>
+                    <div class="companyFormPricingSection">
+                        <!-- Grouped fields for prices -->
+                        <div class="companyformGrid">
+                            <div class="priceInput">
+                                <label class="modalLabel" for="fiveInchPrice">5" Price:</label>
+                                <input class="modalSmallInputField" type="text" id="fiveInchPrice" name="fiveInchPrice" >
+                            </div>
+                            <div class="priceInput">
+                                <label class="modalLabel" for="sixInchPrice">6" Price:</label>
+                                <input class="modalSmallInputField" type="text" id="sixInchPrice" name="sixInchPrice" >
+                            </div>
+                        </div>
 
-                    <!-- Grouped fields for filters -->
-                    <div class="companyformGrid">
-                        <div class="filterInput">
-                            <label class="modalLabel" for="fiveInchFilter">5" Filter:</label>
-                            <input class="modalSmallInputField" type="text" id="fiveInchFilter" name="fiveInchFilter" required>
+                        <!-- Grouped fields for filters -->
+                        <div class="companyformGrid">
+                            <div class="filterInput">
+                                <label class="modalLabel" for="fiveInchFilter">5" Filter:</label>
+                                <input class="modalSmallInputField" type="text" id="fiveInchFilterPrice" name="fiveInchFilterPrice" >
+                            </div>
+                            <div class="filterInput">
+                                <label class="modalLabel" for="sixInchFilter">6" Filter:</label>
+                                <input class="modalSmallInputField" type="text" id="sixInchFilterPrice" name="sixInchFilterPrice" >
+                            </div>
                         </div>
-                        <div class="filterInput">
-                            <label class="modalLabel" for="sixInchFilter">6" Filter:</label>
-                            <input class="modalSmallInputField" type="text" id="sixInchFilter" name="sixInchFilter" required>
+                        <div class="companyformSingle">
+                            <label class="modalLabel"  for="fasciaWood">Fascia Wood</label>
+                            <input class="modalSmallInputField" type="text" id="fasciaWoodPrice" name="fasciaWoodPrice" >
+                        </div>
+                        <div class="companyformSingle">
+                            <label class="modalLabel"  for="trimMetal">Trim Metal</label>
+                            <input class="modalSmallInputField" type="text" id="trimMetalPrice" name="trimMetalPrice" >
                         </div>
                     </div>
-                    <div class="companyformSingle">
-                        <label class="modalLabel"  for="fasciaWood">Fascia Wood</label>
-                        <input class="modalSmallInputField" type="text" id="fasciaWood" name="fasciaWood" required>
-                    </div>
-                    <div class="companyformSingle">
-                        <label class="modalLabel"  for="trimMetal">Trim Metal</label>
-                        <input class="modalSmallInputField" type="text" id="trimMetal" name="trimMetal" required>
-                    </div>
-                </div>
-                <button class="fullButton" id="companyAddFakeInfo">Fake</button>
-                <input class="fullButton" type="submit" value="Submit" id="Submit">
+                    <input class="fullButton" type="submit" value="Submit" id="Submit">
+                </form>
+            <button type="button" class="fullButton" id="companyAddFakeInfo" onclick="fillFormWithFakeData(event, 'companyForm')">Fake</button>            
 
-
-              </form>
             </div>
-          </div>
+        </div>
     </main>
     <script src="../javascript/companies.js"></script>
     <script src="../javascript/signin.js"></script>  
+    <script src="../javascript/global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
 </body>
 </html>

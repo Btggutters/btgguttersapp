@@ -26,6 +26,19 @@ CREATE TABLE company (
     companyName VARCHAR(255),
     companyAddress VARCHAR(255)
 );
+CREATE TABLE company_prices (
+    id SERIAL PRIMARY KEY,
+    company_id INTEGER NOT NULL,
+    five_inch_gutter NUMERIC,
+    six_inch_gutter NUMERIC,
+    five_inch_filter NUMERIC,
+    six_inch_filter NUMERIC,
+    fascia_wood NUMERIC,
+    trim_metal NUMERIC,
+    FOREIGN KEY (company_id) REFERENCES company(id)
+);
+INSERT INTO company_prices (company_id)
+SELECT id FROM company;
 
 CREATE TABLE jobs (
     id SERIAL PRIMARY KEY,
