@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="icon" href="../images/btglogo.png" type="images/x-icon">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+
+
 </head>
 <body>
     <header>
@@ -21,8 +27,7 @@
             <a href="../pages/inventory.html" class="btgButton homeApp">Inventory</a>
             <a href="../pages/customers.html" class="btgButton homeApp">Customers</a>
             <a href="../pages/companies.html" class="btgButton homeApp">Companies</a>
-            <a href="../pages/page1.html" class="btgButton homeApp">Add +</a>
-
+            <a href="#" class="btgButton homeApp" onclick="openAddModal()">Add</a>
             <a href="../page2.html" class="btgButton homeApp">Invoices & Estimates</a>
             <a href="../pages/page1.html" class="btgButton homeApp">Financial</a>
             <a href="../pages/page2.html" class="btgButton homeApp">Button 2</a>
@@ -30,14 +35,86 @@
             <a href="../pages/page2.html" class="btgButton homeApp">Dont know yet</a>
             <a href="../pages/page1.html" class="btgButton homeApp">Dont know yet</a>
             <a href="../pages/page2.html" class="btgButton homeApp">Dont know yet</a>
+            <a href="../pages/page1.html" class="btgButton homeApp">Dont know yet</a>
         </div>
 
 
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+            <span class="close">&times;</span>
 
-    </main>
+                    <!-- Default form (shown when "No Company" is selected) -->
+                <form class="addLeadForm" id="defaultForm">
+                    <div class="addLeadFormTop">
+                        <span class="addLeadFormTitle">Lead</span>
+                        <select name="companyName" id="companyName">
+                            <option value="No Company">No Company</option>
+
+                        </select>
+                    </div>
+
+                    <input  class="addLeadFormInput" type="text" id="customerNameDefault" name="name" placeholder="Name" required>
+                    <input class="addLeadFormInput" type="text" id="jobAddressDefault" name="address" placeholder="Address" required>
+                    <input  class="addLeadFormInput" type="text" id="customerPhoneDefault" name="phone" placeholder="Phone" required>
+                    <input class="addLeadFormInput" type="date" id="estimateDateDefault" name="estimateDate">
+                    <select id="jobTypeOfWorkDefault" name="jobTypeOfWork" multiple>
+                        <option value="Gutter Installation">Gutter Install</option>
+                        <option value="Gutter Repair">Gutter Repair</option>
+                        <option value="Gutter Cleaning">Gutter Cleaning</option>
+                        <option value="Gutter Guard Installation">Guard Install</option>
+                        <option value="Metal Trim Installation">Trim Install</option>
+                    </select><br>
+                    <input class="addLeadFormInput" type="text" id="customerEmailDefault" name="email" placeholder="Email">
+                    <textarea class="addLeadFormInput" id="jobNotesDefault" name="jobNotes" placeholder="Notes"></textarea>
+                    <select id="jobObtainedDefault" name="jobObtained" class="addLeadFormInput">
+                        <option value="How did you obtain this Lead?">How did you obtain this Lead?</option>
+                        <option value="Yard Sign">Yard Sign</option>
+                        <option value="Google">Google</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Freinds&Family">Freinds&Family</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input id="addLeadFormSubmitDefault" class="addLeadFormSubmit" type="submit" value="Submit">
+                </form>
+
+
+
+                <form class="addCompanyLeadForm" id="companyForm" style="display: none;">
+                    <div class="addLeadFormTop">
+                        <span class="addLeadFormTitle">Lead</span>
+                        <select name="companyName" id="companyFormCompanyName">
+                            <option value="No Company">No Company</option>
+                        </select>
+                    </div>
+                    <input class="addLeadFormInput" type="text" id="jobAddressCompany" name="address" placeholder="Address" required>
+                    <input class="addLeadFormInput" type="date" id="estimateDateCompany" name="estimateDate">
+                    <input class="addLeadFormInput" type="date" id="installDateCompany" name="installDate">
+                    <select id="jobTypeOfWorkCompany" name="jobTypeOfWork" multiple>
+                        <option value="Gutter Installation">Gutter Install</option>
+                        <option value="Gutter Repair">Gutter Repair</option>
+                        <option value="Gutter Cleaning">Gutter Cleaning</option>
+                        <option value="Gutter Guard Installation">Guard Install</option>
+                        <option value="Metal Trim Installation">Trim Install</option>
+                    </select><br>
+                    <input class="drawingUpload" type="file" id="drawingUploadCompany" name="drawingUpload" accept="image/*">
+                    <textarea class="addLeadFormInput" id="jobNotesCompany" name="jobNotes" placeholder="Notes"></textarea>
+                    <input id="addLeadFormSubmitCompany" class="addLeadFormSubmit" type="submit" value="Submit">
+                </form>
+
+            </div>
+        </div>
+        
+
+        </main>
 
     
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    
     <script src="../javascript/signin.js"></script>
+    <script src="../javascript/home.js"></script>
+
 </body>
 </html>
+

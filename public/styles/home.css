@@ -28,3 +28,98 @@
     transition: opacity 0.3s ease;
     pointer-events: none; /* Ensures clicks go through the pseudo-element */
 }
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    color: #000;
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Could be more or less, depending on screen size */
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  #jobTypeOfWork + .dropdown {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    position: relative; /* Added for absolute positioning of options */
+  }
+  
+  #jobTypeOfWork + .dropdown .option {
+    padding: 2px 10px;
+    position: absolute; /* Position options absolutely within the dropdown */
+    background: white; /* Match the background of the dropdown */
+    width: calc(100% - 20px); /* Full width minus padding */
+    border: 1px solid #ccc; /* Match the border of the dropdown */
+    border-top: none; /* Remove the top border */
+    display: none; /* Hide options initially */
+    z-index: 2; /* Ensure options appear above other content */
+    color: #000;
+    z-index: 1000; /* Higher than the z-index of other elements */
+    position: relative; /* or absolute, depending on your layout */
+  }
+  
+  #jobTypeOfWork + .dropdown .option.selected {
+    display: block; /* Show selected options */
+  }
+  .addLeadForm {
+    display: grid;
+    grid-template-columns: 1fr;
+
+  }
+  .addLeadFormTop{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+  }
+  .addLeadFormTitle{
+    font-size: 2.4rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+
+/* Style the select element */
+#companyName, #companyFormCompanyName {
+    font-size: var(--medium);
+    color: var(--first-color);
+    background-color: var(--fourth-color);
+    border: 1px solid var(--second-color);
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .addLeadFormInput {
+    font-size: var(--small);
+    color: white;
+    background-color: var(--third-color);
+    border: 1px solid var(--first-color);
+    padding: 5px;
+    width: 100%;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  textarea {
+    resize: none;
+  }

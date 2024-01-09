@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser());
 
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pages', 'home.html'));
 });
@@ -286,4 +287,78 @@ app.get('/get-companies-and-prices', checkUserLoggedIn, (req, res) => {
       res.status(200).json(result.rows);
     }
   });
+});
+app.get('/get-companies', checkUserLoggedIn , (req, res) => {
+  // Create a SELECT query
+  var selectQuery = `
+    SELECT 
+      c.companyName
+    FROM company c
+  `;
+
+  // Execute the query
+  pool.query(selectQuery, (err, result) => {
+    if (err) {
+      console.log('Error executing query', err.stack);
+      res.status(500).json({ error: err.stack });
+    } else {
+      console.log('Data retrieved');
+      res.status(200).json(result.rows);
+    }
+  });
+});
+app.post('/create-lead', checkUserLoggedIn, (req, res) => {
+  // Get the form data from the request body
+  var { customerName, customerPhoneNumber, customerEmail, obtainedHow, address, notes, typeOfWork, date } = req.body;
+
+  // Start a database transaction
+  pool.query('BEGIN')
+    .then(() => {
+      // Insert into the customer table
+      var insertCustomerQuery = `
+        INSERT INTO customer (customerName, customerPhoneNumber, customerEmail, obtainedHow)
+        VALUES ($1, $2, $3, $4)
+        RETURNING id
+      `;
+      return pool.query(insertCustomerQuery, [customerName, customerPhoneNumber, customerEmail, obtainedHow]);
+    })
+    .then(result => {
+      // Get the ID of the newly inserted customer
+      var customerId = result.rows[0].id;
+
+      // Insert into the jobs table
+      var insertJobQuery = `
+        INSERT INTO jobs (customerId, address, notes, typeOfWork)
+        VALUES ($1, $2, $3, $4)
+        RETURNING id
+      `;
+      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork]);
+    })
+    .then(result => {
+      // Get the ID of the newly inserted job
+      var jobId = result.rows[0].id;
+
+      // Insert into the estimate table
+      var insertEstimateQuery = `
+        INSERT INTO estimate (jobId, date)
+        VALUES ($1, $2)
+      `;
+      return pool.query(insertEstimateQuery, [jobId, date]);
+    })
+    .then(() => {
+      // Commit the transaction
+      return pool.query('COMMIT');
+    })
+    .then(() => {
+      console.log('Lead created');
+      res.status(200).json({ message: 'Lead created' });
+    })
+    .catch(err => {
+      // Rollback the transaction in case of error
+      pool.query('ROLLBACK')
+        .then(() => {
+          console.log('Error executing query', err.stack);
+          res.status(500).json({ error: err.stack });
+        });
+    });
 });
