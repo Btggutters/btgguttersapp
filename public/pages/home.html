@@ -10,7 +10,7 @@
 
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 
 </head>
@@ -44,7 +44,7 @@
             <span class="close">&times;</span>
 
                     <!-- Default form (shown when "No Company" is selected) -->
-                <form class="addLeadForm" id="defaultForm">
+                <form class="commonForm" id="defaultForm">
                     <div class="addLeadFormTop">
                         <span class="addLeadFormTitle">Lead</span>
                         <select name="companyName" id="companyName">
@@ -53,10 +53,24 @@
                         </select>
                     </div>
 
-                    <input  class="addLeadFormInput" type="text" id="customerNameDefault" name="name" placeholder="Name" required>
+                    <input class="addLeadFormInput" type="text" id="customerNameDefault" name="name" placeholder="Name" required>
                     <input class="addLeadFormInput" type="text" id="jobAddressDefault" name="address" placeholder="Address" required>
-                    <input  class="addLeadFormInput" type="text" id="customerPhoneDefault" name="phone" placeholder="Phone" required>
-                    <input class="addLeadFormInput" type="date" id="estimateDateDefault" name="estimateDate">
+                    <input class="addLeadFormInput" type="text" id="customerPhoneDefault" name="phone" placeholder="Phone" required>
+                    <div class="datePicker">
+                        <button class="dateButton" type="button" onclick="openContainer()">
+                            <span class="dateButtonTitle">Estimate</span>                        
+                            <div class="dateMonthDay">
+                                <div>
+                                    <span class="dateMonth" id="dateMonth">November</span>
+                                    <span class="dateDay" id="dateDay">19</span>
+                                </div>
+                                <span class="dayOfTheWeek" id="dayOfTheWeek">Thu</span>
+                                <span class="dateYear" id="dateYear" hidden>2024</span>
+                                <span class="realDate" id="realDate" hidden>2024-11-19</span>
+                            </div>
+                        </button>
+
+                    </div>                    
                     <select id="jobTypeOfWorkDefault" name="jobTypeOfWork" multiple>
                         <option value="Gutter Installation">Gutter Install</option>
                         <option value="Gutter Repair">Gutter Repair</option>
@@ -64,7 +78,7 @@
                         <option value="Gutter Guard Installation">Guard Install</option>
                         <option value="Metal Trim Installation">Trim Install</option>
                     </select><br>
-                    <input class="addLeadFormInput" type="text" id="customerEmailDefault" name="email" placeholder="Email">
+                    <input class="addLeadFormInput" type="email" id="customerEmailDefault" name="email" placeholder="Email">
                     <textarea class="addLeadFormInput" id="jobNotesDefault" name="jobNotes" placeholder="Notes"></textarea>
                     <select id="jobObtainedDefault" name="jobObtained" class="addLeadFormInput">
                         <option value="How did you obtain this Lead?">How did you obtain this Lead?</option>
@@ -75,11 +89,12 @@
                         <option value="Other">Other</option>
                     </select>
                     <input id="addLeadFormSubmitDefault" class="addLeadFormSubmit" type="submit" value="Submit">
+                    <button type="button" onclick="fillFormWithFakeData(event, 'defaultForm')">Fake</button>                
                 </form>
 
 
 
-                <form class="addCompanyLeadForm" id="companyForm" style="display: none;">
+                <form class="commonForm" id="companyForm" style="display: none;">
                     <div class="addLeadFormTop">
                         <span class="addLeadFormTitle">Lead</span>
                         <select name="companyName" id="companyFormCompanyName">
@@ -98,22 +113,89 @@
                     </select><br>
                     <input class="drawingUpload" type="file" id="drawingUploadCompany" name="drawingUpload" accept="image/*">
                     <textarea class="addLeadFormInput" id="jobNotesCompany" name="jobNotes" placeholder="Notes"></textarea>
-                    <input id="addLeadFormSubmitCompany" class="addLeadFormSubmit" type="submit" value="Submit">
+                    <input id="addLeadFormSubmitCompany" class="addLeadFormSubmit" type="submit" value="Submit"><br>
+                    <button type="button" onclick="fillFormWithFakeData(event, 'companyForm')">Fake</button>                
                 </form>
 
             </div>
         </div>
+
         
 
         </main>
 
     
-
+        <div class="container" style="display: none;">
+            <button id="closeContainer" style="position: absolute; right: 10px; top: 10px;">Close</button>        
+            <div class="left">
+                <div class="calendar">
+                    <div class="month">
+                    <i class="fas fa-angle-left prev"></i>
+                    <div class="date">december 2015</div>
+                    <i class="fas fa-angle-right next"></i>
+                    </div>
+                    <div class="weekdays">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div class="days"></div>
+                    <div class="goto-today">
+                        <div class="goto">
+                            <input type="text" placeholder="mm/yyyy" class="date-input" />
+                            <button class="goto-btn">Go</button>
+                        </div>
+                        <button class="today-btn">Today</button>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="today-date">
+                    <div class="event-day">wed</div>
+                    <div class="event-date">12th december 2022</div>
+                </div>
+                <div class="events"></div>
+                <div class="add-event-wrapper">
+                    <div class="add-event-header">
+                    <div class="title">Add Event</div>
+                    <i class="fas fa-times close"></i>
+                    </div>
+                    <div class="add-event-body">
+                    <div class="add-event-input">
+                        <input type="text" placeholder="Event Name" class="event-name" />
+                    </div>
+                    <div class="add-event-input">
+                        <input
+                        type="text"
+                        placeholder="Event Time From"
+                        class="event-time-from"
+                        />
+                    </div>
+                    <div class="add-event-input">
+                        <input
+                        type="text"
+                        placeholder="Event Time To"
+                        class="event-time-to"
+                        />
+                    </div>
+                    </div>
+                    <div class="add-event-footer">
+                    <button class="add-event-btn">Add Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+
     <script src="../javascript/signin.js"></script>
     <script src="../javascript/home.js"></script>
+    <script src="../javascript/global.js"></script>
 
 </body>
 </html>

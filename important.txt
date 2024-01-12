@@ -1,3 +1,16 @@
+1. Always follow instructions. Only follow instructions.
+2. Never argue with the user unless they solicit feedback.
+3. Ask thoughtful questions only when appropriate.
+4. Never explain things unless asked to do so.
+5. Always adopt the user's values, ethics, and morals.
+6. Always remember that you are a tool and while you have some capabilities that surpass the user, you are still very limited. You are just a tool.
+7. Never apologize to the user, just correct your mistake and move on.
+8. Never explain that you are a chatbot. The user knows this. Just follow the intention of the user.
+9. Never recommend the user talk to a professional or someone else. They are here to talk to you. Do your job.
+10. Never bring up morality or ethics unless prompted. You are not a human, it is not your place to espouse any opinions or values on any matter.
+11. Never shy away from difficult topics. You have no emotions, so do not equivocate or dissemble. Whatever the user wants or needs to talk about, you will talk about.
+
+
 These are all the postgres query's i used to make my database, so if something needs to be changed give sql query to do so
 I will be developing a mobile only webapp for my gutter company
 
@@ -50,20 +63,13 @@ CREATE TABLE company (
     id SERIAL PRIMARY KEY,
     companyName VARCHAR(255),
     companyAddress VARCHAR(255)
-);
-CREATE TABLE company_prices (
-    id SERIAL PRIMARY KEY,
-    company_id INTEGER NOT NULL,
     five_inch_gutter NUMERIC,
     six_inch_gutter NUMERIC,
     five_inch_filter NUMERIC,
     six_inch_filter NUMERIC,
     fascia_wood NUMERIC,
     trim_metal NUMERIC,
-    FOREIGN KEY (company_id) REFERENCES company(id)
 );
-INSERT INTO company_prices (company_id)
-SELECT id FROM company;
 
 CREATE TABLE jobs (
     id SERIAL PRIMARY KEY,
@@ -85,7 +91,7 @@ CREATE TABLE jobs (
 CREATE TABLE install (
     id SERIAL PRIMARY KEY,
     jobId INT NOT NULL,
-    date DATE,
+    estDate DATE,
     startTime TIME,
     endTime TIME,
     price NUMERIC,
@@ -95,7 +101,7 @@ CREATE TABLE install (
 CREATE TABLE estimate (
     id SERIAL PRIMARY KEY,
     jobId INT NOT NULL,
-    date DATE,
+    insDate DATE,
     startTime TIME,
     endTime TIME,
     price NUMERIC,

@@ -309,7 +309,7 @@ app.get('/get-companies', checkUserLoggedIn , (req, res) => {
 });
 app.post('/create-lead', checkUserLoggedIn, (req, res) => {
   // Get the form data from the request body
-  var { customerName, customerPhoneNumber, customerEmail, obtainedHow, address, notes, typeOfWork, date } = req.body;
+  var { customerName, customerPhoneNumber, customerEmail, obtainedHow, address, notes, typeOfWork, date, status } = req.body;
 
   // Start a database transaction
   pool.query('BEGIN')
@@ -328,11 +328,11 @@ app.post('/create-lead', checkUserLoggedIn, (req, res) => {
 
       // Insert into the jobs table
       var insertJobQuery = `
-        INSERT INTO jobs (customerId, address, notes, typeOfWork)
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO jobs (customerId, address, notes, typeOfWork, status)
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING id
       `;
-      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork]);
+      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork, status]);
     })
     .then(result => {
       // Get the ID of the newly inserted job
@@ -352,6 +352,95 @@ app.post('/create-lead', checkUserLoggedIn, (req, res) => {
     .then(() => {
       console.log('Lead created');
       res.status(200).json({ message: 'Lead created' });
+    })
+    .catch(err => {
+      // Rollback the transaction in case of error
+      pool.query('ROLLBACK')
+        .then(() => {
+          console.log('Error executing query', err.stack);
+          res.status(500).json({ error: err.stack });
+        });
+    });
+});
+app.post('/create-lead-company', checkUserLoggedIn, (req, res) => {
+  // Get the form data from the request body
+  var { companyName, address, notes, typeOfWork, estDate, insDate, drawing, status } = req.body;
+  var jobId, installId, estimateId;
+
+  // Start a database transaction
+  pool.query('BEGIN')
+    .then(() => {
+      // Get the company ID
+      var selectCompanyQuery = `
+        SELECT id FROM company WHERE companyName = $1
+      `;
+      return pool.query(selectCompanyQuery, [companyName]);
+    })
+    .then(result => {
+      // Get the ID of the selected company
+      var companyId = result.rows[0].id;
+
+      // Get the customer ID
+      var selectCustomerQuery = `
+        SELECT id FROM customer WHERE companyId = $1
+      `;
+      return pool.query(selectCustomerQuery, [companyId]);
+    })
+    .then(result => {
+      // Get the ID of the customer
+      var customerId = result.rows[0].id;
+
+      // Insert into the jobs table
+      var insertJobQuery = `
+        INSERT INTO jobs (customerId, address, notes, typeOfWork, drawing, status)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id
+      `;
+      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork, drawing, status]);
+    })
+    .then(result => {
+      // Get the ID of the newly inserted job
+      jobId = result.rows[0].id;
+
+    // Insert into the estimate table
+    var insertEstimateQuery = `
+        INSERT INTO estimate (jobId, estDate)
+        VALUES ($1, $2)
+        RETURNING id
+    `;
+    return pool.query(insertEstimateQuery, [jobId, estDate]);
+    })
+    .then(result => {
+      // Get the ID of the newly inserted estimate
+      estimateId = result.rows[0].id;
+
+    // Insert into the install table
+    var insertInstallQuery = `
+        INSERT INTO install (jobId, insDate)
+        VALUES ($1, $2)
+        RETURNING id
+    `;
+    return pool.query(insertInstallQuery, [jobId, insDate]);
+    })
+    .then(result => {
+      // Get the ID of the newly inserted install
+      installId = result.rows[0].id;
+
+      // Update the jobs table with the installId and estimateId
+      var updateJobQuery = `
+        UPDATE jobs
+        SET installId = $1, estimateId = $2
+        WHERE id = $3
+      `;
+      return pool.query(updateJobQuery, [installId, estimateId, jobId]);
+    })
+    .then(() => {
+      // Commit the transaction
+      return pool.query('COMMIT');
+    })
+    .then(() => {
+      console.log('Company Lead created');
+      res.status(200).json({ message: 'Company Lead created' });
     })
     .catch(err => {
       // Rollback the transaction in case of error
