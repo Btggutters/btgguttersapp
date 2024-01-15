@@ -11,61 +11,67 @@
     <header>
         <a href="home.html" class="companyName">BTG Gutters</a>
         <button class="loginButton" onclick="openSigninModal()"></button>
-    </header>     
+    </header>  
+    
+    
     <main>
         <div class="jobsPage">
             <div class="topOfjobsPage">
+                <button class="filterButton" onclick="openFilterModal()"></button>
                 <input type="text" id="jobsSearchInput" class="crmSearchInput">
-                <button class="jobsAddCustomerButton" onclick="addCustomer()">Add</button>
             </div>
-            <div class="jobsCustomerCardFront">
-                <div class="jobsCustomerCardNameandStatus">
-                    <div class="jobsCustomerCardFrontName">John Doe</div>
-                    <div class="jobsCustomerCardFrontStatus">Estimate Scheduled</div>
-                </div>
-                <div>
-                    <div class="jobsCustomerCardFrontAddress">32080 Parkwood st, Westland, MI 48186</div>
+            <div class="jobsContainer" id="jobsContainer">
+                <div class="jobsCard" onclick="displayModal()"                    <div class="jobsCardNameandStatus">
+                        <div class="jobsCardName"></div>
+                        <div class="jobsCardStatus"></div>
+                    </div>
+                    <div>
+                        <div class="jobsCardAddress"></div>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <form class="jobClickForm">
-                    <label for="job">Job #</label>
-                    <input type="text" id="job" name="job" class="smallInput">
+                <form class="commonForm">
+                    <input type="text" id="job" name="job" class="smallInput" placeholder="Job #">
+                    <input type="text" id="name" name="name" placeholder="Name">
+                    <input type="text" id="status" name="status" placeholder="Status">
+                    <input type="tel" id="phone" name="phone" placeholder="Phone">
+                    <input type="text" id="address" name="address" placeholder="Address">
+                    <input type="text" id="company" name="company" placeholder="Company">
+                    <input type="file" id="drawing" name="drawing" place>
+                    <input type="date" id="estimateDate" name="estimateDate">
+                    <input type="date" id="installDate" name="installDate">  
+                    <div class="datePickerArea">
+                        <button class="dateButton" type="button" onclick="openContainer('estimate', 'customer')">                            <span class="dateButtonTitle">Estimate</span>                        
+                            <div class="dateMonthDay">
+                                <div>
+                                    <span class="dateMonth" id="dateMonthDefault"></span>
+                                    <span class="dateDay" id="dateDayDefault"></span>
+                                </div>
+                                <span class="dayOfTheWeek" id="dayOfTheWeekDefault"></span>
+                                <span class="dateYear" id="dateYearDefault" hidden></span>
+                                <span class="realDate" id="realEstimateDateDefault"></span>
+                            </div>
+                        </button>
+                        <button class="dateButton" type="button" onclick="openContainer('install', 'customer')">                            <span class="dateButtonTitle">Estimate</span>                        
+                            <div class="dateMonthDay">
+                                <div>
+                                    <span class="dateMonth" id="dateMonthDefault"></span>
+                                    <span class="dateDay" id="dateDayDefault"></span>
+                                </div>
+                                <span class="dayOfTheWeek" id="dayOfTheWeekDefault"></span>
+                                <span class="dateYear" id="dateYearDefault" hidden></span>
+                                <span class="realDate" id="realEstimateDateDefault"></span>
+                            </div>
+                        </button>
 
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name">
-
-                    <label for="status">Status</label>
-                    <input type="text" id="status" name="status">
-        
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone">
-        
-                    <label for="address">Address</label>
-                    <input type="text" id="address" name="address">
-                    
-                    <label for="company">Company</label>
-                    <input type="text" id="company" name="company">
-        
-
-                    <label for="drawing">Drawing</label>
-                    <input type="file" id="drawing" name="drawing" class="smallInput">
-        
-                    <label for="estimateDate">Estimate Date</label>
-                    <input type="date" id="estimateDate" name="estimateDate" class="smallInput">
-
-                    <label for="installDate">Install Date</label>
-                    <input type="date" id="installDate" name="installDate" class="smallInput">
-                            
-                    <label for="price">Price</label>
-                    <input type="number" id="price" name="price" class="smallInput">
-
-                    <label for="notes">Notes</label>
-                    <input type="text" id="notes" name="notes">
-
+                    </div>          
+                    <input type="number" id="price" name="price" class="smallInput" placeholder="Price">
+                    <input type="text" id="notes" name="notes" placeholder="Notes">
                 </form>
                 <div class="materialsAddtoJobFeild">
                     <div class="MaterialCard">

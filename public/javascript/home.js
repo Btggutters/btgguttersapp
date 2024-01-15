@@ -114,11 +114,18 @@ document.getElementById('addLeadFormSubmitDefault').addEventListener('click', fu
 
   // Get values from form inputs
   var customerName = document.getElementById('customerNameDefault').value;
+  console.log('customerName:', customerName);
   var customerPhoneNumber = document.getElementById('customerPhoneDefault').value;
+  console.log('customerPhoneNumber:', customerPhoneNumber);
   var customerEmail = document.getElementById('customerEmailDefault').value;
+  console.log('customerEmail:', customerEmail);
   var obtainedHow = document.getElementById('jobObtainedDefault').value;
+  console.log('obtainedHow:', obtainedHow);
   var address = document.getElementById('jobAddressDefault').value;
+  console.log('address:', address);
   var notes = document.getElementById('jobNotesDefault').value;
+  console.log('notes:', notes);
+
 
   // Get all selected options from jobTypeOfWorkDefault
   var typeOfWorkSelect = document.getElementById('jobTypeOfWorkDefault');
@@ -126,11 +133,11 @@ document.getElementById('addLeadFormSubmitDefault').addEventListener('click', fu
     .filter(option => option.selected)
     .map(option => option.value);
 
-  var estDate = document.getElementById('estimateDateDefault').value;
+  var estDate = document.getElementById('realEstimateDateDefault').textContent;
 
   // Determine status based on estDate
   var status = estDate ? 'Est Scheduled' : 'Needs Est';
-
+  console.log('estDate:', estDate);
   // Create a lead
   fetch('/create-lead', {
     method: 'POST',
@@ -144,7 +151,7 @@ document.getElementById('addLeadFormSubmitDefault').addEventListener('click', fu
       obtainedHow: obtainedHow,
       address: address,
       notes: notes,
-      typeOfWork: typeOfWork,
+      typeOfWork: typeOfWork.join(', '),  // Convert array to string
       estDate: estDate,
       status: status, // Add status to the request body
     }),
@@ -166,8 +173,8 @@ document.getElementById('addLeadFormSubmitCompany').addEventListener('click', fu
   var drawing = document.getElementById('drawingUploadCompany').value;
   var notes = document.getElementById('jobNotesCompany').value;
   var companyName = document.getElementById('companyFormCompanyName').value;
-  var estDate = document.getElementById('estimateDateCompany').value;
-  var insDate = document.getElementById('installDateCompany').value;
+  var estDate = document.getElementById('realEstimateDateCompany').textContent;
+  var insDate = document.getElementById('realInstallDateCompany').textContent;
 
   // Determine status based on estDate and insDate
   var status;
@@ -220,15 +227,21 @@ document.getElementById('closeContainer').addEventListener('click', function() {
 });
 document.querySelectorAll('.day').forEach(function(day) {
   day.addEventListener('click', function() {
-      // Update the realDate span
-      document.getElementById('realDate').textContent = day.textContent;
+    // Update the realDate spans
+    document.getElementById('estimateDateDayCompany').textContent = day.textContent;
+    document.getElementById('realEstimateDateCompany').textContent = day.textContent;
+    document.getElementById('realInstallDateCompany').textContent = day.textContent;
+    // Add more IDs as needed...
 
-      // Hide the container
-      var container = document.querySelector('.container');
-      container.style.display = 'none';
+    // Hide the container
+    var container = document.querySelector('.container');
+    container.style.display = 'none';
   });
 });
-function openContainer() {
+function openContainer(dateType, formType) {
+  // Store the dateType and formType in global variables
+  window.currentDateType = dateType;
+  window.currentFormType = formType;
     var container = document.querySelector('.container');
     container.style.display = 'block';
     container.style.position = 'fixed';
@@ -392,16 +405,44 @@ function addListner() {
 
       // Update the realDate span
       const realDate = `${year}-${month + 1}-${e.target.innerHTML}`;
-      document.getElementById('realDate').textContent = realDate;
 
       // Create a new Date object with the selected date
       const date = new Date(year, month, Number(e.target.innerHTML));
+      console.log('date:', date);
 
+      // Determine which spans to update based on currentDateType and currentFormType
+      let dateMonthId, dateDayId, dayOfWeekId, dateYearId, realDateId;
+      if (window.currentFormType === 'customer') {
+        dateMonthId = 'dateMonthDefault';
+        dateDayId = 'dateDayDefault';
+        dayOfWeekId = 'dayOfTheWeekDefault';
+        dateYearId = 'dateYearDefault';
+        realDateId = 'realEstimateDateDefault';
+      } else if (window.currentFormType === 'company') {
+        if (window.currentDateType === 'estimate') {
+          dateMonthId = 'estimateDateMonthCompany';
+          dateDayId = 'estimateDateDayCompany';
+          dayOfWeekId = 'estimateDayOfWeekCompany';
+          dateYearId = 'estimateDateYearCompany';
+          realDateId = 'realEstimateDateCompany';
+        } else if (window.currentDateType === 'install') {
+          dateMonthId = 'installDateMonthCompany';
+          dateDayId = 'installDateDayCompany';
+          dayOfWeekId = 'installDayOfWeekCompany';
+          dateYearId = 'installDateYearCompany';
+          realDateId = 'realInstallDateCompany';
+        }
+      }
+      console.log('currentFormType:', window.currentFormType);
+      console.log('currentDateType:', window.currentDateType);
+      console.log('dateDayId:', dateDayId);
+      document.getElementById(dateDayId).textContent = date.getDate();
       // Update the spans
-      document.getElementById('dateDay').textContent = date.getDate();
-      document.getElementById('dateMonth').textContent = date.toLocaleString('en-US', { month: 'long' });
-      document.getElementById('dayOfTheWeek').textContent = date.toLocaleString('en-US', { weekday: 'short' });
-      document.getElementById('dateYear').textContent = date.getFullYear();
+      document.getElementById(dateDayId).textContent = date.getDate();
+      document.getElementById(dateMonthId).textContent = date.toLocaleString('en-US', { month: 'short' });
+      document.getElementById(dayOfWeekId).textContent = date.toLocaleString('en-US', { weekday: 'short' });
+      document.getElementById(dateYearId).textContent = date.getFullYear();
+      document.getElementById(realDateId).textContent = realDate;
 
       // Hide the container
       var container = document.querySelector('.container');

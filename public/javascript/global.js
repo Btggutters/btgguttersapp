@@ -3,8 +3,11 @@ window.fillFormWithFakeData = function(event, formId) {
     event.stopPropagation();
     console.log('fillFormWithFakeData called');
 
-    var fields = document.querySelectorAll(`#${formId} input, #${formId} select, #${formId} textarea`);
+    var fields = document.querySelectorAll(`#${formId} input, #${formId} span, #${formId} select, #${formId} textarea`);
     fields.forEach(function(field) {
+        if (field.id === 'companyFormCompanyName' || field.id === 'companyName') {
+            return; // skip this field
+        }
         switch(field.type) {
             case 'text':
             case 'number':

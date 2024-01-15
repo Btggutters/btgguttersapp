@@ -224,11 +224,11 @@ app.post('/add-company-and-prices', checkUserLoggedIn, (req, res) => {
     .then(() => {
       // Insert into the company table
       var insertCompanyQuery = `
-        INSERT INTO company (companyName, companyAddress)
-        VALUES ($1, $2)
+        INSERT INTO company (companyName, companyAddress, five_inch_gutter, six_inch_gutter, five_inch_filter, six_inch_filter, fascia_wood, trim_metal)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING id
       `;
-      return pool.query(insertCompanyQuery, [companyName, companyAddress]);
+      return pool.query(insertCompanyQuery, [companyName, companyAddress, fiveInchPrice, sixInchPrice, fiveInchFilterPrice, sixInchFilterPrice, fasciaWoodPrice, trimMetalPrice]);
     })
     .then(result => {
       // Assign the ID of the newly inserted company to companyId
@@ -241,14 +241,7 @@ app.post('/add-company-and-prices', checkUserLoggedIn, (req, res) => {
       `;
       return pool.query(insertCustomerQuery, [salesName, salesNumber, billingEmail, companyId]);
     })
-    .then(() => {
-      // Insert into the company_prices table
-      var insertCompanyPricesQuery = `
-        INSERT INTO company_prices (company_id, five_inch_gutter, six_inch_gutter, five_inch_filter, six_inch_filter, fascia_wood, trim_metal)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
-      `;
-      return pool.query(insertCompanyPricesQuery, [companyId, fiveInchPrice, sixInchPrice, fiveInchFilterPrice, sixInchFilterPrice, fasciaWoodPrice, trimMetalPrice]);
-    })
+
     .then(() => {
       // Commit the transaction
       return pool.query('COMMIT');
@@ -271,10 +264,9 @@ app.get('/get-companies-and-prices', checkUserLoggedIn, (req, res) => {
     SELECT 
       c.companyName, c.companyAddress, 
       cu.customerName, cu.customerPhoneNumber, cu.customerEmail, cu.companyId, 
-      cp.company_id, cp.five_inch_gutter, cp.six_inch_gutter, cp.five_inch_filter, cp.six_inch_filter, cp.fascia_wood, cp.trim_metal 
+      c.five_inch_gutter, c.six_inch_gutter, c.five_inch_filter, c.six_inch_filter, c.fascia_wood, c.trim_metal 
     FROM company c
     JOIN customer cu ON c.id = cu.companyId
-    JOIN company_prices cp ON c.id = cp.company_id
   `;
 
   // Execute the query
@@ -309,7 +301,7 @@ app.get('/get-companies', checkUserLoggedIn , (req, res) => {
 });
 app.post('/create-lead', checkUserLoggedIn, (req, res) => {
   // Get the form data from the request body
-  var { customerName, customerPhoneNumber, customerEmail, obtainedHow, address, notes, typeOfWork, date, status } = req.body;
+  var { customerName, customerPhoneNumber, customerEmail, obtainedHow, address, notes, typeOfWork, estDate, status } = req.body;
 
   // Start a database transaction
   pool.query('BEGIN')
@@ -328,22 +320,11 @@ app.post('/create-lead', checkUserLoggedIn, (req, res) => {
 
       // Insert into the jobs table
       var insertJobQuery = `
-        INSERT INTO jobs (customerId, address, notes, typeOfWork, status)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO jobs (customerId, address, notes, typeOfWork, status, estDate)
+        VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id
       `;
-      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork, status]);
-    })
-    .then(result => {
-      // Get the ID of the newly inserted job
-      var jobId = result.rows[0].id;
-
-      // Insert into the estimate table
-      var insertEstimateQuery = `
-        INSERT INTO estimate (jobId, date)
-        VALUES ($1, $2)
-      `;
-      return pool.query(insertEstimateQuery, [jobId, date]);
+      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork, status, estDate]);
     })
     .then(() => {
       // Commit the transaction
@@ -392,48 +373,13 @@ app.post('/create-lead-company', checkUserLoggedIn, (req, res) => {
 
       // Insert into the jobs table
       var insertJobQuery = `
-        INSERT INTO jobs (customerId, address, notes, typeOfWork, drawing, status)
-        VALUES ($1, $2, $3, $4, $5, $6)
+        INSERT INTO jobs (customerId, address, notes, typeOfWork, drawing, status, estDate, insDate)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING id
       `;
-      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork, drawing, status]);
+      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork, drawing, status, estDate, insDate]);
     })
-    .then(result => {
-      // Get the ID of the newly inserted job
-      jobId = result.rows[0].id;
 
-    // Insert into the estimate table
-    var insertEstimateQuery = `
-        INSERT INTO estimate (jobId, estDate)
-        VALUES ($1, $2)
-        RETURNING id
-    `;
-    return pool.query(insertEstimateQuery, [jobId, estDate]);
-    })
-    .then(result => {
-      // Get the ID of the newly inserted estimate
-      estimateId = result.rows[0].id;
-
-    // Insert into the install table
-    var insertInstallQuery = `
-        INSERT INTO install (jobId, insDate)
-        VALUES ($1, $2)
-        RETURNING id
-    `;
-    return pool.query(insertInstallQuery, [jobId, insDate]);
-    })
-    .then(result => {
-      // Get the ID of the newly inserted install
-      installId = result.rows[0].id;
-
-      // Update the jobs table with the installId and estimateId
-      var updateJobQuery = `
-        UPDATE jobs
-        SET installId = $1, estimateId = $2
-        WHERE id = $3
-      `;
-      return pool.query(updateJobQuery, [installId, estimateId, jobId]);
-    })
     .then(() => {
       // Commit the transaction
       return pool.query('COMMIT');
@@ -450,4 +396,21 @@ app.post('/create-lead-company', checkUserLoggedIn, (req, res) => {
           res.status(500).json({ error: err.stack });
         });
     });
+});
+app.get('/get-jobs', checkUserLoggedIn, (req, res) => {
+  var selectQuery = `
+    SELECT 
+      jobs.id, customer.customerName, jobs.address, jobs.status
+    FROM jobs
+    JOIN customer ON jobs.customerId = customer.id
+  `;
+  pool.query(selectQuery, (err, result) => {
+    if (err) {
+      console.log('Error executing query', err.stack);
+      res.status(500).json({ error: err.stack });
+    } else {
+      console.log('Jobs retrieved');
+      res.status(200).json(result.rows);
+    }
+  });
 });

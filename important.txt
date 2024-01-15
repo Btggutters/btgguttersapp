@@ -86,24 +86,10 @@ CREATE TABLE jobs (
     FOREIGN KEY (installId) REFERENCES install(id),
     FOREIGN KEY (estimateId) REFERENCES estimate(id),
     FOREIGN KEY (materialId) REFERENCES material(id)
-);
-
-CREATE TABLE install (
-    id SERIAL PRIMARY KEY,
-    jobId INT NOT NULL,
-    estDate DATE,
-    startTime TIME,
-    endTime TIME,
-    price NUMERIC,
-    FOREIGN KEY (jobId) REFERENCES jobs(id)
-);
-
-CREATE TABLE estimate (
-    id SERIAL PRIMARY KEY,
-    jobId INT NOT NULL,
     insDate DATE,
-    startTime TIME,
-    endTime TIME,
-    price NUMERIC,
-    FOREIGN KEY (jobId) REFERENCES jobs(id)
+    insStart TIME,
+    insEnd TIME,
+    estStart TIME,
+    estEnd TIME,
+    insDate DATE;
 );

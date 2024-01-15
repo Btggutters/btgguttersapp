@@ -49,24 +49,22 @@
                         <span class="addLeadFormTitle">Lead</span>
                         <select name="companyName" id="companyName">
                             <option value="No Company">No Company</option>
-
                         </select>
                     </div>
 
                     <input class="addLeadFormInput" type="text" id="customerNameDefault" name="name" placeholder="Name" required>
                     <input class="addLeadFormInput" type="text" id="jobAddressDefault" name="address" placeholder="Address" required>
                     <input class="addLeadFormInput" type="text" id="customerPhoneDefault" name="phone" placeholder="Phone" required>
-                    <div class="datePicker">
-                        <button class="dateButton" type="button" onclick="openContainer()">
-                            <span class="dateButtonTitle">Estimate</span>                        
+                    <div class="datePickerArea">
+                        <button class="dateButton" type="button" onclick="openContainer('estimate', 'customer')">                            <span class="dateButtonTitle">Estimate</span>                        
                             <div class="dateMonthDay">
                                 <div>
-                                    <span class="dateMonth" id="dateMonth">November</span>
-                                    <span class="dateDay" id="dateDay">19</span>
+                                    <span class="dateMonth" id="dateMonthDefault"></span>
+                                    <span class="dateDay" id="dateDayDefault"></span>
                                 </div>
-                                <span class="dayOfTheWeek" id="dayOfTheWeek">Thu</span>
-                                <span class="dateYear" id="dateYear" hidden>2024</span>
-                                <span class="realDate" id="realDate" hidden>2024-11-19</span>
+                                <span class="dayOfTheWeek" id="dayOfTheWeekDefault"></span>
+                                <span class="dateYear" id="dateYearDefault" hidden></span>
+                                <span class="realDate" id="realEstimateDateDefault" hidden></span>
                             </div>
                         </button>
 
@@ -102,8 +100,35 @@
                         </select>
                     </div>
                     <input class="addLeadFormInput" type="text" id="jobAddressCompany" name="address" placeholder="Address" required>
-                    <input class="addLeadFormInput" type="date" id="estimateDateCompany" name="estimateDate">
-                    <input class="addLeadFormInput" type="date" id="installDateCompany" name="installDate">
+                    <div class="datePickerArea">
+                        <button class="dateButton" type="button" onclick="openContainer('estimate', 'company')">
+                            <span class="dateButtonTitle">Estimate</span> 
+                            <div class="dateMonthDay">
+                                <div>
+                                    <span class="dateMonth" id="estimateDateMonthCompany"></span>
+                                    <span class="dateDay" id="estimateDateDayCompany"></span>
+                                </div>
+                                <span class="dayOfTheWeek" id="estimateDayOfWeekCompany"></span>
+                                <span class="dateYear" id="estimateDateYearCompany" hidden></span>
+                                <span class="realDate" id="realEstimateDateCompany" hidden required></span>
+                            </div>
+                        </button>
+                        <button class="dateButton" type="button" onclick="openContainer('install', 'company')">
+                            <span class="dateButtonTitle">Install</span>                        
+                            <div class="dateMonthDay">
+                                <div>
+                                    <span class="dateMonth" id="installDateMonthCompany"></span>
+                                    <span class="dateDay" id="installDateDayCompany"></span>
+                                </div>
+                                <span class="dayOfTheWeek" id="installDayOfWeekCompany"></span>
+                                <span class="dateYear" id="installDateYearCompany" hidden></span>
+                                <span class="realDate" id="realInstallDateCompany" hidden></span>
+                            </div>
+                        </button>
+
+                    </div> 
+                    
+                    
                     <select id="jobTypeOfWorkCompany" name="jobTypeOfWork" multiple>
                         <option value="Gutter Installation">Gutter Install</option>
                         <option value="Gutter Repair">Gutter Repair</option>
@@ -126,7 +151,7 @@
 
     
         <div class="container" style="display: none;">
-            <button id="closeContainer" style="position: absolute; right: 10px; top: 10px;">Close</button>        
+            <span id="closeContainer" class="close">x</span>        
             <div class="left">
                 <div class="calendar">
                     <div class="month">
@@ -144,13 +169,6 @@
                         <div>Sat</div>
                     </div>
                     <div class="days"></div>
-                    <div class="goto-today">
-                        <div class="goto">
-                            <input type="text" placeholder="mm/yyyy" class="date-input" />
-                            <button class="goto-btn">Go</button>
-                        </div>
-                        <button class="today-btn">Today</button>
-                    </div>
                 </div>
             </div>
             <div class="right">
@@ -184,7 +202,6 @@
                     </div>
                     </div>
                     <div class="add-event-footer">
-                    <button class="add-event-btn">Add Event</button>
                     </div>
                 </div>
             </div>

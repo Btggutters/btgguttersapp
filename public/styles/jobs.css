@@ -1,49 +1,38 @@
-.jobsPage {
 
-}
 .topOfjobsPage {
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 1fr 1fr;
     padding: 10px;
 }
 
 .jobsSearchInput {
     height: 40px;
 }
-.jobsAddCustomerButton {
-    height: 40px;
-    background-color: #686868;
-    border: 1px solid black;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.jobsCustomerCardFront {
-    border: 3px solid rgb(0, 255, 0);
+
+.jobsCard {
+    border: 3px solid var(--first-color);
     border-radius: 10px;
     align-items: center;
     position: relative;
     padding: 10px 10px;
     width: 100%;
     margin: 10px auto;
-    background-color: #686868;
+    background-color: var(--second-color);
     height: auto;
     font-size: 1.2rem;
 }
-.jobsCustomerCardFrontName {
+.jobsCardName {
     width: 100%;
     text-align: left;
 
 }
 
-.jobsCustomerCardFrontStatus {
+.jobsCardStatus {
     width: 100%;
     text-align: center;
 
 }
-.jobsCustomerCardNameandStatus {
+.jobsCardNameandStatus {
     display: flex;
     justify-content: space-between;
 }
@@ -55,27 +44,23 @@
 
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    font-size: 1.5rem;
-    overflow: auto; /* Add this line */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-
-}
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal-content {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 97%;
+  }
 
 .close {
     color: #aaa;
@@ -84,44 +69,11 @@
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-.jobClickForm {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 10px;
-    align-items: center;
-}
-
-.jobClickForm label {
-    padding-right: 10px;
-    color: #686868;
-}
-
-form input[type="submit"] {
-    grid-column: span 2;
-    justify-self: center;
-}
-form input {
-    width: 100%;
-    height: 5vh;
-}
-.smallInput {
-    width: 55%;
-}
-form input, .smallInput {
-    border: 1px solid #686868;
-    border-radius: 5px;
-}
 .materialsAddtoJobFeild {
     color: #686868;
 }
 .materialCardFront {
-    border: 3px solid rgb(0, 255, 0);
+    border: 3px solid var(--first-color);
     align-items: center;
     position: relative;
     padding: 10px 10px;
@@ -138,7 +90,7 @@ form input, .smallInput {
 .materialCardBack {
     display: none;
     z-index: 1;
-    border: 3px solid rgb(0, 255, 0);
+    border: 3px solid var(--first-color);
     border-top: none;
     align-items: center;
     position: relative;
@@ -170,3 +122,33 @@ form input, .smallInput {
     grid-template-columns: 1fr 1fr;
     margin-bottom: 10px;
 }
+
+.smallInput {
+    width: 50%;
+    height: 5vh;
+    border: 1px solid black; /* Example: add a black border */
+    border-radius: 5px;
+
+
+}
+.commonForm {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 2px solid var(--first-color);
+    border-radius: 15px;
+    background: var(--second-color);
+}
+
+.commonForm input {
+    width: 100%; /* Adjust width as needed */
+    box-sizing: border-box; /* Include padding and border in the element's width */
+    height: 40px;
+    text-align: left;
+    font-size: var(--medium);
+    border: 2px solid var(--first-color);
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }

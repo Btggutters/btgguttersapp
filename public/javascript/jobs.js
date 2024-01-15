@@ -1,24 +1,28 @@
+// Function to display the modal
+window.displayModal = function() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById("myModal");
-    var div = document.querySelector(".jobsCustomerCardFront");
     var span = document.querySelector(".close");
 
-    div.onclick = function() {
-        modal.style.display = "block";
-    }
-
+    // Close the modal when the 'x' is clicked
     span.onclick = function() {
         modal.style.display = "none";
     }
 
+    // Close the modal when clicking outside of it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
-    var cards = document.querySelectorAll(".MaterialCard");
 
-    cards.forEach(function(card) {
+    // Attach events to existing MaterialCard elements
+    var materialCards = document.querySelectorAll(".MaterialCard");
+    materialCards.forEach(function(card) {
         card.addEventListener('click', function() {
             var content = this.querySelector('.materialCardBack');
             var front = this.querySelector('.materialCardFront');
@@ -32,4 +36,45 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Fetch jobs and create cards dynamically
+    fetch('/get-jobs')
+    .then(response => response.json())
+    .then(jobs => {
+        const jobsContainer = document.getElementById('jobsContainer');
+
+        jobs.forEach(job => {
+            const jobsCard = document.createElement('div');
+            jobsCard.className = 'jobsCard';
+
+            // Add event listener to open modal on click
+            jobsCard.addEventListener('click', function() {
+                modal.style.display = "block";
+            });
+
+            const jobsCardNameandStatus = document.createElement('div');
+            jobsCardNameandStatus.className = 'jobsCardNameandStatus';
+
+            const jobsCardName = document.createElement('div');
+            jobsCardName.className = 'jobsCardName';
+            jobsCardName.textContent = job.customername;
+
+            const jobsCardStatus = document.createElement('div');
+            jobsCardStatus.className = 'jobsCardStatus';
+            jobsCardStatus.textContent = job.status;
+
+            jobsCardNameandStatus.appendChild(jobsCardName);
+            jobsCardNameandStatus.appendChild(jobsCardStatus);
+
+            const jobsCardAddress = document.createElement('div');
+            jobsCardAddress.className = 'jobsCardAddress';
+            jobsCardAddress.textContent = job.address;
+
+            jobsCard.appendChild(jobsCardNameandStatus);
+            jobsCard.appendChild(jobsCardAddress);
+
+            jobsContainer.appendChild(jobsCard);
+        });
+    })
+    .catch(error => console.error('Error:', error));
 });
