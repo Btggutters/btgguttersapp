@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calendar</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/calendar.css">
+    <link rel="icon" href="../images/btglogo.png" type="images/x-icon">
+
+
+</head>
+<body>
+    <header>
+        <a href="home.html" class="companyName">BTG Gutters</a>
+        <button class="loginButton" onclick="openSigninModal()"></button>
+    </header> 
+    <main>
+
+
+<!-- calendar.html -->
+
+<button id="openModal">Open Calendar</button>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <div class="month-navigation">
+            <button id="prevMonth">&lt;</button>
+            <span id="month" class="month"></span>
+            <button id="nextMonth">&gt;</button>
+        </div>
+        <div id="calendar"></div>
+        <span id="year" class="year"></span>
+    </div>
+</div>
+
+
+
+
+
+
+    </main>
+    <script src="../javascript/signin.js"></script>
+    <script src="../javascript/calendar.js"></script>
+    <script src="../javascript/global.js"></script>
+</body>
+</html>

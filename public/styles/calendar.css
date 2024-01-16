@@ -1,0 +1,129 @@
+/* Basic reset for padding and margin */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Modal background */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000; /* High z-index to be on top of other content */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+  
+  
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: var(--fourth-color); /* Lightest grey */
+  margin: 5% auto; /* Centering vertically */
+  padding: 5px;
+  border-radius: 10px; /* Rounded corners */
+  width: 100%; /* Full width */
+  height: 98%; /* 90% of the screen height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Distribute space evenly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+}
+
+/* Close button */
+.close {
+  text-align: center; /* Align to the right */
+  transform: translateY(-50%);
+  position: absolute;
+  align-self: flex-end; /* Align to the right */
+  font-size: 3rem; /* Larger close button */
+  cursor: pointer;
+  color: var(--second-color); /* Dark grey */
+}
+
+/* Month and Year styling */
+.month, .year {
+  font-size: 1.2em; /* Larger font size */
+  font-weight: bold; /* Bold font for emphasis */
+  color: var(--first-color); /* New Blue */
+  margin: 10px 0; /* Spacing above and below */
+  text-align: center;
+  width: 100%;
+}
+
+/* Calendar grid */
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns for days */
+  grid-template-rows: 20px auto auto auto auto auto auto; /* Explicit row heights */
+  gap: 1px; /* Space between days */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+}
+
+/* Days of the week */
+.dayOfWeek {
+  text-align: center;
+  background: var(--second-color); /* Dark grey */
+  color: var(--fourth-color); /* Lightest grey */
+  border-radius: 5px; /* Rounded corners for cells */
+  height: 20px; /* Fixed height for days of the week */
+  line-height: 10px; /* Align text vertically */
+}
+
+/* Day cells */
+.day {
+  position: relative; /* Set position context for absolute positioning */
+  text-align: left; /* Align text to the left */
+  padding: 15px; /* Adjust padding as needed */
+  background: var(--third-color); /* Lighter grey */
+  color: var(--second-color); /* Dark grey */
+  border-radius: 5px; /* Rounded corners for cells */
+  height: auto; /* Allow cells to grow */
+  min-height: 60px; /* Minimum height for day cells */
+}
+
+/* Day number */
+.day-number {
+  position: absolute; /* Position the day number absolutely */
+  top: 8px; /* Position from the top */
+  left: 8px; /* Position from the left */
+  color: var(--first-color); /* New Blue */
+  font-weight: bold; /* Optional: make the number bold */
+}
+
+/* Day cells for days not in the current month */
+.day.not-current-month {
+  background-color: #cacaca; /* Lighter grey background */
+}
+
+/* Day number not in the current month */
+.day .not-current-month {
+  color: var(--second-color); /* Dark grey */
+}
+.month-navigation button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em;
+  padding: 0 10px;
+}
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  /* ... other responsive styles ... */
+
+  .dayOfWeek {
+    padding: 10px 0; /* Keep fixed padding for days of the week */
+    height: 30px; /* Adjust height for mobile if necessary */
+  }
+
+  .day {
+    padding: 20px 0; /* Even more padding for taller cells on mobile */
+    min-height: 80px; /* Increase minimum height for day cells on mobile */
+  }
+}

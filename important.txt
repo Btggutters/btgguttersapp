@@ -21,12 +21,6 @@ postgres is my database
 -use tabs
 -specify where to put the code generated
 
-CSS
-you will use either
-'var(--small)' for anything that is .7rem to 1.2 rem
-'var(--medium)' for anything that is 1.3 rem to 2 rem
-'var(--large)' for anytthing that is 2.1 rem to 3.3 rem
-
 use these four colors
 
     --first-color: #2d03fc;/* New Blue */
