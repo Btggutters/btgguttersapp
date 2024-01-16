@@ -1,9 +1,3 @@
-// Function to display the modal
-window.displayModal = function() {
-    var modal = document.getElementById("myModal");
-    modal.style.display = "block";
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById("myModal");
     var span = document.querySelector(".close");
@@ -20,23 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Attach events to existing MaterialCard elements
-    var materialCards = document.querySelectorAll(".MaterialCard");
-    materialCards.forEach(function(card) {
-        card.addEventListener('click', function() {
-            var content = this.querySelector('.materialCardBack');
-            var front = this.querySelector('.materialCardFront');
-            content.style.display = content.style.display === 'none' ? 'block' : 'none';
-            if (content.style.display === 'block') {
-                front.style.marginBottom = '0';
-                front.style.borderBottom = 'none';
-            } else {
-                front.style.marginBottom = ''; // reset to default
-                front.style.borderBottom = ''; // reset to default
-            }
-        });
-    });
-
     // Fetch jobs and create cards dynamically
     fetch('/get-jobs')
     .then(response => response.json())
@@ -46,10 +23,36 @@ document.addEventListener('DOMContentLoaded', function() {
         jobs.forEach(job => {
             const jobsCard = document.createElement('div');
             jobsCard.className = 'jobsCard';
+    
+            // Add data-id attribute to store the job id
+            jobsCard.setAttribute('data-id', job.id);
 
-            // Add event listener to open modal on click
+            // Add event listener to each job card
             jobsCard.addEventListener('click', function() {
-                modal.style.display = "block";
+                const jobId = this.getAttribute('data-id');
+
+                // Fetch job data and populate the form
+                fetch(`/get-full-job/${jobId}`)
+                    .then(response => response.json())
+                    .then(job => {
+                        console.log(job);
+                        document.getElementById('jobId').value = job.id;
+                        document.getElementById('name').value = job.customername;
+                        document.getElementById('status').value = job.status;
+                        document.getElementById('phone').value = job.customerphonenumber;
+                        document.getElementById('address').value = job.address;
+                        document.getElementById('company').value = job.companyname || '';
+                        // For the drawing, you'll need to handle file downloads
+                        document.getElementById('jobsCardEstimateDate').textContent = job.estdate || '';
+                        document.getElementById('jobsCardInstallDate').textContent = job.insdate || '';
+                        document.getElementById('price').value = job.price;
+                        document.getElementById('notes').value = job.notes;
+                        console.log(job.id);
+                    
+                        // Display the modal
+                        modal.style.display = "block";
+                    })
+                    .catch(error => console.error('Error:', error));
             });
 
             const jobsCardNameandStatus = document.createElement('div');

@@ -280,123 +280,7 @@ app.get('/get-companies-and-prices', checkUserLoggedIn, (req, res) => {
     }
   });
 });
-app.get('/get-companies', checkUserLoggedIn , (req, res) => {
-  // Create a SELECT query
-  var selectQuery = `
-    SELECT 
-      c.companyName
-    FROM company c
-  `;
 
-  // Execute the query
-  pool.query(selectQuery, (err, result) => {
-    if (err) {
-      console.log('Error executing query', err.stack);
-      res.status(500).json({ error: err.stack });
-    } else {
-      console.log('Data retrieved');
-      res.status(200).json(result.rows);
-    }
-  });
-});
-app.post('/create-lead', checkUserLoggedIn, (req, res) => {
-  // Get the form data from the request body
-  var { customerName, customerPhoneNumber, customerEmail, obtainedHow, address, notes, typeOfWork, estDate, status } = req.body;
-
-  // Start a database transaction
-  pool.query('BEGIN')
-    .then(() => {
-      // Insert into the customer table
-      var insertCustomerQuery = `
-        INSERT INTO customer (customerName, customerPhoneNumber, customerEmail, obtainedHow)
-        VALUES ($1, $2, $3, $4)
-        RETURNING id
-      `;
-      return pool.query(insertCustomerQuery, [customerName, customerPhoneNumber, customerEmail, obtainedHow]);
-    })
-    .then(result => {
-      // Get the ID of the newly inserted customer
-      var customerId = result.rows[0].id;
-
-      // Insert into the jobs table
-      var insertJobQuery = `
-        INSERT INTO jobs (customerId, address, notes, typeOfWork, status, estDate)
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING id
-      `;
-      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork, status, estDate]);
-    })
-    .then(() => {
-      // Commit the transaction
-      return pool.query('COMMIT');
-    })
-    .then(() => {
-      console.log('Lead created');
-      res.status(200).json({ message: 'Lead created' });
-    })
-    .catch(err => {
-      // Rollback the transaction in case of error
-      pool.query('ROLLBACK')
-        .then(() => {
-          console.log('Error executing query', err.stack);
-          res.status(500).json({ error: err.stack });
-        });
-    });
-});
-app.post('/create-lead-company', checkUserLoggedIn, (req, res) => {
-  // Get the form data from the request body
-  var { companyName, address, notes, typeOfWork, estDate, insDate, drawing, status } = req.body;
-  var jobId, installId, estimateId;
-
-  // Start a database transaction
-  pool.query('BEGIN')
-    .then(() => {
-      // Get the company ID
-      var selectCompanyQuery = `
-        SELECT id FROM company WHERE companyName = $1
-      `;
-      return pool.query(selectCompanyQuery, [companyName]);
-    })
-    .then(result => {
-      // Get the ID of the selected company
-      var companyId = result.rows[0].id;
-
-      // Get the customer ID
-      var selectCustomerQuery = `
-        SELECT id FROM customer WHERE companyId = $1
-      `;
-      return pool.query(selectCustomerQuery, [companyId]);
-    })
-    .then(result => {
-      // Get the ID of the customer
-      var customerId = result.rows[0].id;
-
-      // Insert into the jobs table
-      var insertJobQuery = `
-        INSERT INTO jobs (customerId, address, notes, typeOfWork, drawing, status, estDate, insDate)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-        RETURNING id
-      `;
-      return pool.query(insertJobQuery, [customerId, address, notes, typeOfWork, drawing, status, estDate, insDate]);
-    })
-
-    .then(() => {
-      // Commit the transaction
-      return pool.query('COMMIT');
-    })
-    .then(() => {
-      console.log('Company Lead created');
-      res.status(200).json({ message: 'Company Lead created' });
-    })
-    .catch(err => {
-      // Rollback the transaction in case of error
-      pool.query('ROLLBACK')
-        .then(() => {
-          console.log('Error executing query', err.stack);
-          res.status(500).json({ error: err.stack });
-        });
-    });
-});
 app.get('/get-jobs', checkUserLoggedIn, (req, res) => {
   var selectQuery = `
     SELECT 
@@ -413,4 +297,36 @@ app.get('/get-jobs', checkUserLoggedIn, (req, res) => {
       res.status(200).json(result.rows);
     }
   });
+});
+app.get('/get-full-job/:id', checkUserLoggedIn, async (req, res) => {
+  try {
+      const jobId = req.params.id;
+      const job = await pool.query(`
+          SELECT 
+              j.id, 
+              cu.customerName, 
+              j.status, 
+              cu.customerPhoneNumber, 
+              j.address, 
+              c.companyName, 
+              j.drawing, 
+              TO_CHAR(j.estDate, 'YYYY-MM-DD') as estDate, 
+              TO_CHAR(j.insDate, 'YYYY-MM-DD') as insDate, 
+              j.price, 
+              j.notes
+          FROM jobs j
+          JOIN customer cu ON j.customerId = cu.id
+          LEFT JOIN company c ON cu.companyId = c.id
+          WHERE j.id = $1
+      `, [jobId]);
+
+      if (job.rows.length > 0) {
+          res.json(job.rows[0]);
+      } else {
+          res.json({ error: 'No job found with this ID' });
+      }
+  } catch (err) {
+      console.error('Error executing query', err.stack);
+      res.status(500).json({ error: err.stack });
+  }
 });

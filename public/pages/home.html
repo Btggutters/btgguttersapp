@@ -28,80 +28,25 @@
             <a href="../pages/customers.html" class="btgButton homeApp">Customers</a>
             <a href="../pages/companies.html" class="btgButton homeApp">Companies</a>
             <a href="#" class="btgButton homeApp" onclick="openAddModal()">Add</a>
-            <a href="../page2.html" class="btgButton homeApp">Invoices & Estimates</a>
-            <a href="../pages/page1.html" class="btgButton homeApp">Financial</a>
-            <a href="../pages/page2.html" class="btgButton homeApp">Button 2</a>
-            <a href="../pages/page1.html" class="btgButton homeApp">Dont know yet</a>
-            <a href="../pages/page2.html" class="btgButton homeApp">Dont know yet</a>
-            <a href="../pages/page1.html" class="btgButton homeApp">Dont know yet</a>
-            <a href="../pages/page2.html" class="btgButton homeApp">Dont know yet</a>
-            <a href="../pages/page1.html" class="btgButton homeApp">Dont know yet</a>
+            <a href="../pages/calendar.html" class="btgButton homeApp">Calendar</a>
         </div>
 
 
         <div id="myModal" class="modal">
             <div class="modal-content">
             <span class="close">&times;</span>
-
-                    <!-- Default form (shown when "No Company" is selected) -->
-                <form class="commonForm" id="defaultForm">
-                    <div class="addLeadFormTop">
-                        <span class="addLeadFormTitle">Lead</span>
-                        <select name="companyName" id="companyName">
-                            <option value="No Company">No Company</option>
-                        </select>
-                    </div>
-
-                    <input class="addLeadFormInput" type="text" id="customerNameDefault" name="name" placeholder="Name" required>
-                    <input class="addLeadFormInput" type="text" id="jobAddressDefault" name="address" placeholder="Address" required>
-                    <input class="addLeadFormInput" type="text" id="customerPhoneDefault" name="phone" placeholder="Phone" required>
-                    <div class="datePickerArea">
-                        <button class="dateButton" type="button" onclick="openContainer('estimate', 'customer')">                            <span class="dateButtonTitle">Estimate</span>                        
-                            <div class="dateMonthDay">
-                                <div>
-                                    <span class="dateMonth" id="dateMonthDefault"></span>
-                                    <span class="dateDay" id="dateDayDefault"></span>
-                                </div>
-                                <span class="dayOfTheWeek" id="dayOfTheWeekDefault"></span>
-                                <span class="dateYear" id="dateYearDefault" hidden></span>
-                                <span class="realDate" id="realEstimateDateDefault" hidden></span>
-                            </div>
-                        </button>
-
-                    </div>                    
-                    <select id="jobTypeOfWorkDefault" name="jobTypeOfWork" multiple>
-                        <option value="Gutter Installation">Gutter Install</option>
-                        <option value="Gutter Repair">Gutter Repair</option>
-                        <option value="Gutter Cleaning">Gutter Cleaning</option>
-                        <option value="Gutter Guard Installation">Guard Install</option>
-                        <option value="Metal Trim Installation">Trim Install</option>
-                    </select><br>
-                    <input class="addLeadFormInput" type="email" id="customerEmailDefault" name="email" placeholder="Email">
-                    <textarea class="addLeadFormInput" id="jobNotesDefault" name="jobNotes" placeholder="Notes"></textarea>
-                    <select id="jobObtainedDefault" name="jobObtained" class="addLeadFormInput">
-                        <option value="How did you obtain this Lead?">How did you obtain this Lead?</option>
-                        <option value="Yard Sign">Yard Sign</option>
-                        <option value="Google">Google</option>
-                        <option value="Facebook">Facebook</option>
-                        <option value="Freinds&Family">Freinds&Family</option>
-                        <option value="Other">Other</option>
-                    </select>
-                    <input id="addLeadFormSubmitDefault" class="addLeadFormSubmit" type="submit" value="Submit">
-                    <button type="button" onclick="fillFormWithFakeData(event, 'defaultForm')">Fake</button>                
-                </form>
-
-
-
-                <form class="commonForm" id="companyForm" style="display: none;">
+                <form class="commonForm" id="addLeadForm">
                     <div class="addLeadFormTop">
                         <span class="addLeadFormTitle">Lead</span>
                         <select name="companyName" id="companyFormCompanyName">
                             <option value="No Company">No Company</option>
                         </select>
                     </div>
-                    <input class="addLeadFormInput" type="text" id="jobAddressCompany" name="address" placeholder="Address" required>
+                    <input class="addLeadFormInput" type="text" id="name" name="name" placeholder="Name" required>
+                    <input class="addLeadFormInput" type="text" id="address" name="address" placeholder="Address" required>
+                    <input class="addLeadFormInput" type="text" id="phone" name="phone" placeholder="Phone" required>
                     <div class="datePickerArea">
-                        <button class="dateButton" type="button" onclick="openContainer('estimate', 'company')">
+                        <button class="dateButton" type="button" onclick="">
                             <span class="dateButtonTitle">Estimate</span> 
                             <div class="dateMonthDay">
                                 <div>
@@ -110,10 +55,10 @@
                                 </div>
                                 <span class="dayOfTheWeek" id="estimateDayOfWeekCompany"></span>
                                 <span class="dateYear" id="estimateDateYearCompany" hidden></span>
-                                <span class="realDate" id="realEstimateDateCompany" hidden required></span>
+                                <span class="realDate" id="realEstimateDateCompany" hidden></span>
                             </div>
                         </button>
-                        <button class="dateButton" type="button" onclick="openContainer('install', 'company')">
+                        <button class="dateButton" type="button" onclick="">
                             <span class="dateButtonTitle">Install</span>                        
                             <div class="dateMonthDay">
                                 <div>
@@ -125,10 +70,7 @@
                                 <span class="realDate" id="realInstallDateCompany" hidden></span>
                             </div>
                         </button>
-
                     </div> 
-                    
-                    
                     <select id="jobTypeOfWorkCompany" name="jobTypeOfWork" multiple>
                         <option value="Gutter Installation">Gutter Install</option>
                         <option value="Gutter Repair">Gutter Repair</option>
@@ -138,10 +80,17 @@
                     </select><br>
                     <input class="drawingUpload" type="file" id="drawingUploadCompany" name="drawingUpload" accept="image/*">
                     <textarea class="addLeadFormInput" id="jobNotesCompany" name="jobNotes" placeholder="Notes"></textarea>
+                    <select id="jobObtainedDefault" name="jobObtained" class="addLeadFormInput">
+                        <option value="How did you obtain this Lead?">How did you obtain this Lead?</option>
+                        <option value="Yard Sign">Yard Sign</option>
+                        <option value="Google">Google</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Freinds&Family">Freinds&Family</option>
+                        <option value="Other">Other</option>
+                    </select>
                     <input id="addLeadFormSubmitCompany" class="addLeadFormSubmit" type="submit" value="Submit"><br>
                     <button type="button" onclick="fillFormWithFakeData(event, 'companyForm')">Fake</button>                
                 </form>
-
             </div>
         </div>
 

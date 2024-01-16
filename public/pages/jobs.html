@@ -21,14 +21,6 @@
                 <input type="text" id="jobsSearchInput" class="crmSearchInput">
             </div>
             <div class="jobsContainer" id="jobsContainer">
-                <div class="jobsCard" onclick="displayModal()"                    <div class="jobsCardNameandStatus">
-                        <div class="jobsCardName"></div>
-                        <div class="jobsCardStatus"></div>
-                    </div>
-                    <div>
-                        <div class="jobsCardAddress"></div>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -36,17 +28,19 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <form class="commonForm">
-                    <input type="text" id="job" name="job" class="smallInput" placeholder="Job #">
-                    <input type="text" id="name" name="name" placeholder="Name">
-                    <input type="text" id="status" name="status" placeholder="Status">
-                    <input type="tel" id="phone" name="phone" placeholder="Phone">
-                    <input type="text" id="address" name="address" placeholder="Address">
-                    <input type="text" id="company" name="company" placeholder="Company">
-                    <input type="file" id="drawing" name="drawing" place>
-                    <input type="date" id="estimateDate" name="estimateDate">
-                    <input type="date" id="installDate" name="installDate">  
-                    <div class="datePickerArea">
-                        <button class="dateButton" type="button" onclick="openContainer('estimate', 'customer')">                            <span class="dateButtonTitle">Estimate</span>                        
+                    <input class="input smallInput" type="text" id="jobId" name="job" placeholder="Job #">
+                    <input class="input" type="text" id="name" name="name" placeholder="Name">
+                    <input class="input" type="text" id="status" name="status" placeholder="Status">
+                    <input class="input" type="tel" id="phone" name="phone" placeholder="Phone">
+                    <input class="input" type="text" id="address" name="address" placeholder="Address">
+                    <select class="input" id="company" name="company">
+                        <option value="">Select Company</option>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                    <input type="file" id="drawing" name="drawing" place> 
+                    <div class="dateInputArea">
+                        <button class="dateInputButton" type="button" onclick="">                            
+                            <span class="dateButtonTitle">Estimate</span>                        
                             <div class="dateMonthDay">
                                 <div>
                                     <span class="dateMonth" id="dateMonthDefault"></span>
@@ -54,102 +48,34 @@
                                 </div>
                                 <span class="dayOfTheWeek" id="dayOfTheWeekDefault"></span>
                                 <span class="dateYear" id="dateYearDefault" hidden></span>
-                                <span class="realDate" id="realEstimateDateDefault"></span>
+                                <span class="realDate" id="jobsCardEstimateDate"></span>
                             </div>
                         </button>
-                        <button class="dateButton" type="button" onclick="openContainer('install', 'customer')">                            <span class="dateButtonTitle">Estimate</span>                        
+                        <button class="dateInputButton" type="button" onclick="">                            
+                            <span class="dateButtonTitle">Install</span>                        
                             <div class="dateMonthDay">
                                 <div>
                                     <span class="dateMonth" id="dateMonthDefault"></span>
                                     <span class="dateDay" id="dateDayDefault"></span>
-                                </div>
-                                <span class="dayOfTheWeek" id="dayOfTheWeekDefault"></span>
+                                    <span class="dayOfTheWeek" id="dayOfTheWeekDefault"></span>
+                            </div>
                                 <span class="dateYear" id="dateYearDefault" hidden></span>
-                                <span class="realDate" id="realEstimateDateDefault"></span>
+                                <span class="realDate" id="jobsCardInstallDate"></span>
                             </div>
                         </button>
-
                     </div>          
-                    <input type="number" id="price" name="price" class="smallInput" placeholder="Price">
-                    <input type="text" id="notes" name="notes" placeholder="Notes">
+                    <input type="number" id="price" name="price" class="input smallInput" placeholder="Price">
+                    <textarea class="input doubleInput" id="notes" name="notes" placeholder="Notes"></textarea>
+                    <select id="obtainedHow" name="obtainedHow" class="input">
+                        <option value="How did you obtain this Lead?">How did you obtain this Lead?</option>
+                        <option value="Yard Sign">Yard Sign</option>
+                        <option value="Google">Google</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Freinds&Family">Freinds&Family</option>
+                        <option value="Other">Other</option>
+                    </select>                
+                    <button class="btgButton" type="submit">Save</button>
                 </form>
-                <div class="materialsAddtoJobFeild">
-                    <div class="MaterialCard">
-                        <div class="materialCardFront">
-                            <div class="materialCardFrontName">Gutters</div>
-                        </div>
-                        <div id="guttersMaterialCardContent" class="materialCardBack">
-                            <div class="guttersMaterialCardContentTop">
-                                <button>5</button>
-                                <select id="dropdown">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="guttersMaterialCardContentUnderTop">
-                                <span>Item</span>
-                                <span>QTY</span>
-                            </div>
-                            <div class="guttersMaterialCardContentBelow">
-                                <label for="gutterFTInput">Gutter FT</label>
-                                <input type="number" name="gutterFTInput" id="gutterFTInput">
-                                
-                                <label for="downspoutInput">Downspout</label>
-                                <input type="number" name="downspoutInput" id="downspoutInput">
-                                
-                                <label for="aElbowInput">A Elbow</label>
-                                <input type="number" name="aElbowInput" id="aElbowInput">
-                                
-                                <label for="bElbowInput">B Elbow</label>
-                                <input type="number" name="bElbowInput" id="bElbowInput">
-                                
-                                <label for="inMiterInput">In Miter</label>
-                                <input type="number" name="inMiterInput" id="inMiterInput">
-                                
-                                <label for="inBayMiterInput">In Bay Miter</label>
-                                <input type="number" name="inBayMiterInput" id="inBayMiterInput">
-                                
-                                <label for="outMiterInput">Out Miter</label>
-                                <input type="number" name="outMiterInput" id="outMiterInput">
-                                
-                                <label for="outBayMiterInput">Out Bay Miter</label>
-                                <input type="number" name="outBayMiterInput" id="outBayMiterInput">
-                                
-                                <label for="strapInput">Strap</label>
-                                <input type="number" name="strapInput" id="strapInput">
-                                
-                                <label for="wedgesInput">Wedges</label>
-                                <input type="number" name="wedgesInput" id="wedgesInput">
-                            </div>
-                        </div>
-                    </div>                 
-                    <div class="MaterialCard">
-                        <div class="materialCardFront">
-                            <div class="materialCardFrontName">Leaf Protection</div>
-                        </div>
-                        <div id="leafProtectionMaterialCardContent" class="materialCardBack">
-
-                        </div>
-                    </div>                 
-                    <div class="MaterialCard">
-                        <div class="materialCardFront">
-                            <div class="materialCardFrontName">Fascia Wood</div>
-                        </div>
-                        <div id="fasciaWoodMaterialCardContent" class="materialCardBack">
-                            sdf
-                        </div>
-                    </div>                 
-                    <div class="MaterialCard">
-                        <div class="materialCardFront">
-                            <div class="materialCardFrontName">Fascia Trim</div>
-                        </div>
-                        <div id="fasciaTrimMaterialCardContent" class="materialCardBack">
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
