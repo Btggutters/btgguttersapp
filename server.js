@@ -330,3 +330,33 @@ app.get('/get-full-job/:id', checkUserLoggedIn, async (req, res) => {
       res.status(500).json({ error: err.stack });
   }
 });
+app.get('/search-jobs', async (req, res) => {
+  const { term } = req.query;
+  try {
+      // Ensure the query selects the id (jobId) and any other necessary columns explicitly if needed for clarity
+      const query = `
+          SELECT id AS jobId, * FROM jobs
+          WHERE status = 'Est Scheduled'
+          AND address ILIKE $1;
+      `;
+      const values = [`%${term}%`];
+      const result = await pool.query(query, values);
+      // The response will include jobId along with other job details
+      res.json(result.rows);
+  } catch (err) {
+      console.error('Error executing query', err.stack);
+      res.status(500).send('Error searching jobs');
+  }
+});
+app.get('/get-material-prices', checkUserLoggedIn, async (req, res) => {
+  try {
+    const selectQuery = `
+      SELECT * FROM material_prices
+    `;
+    const result = await pool.query(selectQuery);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error('Error executing query', err.stack);
+    res.status(500).json({ error: err.stack });
+  }
+});

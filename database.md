@@ -1,3 +1,10 @@
+-i will have our customers data in a database so please make sure all connections are secure  
+-postgres is my database so if you need to make a new table or change a table please give me the sql query to do so
+
+-Here is the current structure of the database, if anything is changed we need to update this document
+
+
+
 CREATE TABLE material (
     id SERIAL PRIMARY KEY,
     size INT CHECK (size = 5 OR size = 6),
@@ -9,6 +16,7 @@ CREATE TABLE material (
     FOREIGN KEY (job_id) REFERENCES jobs(id)
 );
 
+
 CREATE TABLE customer (
     id SERIAL PRIMARY KEY,
     companyId INT,
@@ -18,10 +26,11 @@ CREATE TABLE customer (
     obtainedHow VARCHAR(255),
     FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE SET NULL
 );
+
 CREATE TABLE company (
     id SERIAL PRIMARY KEY,
     companyName VARCHAR(255),
-    companyAddress VARCHAR(255)
+    companyAddress VARCHAR(255),
     five_inch_gutter NUMERIC,
     six_inch_gutter NUMERIC,
     five_inch_filter NUMERIC,
@@ -40,12 +49,31 @@ CREATE TABLE jobs (
     typeOfWork VARCHAR(255),
     materialId INT,
     FOREIGN KEY (customerId) REFERENCES customer(id),
-    FOREIGN KEY (materialId) REFERENCES material(id)
+    FOREIGN KEY (materialId) REFERENCES material(id),
     insDate DATE,
     insStart TIME,
     insEnd TIME,
-    estDate DATE;
+    estDate DATE,
     estStart TIME,
     estEnd TIME,
-    price INT;
+    price INT
 );
+
+CREATE TABLE job_orders (
+    id SERIAL PRIMARY KEY,
+    job_id INT NOT NULL,
+    size INT CHECK (size > 0),
+    name VARCHAR(255),
+    qty INT CHECK (qty >= 0),
+    ready BOOLEAN,
+    FOREIGN KEY (job_id) REFERENCES jobs(id)
+);
+
+CREATE TABLE material_prices (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    price_5in NUMERIC,
+    price_6in NUMERIC,
+    price NUMERIC
+);
+

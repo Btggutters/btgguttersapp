@@ -46,7 +46,7 @@ main {
     justify-content: space-between;
 }
 
-.smallCard {
+.costCard {
     border: 3px solid var(--first-color);
     border-radius: 10px;
     position: relative;
@@ -61,26 +61,13 @@ main {
     grid-template-rows: 1fr 10fr;
     box-sizing: border-box;
 }
-/* same as other buttons */
-.typeOfCalculation {
-    height: 5vh;
-    background-color: var(--first-color); /* neon green background */
-    color: rgb(0, 0, 0); /* white text */
-    border: 2px white; /* remove default border */
-    border-radius: 50px; /* fully rounded corners */
-    font-size: 2rem; /* slightly larger text */
-    font-weight: bold; /* bold text */
-    width: 70%; /* full width */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 .toggleContainer {
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid var(--third-color);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 2fr 3fr;
     grid-auto-flow: column;
 }
 .AccessoriesToggleCotainer {
@@ -104,6 +91,10 @@ main {
 
 }
 .inputField {
+    width: 80px;
+    font-size: 2rem;
+}
+.inputFieldConvert {
     width: 80px ;
     font-size: 2rem;
 }
@@ -154,31 +145,56 @@ main {
     font-size: 1.5rem;
     font-weight: bold;
 }
-.pricePerFoot {
-    width: 25vw;
-    height: 5vh;
-    font-size: 2rem;
-    text-align: center;
-    border: 2px solid black;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-.firstOutputField {
-    text-align: center;
-}
-.secondOutputField {
-    width: 100%;
-    text-align: right;
-}
+
 .outputField {
+    text-align: center;
+    color: var(--first-color);
     font-size: 2rem;
-    width: 70%;
-    text-align: right;
-    overflow: hidden;
 }
+
+
+
+
+
+.typeOfCalculation {
+    display: grid;
+    grid-template-columns: 2fr 3fr 7fr;
+    align-items: center;
+  }
+  
+  .typeOfCalculationText, .pricePerFootDisplay, .pricePerFoot {
+    white-space: nowrap; /* Ensures the text does not wrap */
+  }
+  
+  .pricePerFootDisplay {
+    overflow: hidden; /* Prevents the display from affecting the slider size */
+    text-overflow: ellipsis; /* Adds an ellipsis if the text overflows */
+    max-width: 100%; /* Adjust based on your layout needs */
+  }
+  
+  .pricePerFoot {
+    width: 100%; /* Makes the slider take up all available space */
+  }
+
+  .search-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content div {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content div:hover {background-color: #f1f1f1}

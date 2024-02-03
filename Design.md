@@ -8,3 +8,5 @@
     never use hover
 
     use btgButton as a css class if its a button 
+    
+    this is for a mobile app for my gutter company

@@ -21,90 +21,86 @@
                 </div>
             </div>
             <div class="row">
-                <input type="number" class="inputField" id="lbInput">
+                <input type="number" class="inputFieldConvert" id="lbInput">
                 <label for="lbInput" class="toLabel">Lb</label>
                 <output type="number" class="outputField" id="ftOutput"></output>
                 <label for="ftOutput" class="toLabel">Ft</label>
             </div>
             <div class="row">
-                <input type="number" class="inputField" id="ftInput">
+                <input type="number" class="inputFieldConvert" id="ftInput">
                 <label for="ftinput" class="toLabel">Ft</label>
                 <output type="number" class="outputField" id="lbOutput"></output>
                 <label for="lbOutput" class="toLabel">Lb</label>
             </div>
         </div>
-        <div class="smallCard">
+        <div class="costCard">
             <div id="typeOfCalculation" class="typeOfCalculation">
-                <span>Cost & Charge</span>
+                <span class="typeOfCalculationText">C&C</span>
+                <span id="pricePerFootDisplay" class="pricePerFootDisplay"></span>
+                <input type="range" class="pricePerFoot" id="pricePerFootSelector" min="1" max="20" step="0.5">
             </div>
-            <input type="number" class="pricePerFoot" id="pricePerFootSelector" min="1" max="99" placeholder="$/ft">
             <div class="calculatorRows">
                 <div class="toggleContainer">
-                    <button id="sizeToggleForGutter" class="toggleButton" data-item="Gutter">5</button>
-                    <input type="number" class="inputField" id="inputGutter" data-item="Gutter">
-                    <label for="inputGutter" class="inputLabel">ft</label>
-                    <output class="firstOutputField" id="outputFieldGutterCost" data-item="Gutter"></output>
-                    <output class="secondOutputField" id="outputFieldGutterCharge" data-item="Gutter"></output>
+                    <button id="sizeToggleGutterFt" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputGutterFt">
+                    <label for="inputGutterFt" class="inputLabel">Gutter Ft</label>
+                    <output class="outputField" id="outputGutterFtCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleForDS" class="toggleButton" data-item="DS">5</button>
-                    <input type="number" class="inputField" id="inputDS" data-item="DS">
-                    <label for="inputDS" class="inputLabel">DS</label>
-                    <output class="firstOutputField" id="outputFieldDSCost" data-item="DS"></output>
-                    <output class="secondOutputField" id="outputFieldDSCharge" data-item="DS"></output>
+                    <button id="sizeToggleDownspoutFt" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputDownspoutFt">
+                    <label for="inputDownspoutFt" class="inputLabel">Downspout</label>
+                    <output class="outputField" id="outputDownspoutFtCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleForA" class="toggleButton" data-item="A">5</button>
-                    <input type="number" class="inputField" id="inputA" data-item="A">
-                    <label for="inputA" class="inputLabel">A</label>
-                    <output class="firstOutputField" id="outputFieldACost" data-item="A"></output>
-                    <output class="secondOutputField" id="outputFieldACharge" data-item="A"></output>
+                    <button id="sizeToggleAElbow" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputAElbow">
+                    <label for="inputAElbow" class="inputLabel">A Elbow</label>
+                    <output class="outputField" id="outputAElbowCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleForB" class="toggleButton" data-item="B">5</button>
-                    <input type="number" class="inputField" id="inputB" data-item="B">
-                    <label for="inputB" class="inputLabel">B</label>
-                    <output class="firstOutputField" id="outputFieldBCost" data-item="B"></output>
-                    <output class="secondOutputField" id="outputFieldBCharge" data-item="B"></output>
+                    <button id="sizeToggleBElbow" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputBElbow">
+                    <label for="inputBElbow" class="inputLabel">B Elbow</label>
+                    <output class="outputField" id="outputBElbowCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleForIn" class="toggleButton" data-item="In">5</button>
-                    <input type="number" class="inputField" id="inputIn" data-item="In">
-                    <label for="inputIn" class="inputLabel">In</label>
-                    <output class="firstOutputField" id="outputFieldInCost" data-item="In"></output>
-                    <output class="secondOutputField" id="outputFieldInCharge" data-item="In"></output>
+                    <button id="sizeToggleInMiter" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputInMiter">
+                    <label for="inputInMiter" class="inputLabel">In Miter</label>
+                    <output class="outputField" id="outputInMiterCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleForOut" class="toggleButton" data-item="Out">5</button>
-                    <input type="number" class="inputField" id="inputOut" data-item="Out">
-                    <label for="inputOut" class="inputLabel">Out</label>
-                    <output class="firstOutputField" id="outputFieldOutCost" data-item="Out"></output>
-                    <output class="secondOutputField" id="outputFieldOutCharge" data-item="Out"></output>
+                    <button id="sizeToggleOutMiter" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputOutMiter">
+                    <label for="inputOutMiter" class="inputLabel">Out Miter</label>
+                    <output class="outputField" id="outputOutMiterCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleForSets" class="toggleButton" data-item="Sets">5</button>
-                    <input type="number" class="inputField" id="inputSets" data-item="Sets">
+                    <button id="sizeToggleSets" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputSets">
                     <label for="inputSets" class="inputLabel">Sets</label>
-                    <output class="firstOutputField" id="outputFieldSetsCost" data-item="Sets"></output>
-                    <output class="secondOutputField" id="outputFieldSetsCharge" data-item="Sets"></output>
-                </div>
-                <div class="AccessoriesToggleCotainer">
-                    <button class="accessoriesButton" id="accessoriesButton">Accessories</button>
-                    <output class="firstOutputField" id="outputFieldAccessoriesCost"></output>
-                    <output class="secondOutputField" id="outputFieldAccessoriesCharge" data-item="Accessories"></output>
+                    <output class="outputField" id="outputSetsCost"></output>
                 </div>
                 <div class="price" id="currentPrices">
+                    <label for="materialCharge">Charge</label>
+                    <label for="materialChargePercentage">Charge %</label>
                     <label for="materialCostPrice">Cost</label>
-                    <label for="materialChargePrice" id="Materiaq">5x</label>
-                    <label for="materialPerFootPrice">Per Ft</label>
+                    <output class="materialPrice" id="materialCharge"></output>
+                    <output class="materialPrice" id="materialChargePercentage"></output>
                     <output class="materialPrice" id="materialCostPrice"></output>
-                    <output class="materialPrice" id="materialChargePrice"></output>
-                    <output class="materialPrice" id="materialPerFootPrice"></output>
+                </div>
+                <div>
+                    <div class="search-container">
+                        <input type="text" id="searchBar" class="searchBar" placeholder="Search...">
+                        <div id="searchResults" class="dropdown-content"></div>
+                    </div>
+                    <button class="attachOrderButton" id="attachOrderButton">Attach Order</button>
                 </div>
             </div>
         </div>
     </main>
-    <script src="../javascript/costandcharge.js"></script>
+    <script src="../javascript/calculator.js"></script>
     <script src="../javascript/kwm.js"></script>
     <script src="../javascript/signin.js"></script> 
 
