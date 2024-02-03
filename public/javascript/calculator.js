@@ -332,17 +332,6 @@ document
     );
   
     // Update the materialChargePercentage output without decimal places
-    const materialChargePercentageElement = document.getElementById("materialChargePercentage");
-    materialChargePercentageElement.textContent = materialChargePercentage + "%";
-  
-    // Set color based on the percentage
-    if (materialChargePercentage >= 26 && materialChargePercentage <= 100) {
-      materialChargePercentageElement.style.color = "red";
-    } else if ((materialChargePercentage >= 21 && materialChargePercentage <= 25) || (materialChargePercentage >= 10 && materialChargePercentage <= 14)) {
-      materialChargePercentageElement.style.color = "yellow";
-    } else if (materialChargePercentage >= 15 && materialChargePercentage <= 20) {
-      materialChargePercentageElement.style.color = "green";
-    } else if (materialChargePercentage >= 0 && materialChargePercentage <= 9) {
-      materialChargePercentageElement.style.color = "red";
-    }
+    document.getElementById("materialChargePercentage").textContent =
+      materialChargePercentage + "%";
   }
