@@ -22,81 +22,88 @@
             </div>
             <div class="row">
                 <input type="number" class="inputFieldConvert" id="lbInput">
-                <label for="lbInput" class="toLabel">Lb</label>
+                <span class="toLabel">Lb</span>
                 <output type="number" class="outputField" id="ftOutput"></output>
-                <label for="ftOutput" class="toLabel">Ft</label>
+                <span class="toLabel">Ft</span>
             </div>
             <div class="row">
                 <input type="number" class="inputFieldConvert" id="ftInput">
-                <label for="ftinput" class="toLabel">Ft</label>
+                <span class="toLabel">Ft</span>
                 <output type="number" class="outputField" id="lbOutput"></output>
-                <label for="lbOutput" class="toLabel">Lb</label>
+                <span class="toLabel">Lb</span>
             </div>
         </div>
         <div class="costCard">
             <div id="typeOfCalculation" class="typeOfCalculation">
-                <span class="typeOfCalculationText">C&C</span>
-                <span id="pricePerFootDisplay" class="pricePerFootDisplay"></span>
-                <input type="range" class="pricePerFoot" id="pricePerFootSelector" min="1" max="20" step="0.5">
+                <div class="topCalculationContainer">
+                    <span class="typeOfCalculationText">C&C</span>
+                    <span id="pricePerFootDisplay" class="pricePerFootDisplay"></span>
+                </div>
+                <div class="topCalculationContainer">
+                    <output class="materialPrice" id="materialTotalFootage"></output>
+                    <input type="range" class="pricePerFoot" id="pricePerFootSelector" min="1" max="20" step="0.5">
+                </div>
             </div>
             <div class="calculatorRows">
                 <div class="toggleContainer">
                     <button id="sizeToggleGutterFt" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputGutterFt">
-                    <label for="inputGutterFt" class="inputLabel">Gutter Ft</label>
+                    <span class="inputLabel">Gutter Ft</span>
                     <output class="outputField" id="outputGutterFtCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleDownspoutFt" class="toggleButton">5</button>
-                    <input type="number" class="inputField" id="inputDownspoutFt">
-                    <label for="inputDownspoutFt" class="inputLabel">Downspout</label>
-                    <output class="outputField" id="outputDownspoutFtCost"></output>
+                    <button id="sizeToggleDownspout" class="toggleButton">5</button>
+                    <input type="number" class="inputField" id="inputDownspout">
+                    <span class="inputLabel">Downspout</span>
+                    <output class="outputField" id="outputDownspoutCost"></output>
                 </div>
                 <div class="toggleContainer">
                     <button id="sizeToggleAElbow" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputAElbow">
-                    <label for="inputAElbow" class="inputLabel">A Elbow</label>
+                    <span class="inputLabel">A Elbow</span>
                     <output class="outputField" id="outputAElbowCost"></output>
                 </div>
                 <div class="toggleContainer">
                     <button id="sizeToggleBElbow" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputBElbow">
-                    <label for="inputBElbow" class="inputLabel">B Elbow</label>
+                    <span class="inputLabel">B Elbow</span>
                     <output class="outputField" id="outputBElbowCost"></output>
                 </div>
                 <div class="toggleContainer">
                     <button id="sizeToggleInMiter" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputInMiter">
-                    <label for="inputInMiter" class="inputLabel">In Miter</label>
+                    <span class="inputLabel">In Miter</span>
                     <output class="outputField" id="outputInMiterCost"></output>
                 </div>
                 <div class="toggleContainer">
                     <button id="sizeToggleOutMiter" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputOutMiter">
-                    <label for="inputOutMiter" class="inputLabel">Out Miter</label>
+                    <span class="inputLabel">Out Miter</span>
                     <output class="outputField" id="outputOutMiterCost"></output>
                 </div>
                 <div class="toggleContainer">
                     <button id="sizeToggleSets" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputSets">
-                    <label for="inputSets" class="inputLabel">Sets</label>
+                    <span class="inputLabel">Sets</span>
                     <output class="outputField" id="outputSetsCost"></output>
                 </div>
-                <div class="price" id="currentPrices">
-                    <label for="materialCharge">Charge</label>
-                    <label for="materialChargePercentage">%</label>
-                    <label for="materialCostPrice">Cost</label>
-                    <output class="materialPrice" id="materialCharge"></output>
-                    <output class="materialPrice" id="materialChargePercentage"></output>
-                    <output class="materialPrice" id="materialCostPrice"></output>
-                </div>
-                <div>
-                    <div class="search-container">
-                        <input type="text" id="searchBar" class="searchBar" placeholder="Search...">
-                        <div id="searchResults" class="dropdown-content"></div>
+                <div class="priceSection">
+                    <div class="priceRow">
+                        <span>Price</span>
+                        <span>Charge%</span>
+                        <span>Cost</span>
                     </div>
-                    <button class="attachOrderButton" id="attachOrderButton">Attach Order</button>
+                    <div class="priceBottomRow">
+                        <output class="materialPrice" id="materialCharge"></output>
+                        <output class="materialPrice" id="materialChargePercentage"></output>
+                        <button class="materialPrice" id="materialCostPrice"></button>
+                    </div>
                 </div>
+                <div class="search-container">
+                    <input type="text" id="searchBar" class="searchBar" placeholder="Search...">
+                    <div id="searchResults" class="dropdown-content"></div>
+                </div>
+                
             </div>
         </div>
     </main>

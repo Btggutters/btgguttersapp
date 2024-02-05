@@ -126,12 +126,34 @@ main {
 
 }
 
-.price {
+.priceSection {
     font-size: 2rem;
     text-align: right;
+
+}
+
+.priceRow {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 10px;
+}
+.priceBottomRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 10px;
+}
+
+.search-container {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+}
+.searchBar {
+    width: 100%;
+    padding: 5px;
+    font-size: 2rem;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 .ignoreButton {
     padding: 5px 10px;
@@ -152,19 +174,19 @@ main {
     font-size: 2rem;
 }
 
-
-
-
-
 .typeOfCalculation {
     display: grid;
-    grid-template-columns: 2fr 3fr 7fr;
-    align-items: center;
-  }
+    grid-template-rows: 1fr 1fr;
+    margin-bottom: 10px;
+}
+
+.topCalculationContainer {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: 100%;
+    margin-bottom: 10px;
+}
   
-  .typeOfCalculationText, .pricePerFootDisplay, .pricePerFoot {
-    white-space: nowrap; /* Ensures the text does not wrap */
-  }
   
   .pricePerFootDisplay {
     overflow: hidden; /* Prevents the display from affecting the slider size */
