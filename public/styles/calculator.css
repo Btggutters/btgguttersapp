@@ -27,80 +27,9 @@ main {
     align-items: center;
     margin-bottom: 10px;
 }
-
-.inputBox {
-    width: 80px;
-    padding: 5px;
-    border: 1px solid black;
-    font-size: 2rem;
-}
-.conversionsOutputBox {
-    width: 80%;
-    border: none;
-    background-color: var(--second-color);
-    font-size: 2rem;
-    text-align: center;
-}
-.sizeRow {
-    display: flex;
-    justify-content: space-between;
-}
-
-.costCard {
-    border: 3px solid var(--first-color);
-    border-radius: 10px;
-    position: relative;
-    padding: 10px 10px;
-    width: 100%;
-    margin: 10px auto;
-    background-color: var(--second-color);
-    height: auto;
-    font-size: 1.5rem;
-    font-weight: bold;
-    display: grid;
-    grid-template-rows: 1fr 10fr;
-    box-sizing: border-box;
-}
-
-.toggleContainer {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid var(--third-color);
-    display: grid;
-    grid-template-columns: 1fr 2fr 2fr 3fr;
-    grid-auto-flow: column;
-}
-.AccessoriesToggleCotainer {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid var(--third-color);
-    display: grid;
-    grid-template-columns: 6fr 3fr 2fr;
-    grid-auto-flow: column;
-}
-.accessoriesButton {
-
-    padding: 5px 5px;
-    border: 2px solid var(--first-color);
-    background-color: white;
-    height: 7vh;
-    width: auto;
-    border-radius: 10px;
-    font-size: 1.8rem;
-    font-weight: bold;
-
-}
-.inputField {
-    width: 80px;
-    font-size: 2rem;
-}
 .inputFieldConvert {
     width: 80px ;
     font-size: 2rem;
-}
-.calculatorTitle {
-    width: 90%;
-
 }
 .kwmButtonArea {
     width: 20%;
@@ -109,8 +38,47 @@ main {
     justify-content: center;
     align-items: center;
 }
-.toggleButton , .toggleButtonKwm {
 
+
+.costCard {
+    border: 3px solid var(--first-color);
+    border-radius: 10px;
+    position: relative;
+    padding: 3px 5px;
+    width: 100%;
+    margin: 10px auto;
+    background-color: var(--second-color);
+    height: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+
+.toggleContainer {
+    margin: 5px 0;
+    border-bottom: 1px solid var(--third-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Ensure vertical alignment */
+}
+
+.inputField {
+    width: 20%; /* You might need to adjust this */
+    font-size: 2rem;
+    flex-grow: 0; /* Do not allow it to grow */
+    flex-shrink: 1; /* Allow it to shrink if necessary */
+}
+
+.outputField {
+    text-align: right;
+    color: var(--first-color);
+    font-size: 2rem;
+    flex-grow: 1; /* Allow it to grow to fill available space */
+    margin-left: auto; /* Push it to the right */
+}
+
+.toggleButton, .toggleButtonKwm {
     padding: 5px 5px;
     border: 4px solid var(--first-color);
     background-color: var(--second-color);
@@ -123,9 +91,9 @@ main {
     align-items: center;
     width: 50px; /* Adjust as needed */
     height: 50px; /* Adjust as needed */
-
+    flex-grow: 0; /* Do not allow it to grow */
+    flex-shrink: 0; /* Do not allow it to shrink */
 }
-
 .priceSection {
     font-size: 2rem;
     text-align: right;
@@ -168,11 +136,7 @@ main {
     font-weight: bold;
 }
 
-.outputField {
-    text-align: center;
-    color: var(--first-color);
-    font-size: 2rem;
-}
+
 
 .typeOfCalculation {
     display: grid;
