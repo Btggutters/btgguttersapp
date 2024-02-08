@@ -77,18 +77,4 @@ CREATE TABLE material_prices (
     price NUMERIC
 );
 
-accessoriesCost = gutterHangerCost + gutterBigScrewCost + downspoutBigScrewCost + downspoutSmallScrewCost + elbowsSmallScrewPrice + mitersSmallScrewPrice + mitersCaulkPrice + setsCaulkPrice
-
-
-// At the end of fetchMaterialPrices and updateMaterialCostPriceButton
-updateTotalFootageAndMaterialCharge();
-
-// Inside the event listeners for '.inputField' and '#pricePerFootSelector'
-document.querySelectorAll('.inputField, #pricePerFootSelector').forEach(input => {
-  input.addEventListener('input', () => {
-    updateCost(...); // Existing functionality
-    updateMaterialCostPriceButton(); // Existing functionality
-    updateTotalFootageAndMaterialCharge(); // Add this line
-  });
-});
 

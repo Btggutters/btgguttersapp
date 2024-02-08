@@ -360,3 +360,9 @@ app.get('/get-material-prices', checkUserLoggedIn, async (req, res) => {
     res.status(500).json({ error: err.stack });
   }
 });
+app.post('/logout', (req, res) => {
+  // Clear the 'token' cookie
+  res.clearCookie('token');
+  // Send a response indicating the user has been logged out
+  res.json({ message: 'Logged out successfully' });
+});

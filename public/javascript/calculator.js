@@ -218,7 +218,7 @@ document
   
     const pricePerFoot = parseFloat(document.getElementById("pricePerFootSelector").value) || 0;
     let materialCharge = pricePerFoot * totalFootage;
-    materialCharge = Math.ceil(materialCharge / 25) * 25;
+    materialCharge = Math.ceil(materialCharge / 50) * 50;
   
     // Fetch the materialCostPrice from the button's text content
     const materialCostPriceButton = document.getElementById("materialCostPrice");

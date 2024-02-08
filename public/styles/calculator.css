@@ -5,80 +5,76 @@ main {
     align-items: center;
     height: 100%;
 }
-.toLabel {
-  font-size: 2.2rem;
-  font-weight: bold;
-  MARgin-left:10px;
-  width: 20%;
+
+.toLabel,
+.inputLabel,
+.inputField,
+.inputFieldConvert {
+    font-size: 1.5rem;
+    width: 100%;
 }
-.kwmCard {
+.outputField,
+.materialPrice,
+.pricePerFootDisplay,
+.materialPriceButton{
+    font-size: 2rem;
+    font-weight: bold;
+    width: 100%;
+}
+.materialPrice,
+.materialPriceButton {
+    text-align: right;
+
+}
+.materialPriceButton {
+    background-color: var(--second-color);
+    border: 3px solid var(--first-color);
+}
+
+
+
+.btgCard {
     border: 3px solid var(--first-color);
     border-radius: 10px;
     padding: 10px 10px;
-    width: 98%;
+    width: 99%;
     margin: 6px auto;
     background-color: var(--second-color);
     height: auto;
-    display: grid;
-    grid-template-rows: 4fr 4fr 4fr;
+    display: flexbox;
 }
+
 .row {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr;
     margin-bottom: 10px;
-}
-.inputFieldConvert {
-    width: 80px ;
-    font-size: 2rem;
-}
-.kwmButtonArea {
-    width: 20%;
-    text-align: right;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.costCard {
-    border: 3px solid var(--first-color);
-    border-radius: 10px;
-    position: relative;
-    padding: 3px 5px;
-    width: 100%;
-    margin: 10px auto;
-    background-color: var(--second-color);
-    height: auto;
-    font-size: 1.5rem;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
 }
 
 .toggleContainer {
     margin: 5px 0;
     border-bottom: 1px solid var(--third-color);
-    display: flex;
-    flex-direction: row;
-    align-items: center; /* Ensure vertical alignment */
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    height: 40px;
+
 }
 
 .inputField {
-    width: 20%; /* You might need to adjust this */
-    font-size: 2rem;
-    flex-grow: 0; /* Do not allow it to grow */
-    flex-shrink: 1; /* Allow it to shrink if necessary */
+    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 1;
+
 }
 
 .outputField {
     text-align: right;
-    color: var(--first-color);
-    font-size: 2rem;
-    flex-grow: 1; /* Allow it to grow to fill available space */
-    margin-left: auto; /* Push it to the right */
+    flex-grow: 1;
+    margin-left: auto;
+
 }
 
-.toggleButton, .toggleButtonKwm {
+.toggleButton,
+.toggleButtonKwm {
     padding: 5px 5px;
     border: 4px solid var(--first-color);
     background-color: var(--second-color);
@@ -89,11 +85,12 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px; /* Adjust as needed */
-    height: 50px; /* Adjust as needed */
-    flex-grow: 0; /* Do not allow it to grow */
-    flex-shrink: 0; /* Do not allow it to shrink */
+    width: 50px;
+    height: 50px;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
+
 .priceSection {
     font-size: 2rem;
     text-align: right;
@@ -105,82 +102,91 @@ main {
     grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: 10px;
 }
+
 .priceBottomRow {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: 10px;
 }
 
-.search-container {
-    display: flex;
-    width: 100%;
-    margin-top: 10px;
+.searchContainer {
+    display: flexbox;
 }
-.searchBar {
+
+.searchBar,
+.colorDropdown {
     width: 100%;
     padding: 5px;
     font-size: 2rem;
     border: 1px solid black;
     border-radius: 10px;
 }
-.ignoreButton {
-    padding: 5px 10px;
-    border: none;
-    background-color: var(--second-color);
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 12vw;
-    height: 100%;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    font-weight: bold;
+.typeOfCalculationTop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+}
+.typeOfCalculationBottom {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+    margin: 2px 15px;
+
 }
 
-
-
-.typeOfCalculation {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    margin-bottom: 10px;
-}
-
-.topCalculationContainer {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+.pricePerFootDisplay {
+    overflow: hidden;
+    text-overflow: ellipsis;
     width: 100%;
-    margin-bottom: 10px;
 }
-  
-  
-  .pricePerFootDisplay {
-    overflow: hidden; /* Prevents the display from affecting the slider size */
-    text-overflow: ellipsis; /* Adds an ellipsis if the text overflows */
-    max-width: 100%; /* Adjust based on your layout needs */
-  }
-  
-  .pricePerFoot {
-    width: 100%; /* Makes the slider take up all available space */
-  }
 
-  .search-container {
+.pricePerFoot {
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+
+.pricePerFoot::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background: var(--first-color);
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: -11px;
+
+}
+
+
+.pricePerFoot::-webkit-slider-runnable-track {
+    height: 8px;
+    background: var(--third-color);
+    border-radius: 4px;
+}
+
+.search-container {
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdownContent {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
-  
-  .dropdown-content div {
+}
+
+.dropdownContent div {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  .dropdown-content div:hover {background-color: #f1f1f1}
+}
+
+.dropdownContent div:hover {
+    background-color: #f1f1f1
+}

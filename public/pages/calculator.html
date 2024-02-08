@@ -10,79 +10,70 @@
 <body>
     <header>
         <a href="home.html" class="companyName">BTG Gutters</a>
-        <button class="loginButton" onclick="openSigninModal()"></button>
+        <button class="accountButton"></button>
     </header>     
     <main>
-        <div class="kwmCard">
+        <div class="btgCard">
             <div class="row">
-                <h1 class="calculatorTitle">Convert</h1>
-                <div class="kwmButtonArea">
-                    <button class="toggleButtonKwm" id="toggleButtonKwm"></button>
-                </div>
+                <button class="toggleButtonKwm" id="toggleButtonKwm"></button>
             </div>
             <div class="row">
                 <input type="number" class="inputFieldConvert" id="lbInput">
-                <span class="toLabel">Lb</span>
+                <span class="inputLabel">Lb</span>
                 <output type="number" class="outputField" id="ftOutput"></output>
-                <span class="toLabel">Ft</span>
+                <span class="inputLabel">Ft</span>
             </div>
             <div class="row">
                 <input type="number" class="inputFieldConvert" id="ftInput">
-                <span class="toLabel">Ft</span>
+                <span class="inputLabel">Ft</span>
                 <output type="number" class="outputField" id="lbOutput"></output>
-                <span class="toLabel">Lb</span>
+                <span class="inputLabel">Lb</span>
             </div>
         </div>
-        <div class="costCard">
+        <div class="btgCard">
             <div id="typeOfCalculation" class="typeOfCalculation">
-                <div class="topCalculationContainer">
-                    <span class="typeOfCalculationText">C&C</span>
-                    <span id="pricePerFootDisplay" class="pricePerFootDisplay"></span>
-                </div>
-                <div class="topCalculationContainer">
+                <div class="typeOfCalculationTop">
+                    <button id="sizeToggleGutterFt" class="toggleButton">5</button>
                     <output class="materialPrice" id="materialTotalFootage"></output>
-                    <input type="range" class="pricePerFoot" id="pricePerFootSelector" min="1" max="20" step="0.5">
+                    
+                </div>
+                <div class="typeOfCalculationBottom">
+                    <span id="pricePerFootDisplay" class="pricePerFootDisplay"></span>
+                    <input type="range" class="pricePerFoot" id="pricePerFootSelector" min="4" max="12" step="0.5">
                 </div>
             </div>
             <div class="calculatorRows">
                 <div class="toggleContainer">
-                    <button id="sizeToggleGutterFt" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputGutterFt">
-                    <span class="inputLabel">Gutter Ft</span>
+                    <span class="inputLabel">Gutter</span>
                     <output class="outputField" id="outputGutterFtCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleDownspout" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputDownspout">
                     <span class="inputLabel">Downspout</span>
                     <output class="outputField" id="outputDownspoutCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleAElbow" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputAElbow">
                     <span class="inputLabel">A Elbow</span>
                     <output class="outputField" id="outputAElbowCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleBElbow" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputBElbow">
                     <span class="inputLabel">B Elbow</span>
                     <output class="outputField" id="outputBElbowCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleInMiter" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputInMiter">
                     <span class="inputLabel">In Miter</span>
                     <output class="outputField" id="outputInMiterCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleOutMiter" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputOutMiter">
                     <span class="inputLabel">Out Miter</span>
                     <output class="outputField" id="outputOutMiterCost"></output>
                 </div>
                 <div class="toggleContainer">
-                    <button id="sizeToggleSets" class="toggleButton">5</button>
                     <input type="number" class="inputField" id="inputSets">
                     <span class="inputLabel">Sets</span>
                     <output class="outputField" id="outputSetsCost"></output>
@@ -96,15 +87,12 @@
                     <div class="priceBottomRow">
                         <output class="materialPrice" id="materialCharge"></output>
                         <output class="materialPrice" id="materialChargePercentage"></output>
-                        <button class="materialPrice" id="materialCostPrice"></button>
+                        <output class="materialPriceButton" id="materialCostPrice"></output>
                     </div>
                 </div>
-                <div class="search-container">
-                    <input type="text" id="searchBar" class="searchBar" placeholder="Search...">
-                    <div id="searchResults" class="dropdown-content"></div>
-                </div>
-                
             </div>
+        </div>
+        <div class="btgCard">
         </div>
     </main>
     <script src="../javascript/calculator.js"></script>
