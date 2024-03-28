@@ -70,18 +70,34 @@
 }
 
 .commonForm {
-    display: grid;
-
-    width: 100%;
+    display: flex;
+    flex-direction: column;
     padding: 5px;
     margin-bottom: 10px;
     border: 2px solid var(--first-color);
     border-radius: 15px;
     background: var(--second-color);
 }
-
-
-
+.commonRow {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.commonRow label {
+    text-align: left;
+    font-size: var(--medium);
+}
+.uploadFeild {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.uploadFeild img {
+  max-height: 90px;
+}
   .input {
     box-sizing: border-box; /* Include padding and border in the element's width */
     height: 40px;

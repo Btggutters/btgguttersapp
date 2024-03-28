@@ -28,16 +28,43 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <form class="commonForm">
-                    <input class="input smallInput" type="text" id="jobId" name="job" placeholder="Job #">
-                    <input class="input" type="text" id="name" name="name" placeholder="Name">
-                    <input class="input" type="text" id="status" name="status" placeholder="Status">
-                    <input class="input" type="tel" id="phone" name="phone" placeholder="Phone">
-                    <input class="input" type="text" id="address" name="address" placeholder="Address">
-                    <select class="input" id="company" name="company">
-                        <option value="">Select Company</option>
-                        <!-- Options will be populated dynamically -->
-                    </select>
-                    <input type="file" id="drawing" name="drawing" place> 
+                    <div class="commonRow">
+                        <label for="jobId">Job #</label>
+                        <input class="input smallInput" type="text" id="jobId" name="jobId" placeholder="Job #">
+                    </div>
+                    <div class="commonRow">
+                        <label for="name">Name</label>
+                        <input class="input" type="text" id="name" name="name" placeholder="Name">
+                    </div>
+                    <div class="commonRow">
+                        <label for="status">Status</label>
+                        <input class="input" type="text" id="status" name="status" placeholder="Status">
+                    </div>
+                    <div class="commonRow">
+                        <label for="phone">Phone</label>
+                        <input class="input" type="tel" id="phone" name="phone" placeholder="Phone">
+                    </div>
+                    <div class="commonRow">
+                        <label for="address">Address</label>
+                        <input class="input" type="text" id="address" name="address" placeholder="Address">
+                    </div>
+                    <div class="commonRow">
+                        <label for="email">Email</label>
+                        <input class="input" type="email" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="commonRow">
+                        <label for="company">Company</label>
+                        <select class="input" id="company" name="company">
+                            <option value="">Select Company</option>
+                            <!-- Options will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="uploadFeild">
+                        <img src="/images/drawing.png" id="drawing" alt="Drawing">
+                        <img src="/images/photos.png" id="photos" alt="Photos">
+                        <img src="/images/inventoryIcon.png" id="inventory" alt="Inventory">
+                    </div>
+                    
                     <div class="dateInputArea">
                         <button class="dateInputButton" type="button" onclick="">                            
                             <span class="dateButtonTitle">Estimate</span>                        
@@ -63,18 +90,31 @@
                                 <span class="realDate" id="jobsCardInstallDate"></span>
                             </div>
                         </button>
+                    </div>
+                    <div class="commonRow">
+                        <label for="price">Price</label>
+                        <input type="number" id="price" name="price" class="input smallInput" placeholder="Price">
                     </div>          
-                    <input type="number" id="price" name="price" class="input smallInput" placeholder="Price">
-                    <textarea class="input doubleInput" id="notes" name="notes" placeholder="Notes"></textarea>
-                    <select id="obtainedHow" name="obtainedHow" class="input">
-                        <option value="How did you obtain this Lead?">How did you obtain this Lead?</option>
-                        <option value="Yard Sign">Yard Sign</option>
-                        <option value="Google">Google</option>
-                        <option value="Facebook">Facebook</option>
-                        <option value="Freinds&Family">Freinds&Family</option>
-                        <option value="Other">Other</option>
-                    </select>                
-                    <button class="btgButton" type="submit">Save</button>
+                    
+                    <div class="commonRow">
+                        <label for="notes">Notes</label>
+                        <textarea class="input doubleInput" id="notes" name="notes" placeholder="Notes"></textarea>
+                    </div>
+                    <div class="commonRow">
+                        <label for="obtainedHow">Obtained</label>
+                        <select id="obtainedHow" name="obtainedHow" class="input">
+                            <option value="How did you obtain this Lead?">How did you obtain?</option>
+                            <option value="Yard Sign">Yard Sign</option>
+                            <option value="Google">Google SEO</option>
+                            <option value="GoogleAds">Google Ads</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="FacebookAds">Facebook Ads</option>
+                            <option value="Freinds">Freinds</option>
+                            <option value="Family">Family</option>
+                            <option value="Neighbor">Neighbor</option>
+                            <option value="Other">Other</option>
+                        </select>                
+                    </div>
                 </form>
             </div>
         </div>

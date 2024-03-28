@@ -190,3 +190,12 @@ main {
 .dropdownContent div:hover {
     background-color: #f1f1f1
 }
+
+.calculatorDropdown {
+    width: 100%;
+    padding: 5px;
+    font-size: 1.5rem;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+

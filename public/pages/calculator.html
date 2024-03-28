@@ -78,10 +78,20 @@
                     <span class="inputLabel">Sets</span>
                     <output class="outputField" id="outputSetsCost"></output>
                 </div>
+                <div class="toggleContainer">
+                    <input type="number" class="inputField" id="inputFilter">
+                    <span class="inputLabel">Filter</span>
+                    <output class="outputField" id="outputFilterCost"></output>
+                </div>
+                <div class="toggleContainer">
+                    <input type="number" class="inputField" id="inputAdapter">
+                    <span class="inputLabel">Adapter</span>
+                    <output class="outputField" id="outputAdapterCost"></output>
+                </div>
                 <div class="priceSection">
                     <div class="priceRow">
                         <span>Price</span>
-                        <span>Charge%</span>
+                        <span>%</span>
                         <span>Cost</span>
                     </div>
                     <div class="priceBottomRow">
@@ -90,6 +100,16 @@
                         <output class="materialPriceButton" id="materialCostPrice"></output>
                     </div>
                 </div>
+            <div class="dropdownContainer">
+                <select id="colorDropdown" class="calculatorDropdown">
+                    <option value="">Select Color</option>
+                </select>
+            </div>
+            <div class="dropdownContainer">
+                <select id="addressDropdown" class="calculatorDropdown">
+                    <option value="">Select Address</option>
+                </select>
+            </div>
             </div>
         </div>
         <div class="btgCard">

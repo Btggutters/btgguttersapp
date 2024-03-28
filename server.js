@@ -306,7 +306,8 @@ app.get('/get-full-job/:id', checkUserLoggedIn, async (req, res) => {
               j.id, 
               cu.customerName, 
               j.status, 
-              cu.customerPhoneNumber, 
+              cu.customerPhoneNumber,
+              cu.customeremail,
               j.address, 
               c.companyName, 
               j.drawing, 
@@ -365,4 +366,131 @@ app.post('/logout', (req, res) => {
   res.clearCookie('token');
   // Send a response indicating the user has been logged out
   res.json({ message: 'Logged out successfully' });
+});
+app.get('/get-job-addresses', checkUserLoggedIn, async (req, res) => {
+  try {
+    const { rows } = await pool.query(`
+      SELECT j.id, j.address
+      FROM jobs j
+      LEFT JOIN job_orders jo ON j.id = jo.job_id
+      WHERE jo.job_id IS NULL;
+    `);
+    res.json(rows);
+  } catch (error) {
+    console.error('Failed to fetch job addresses:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// endpoint for updating job_orders and jobs after estimate
+const updateJobPrice = async (jobId, price) => {
+  const query = `
+    UPDATE jobs
+    SET price = $2
+    WHERE id = $1;
+  `;
+  const result = await pool.query(query, [jobId, price]);
+  return result.rowCount;
+};
+
+const insertJobOrder = async (jobData) => {
+  const query = `
+    INSERT INTO job_orders (
+      job_id, size, gutterft, downspout, aelbow, belbow, outmiter, inmiter, filter, color, bigscrews, smallscrews, caulk, adapters, expect_cost, hangers, sets
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17);
+  `;
+  await pool.query(query, jobData);
+};
+
+app.post('/insert-job-data', checkUserLoggedIn, async (req, res) => {
+  const jobData = [
+    req.body.selectedJobId,
+    req.body.sizeToggleGutterFt,
+    req.body.inputGutterFt,
+    req.body.inputDownspout,
+    req.body.inputAElbow,
+    req.body.inputBElbow,
+    req.body.inputOutMiter,
+    req.body.inputInMiter,
+    req.body.inputFilter,
+    req.body.selectedColor,
+    req.body.BigScrews,
+    req.body.SmallScrews,
+    req.body.Caulk,
+    req.body.inputAdapter,
+    req.body.materialCostPrice,
+    req.body.Hangers,
+    req.body.inputSets
+  ];
+
+  try {
+    await pool.query('BEGIN');
+    const updatedRows = await updateJobPrice(req.body.selectedJobId, req.body.materialCharge);
+
+    if (updatedRows === 0) {
+      await pool.query('ROLLBACK');
+      return res.status(404).json({ message: 'Job not found' });
+    }
+
+    await insertJobOrder(jobData);
+    await pool.query('COMMIT');
+    res.status(200).json({ message: 'Job and job order data inserted successfully' });
+  } catch (error) {
+    await pool.query('ROLLBACK');
+    console.error('Error processing job data:', error);
+    res.status(500).json({ error: 'Failed to process job data' });
+  }
+});
+app.post('/update-job/:id', checkUserLoggedIn, async (req, res) => {
+  const jobId = req.params.id;
+  const {
+    status, address, drawing, estdate, insdate, price, notes,
+    name, phone, email, obtainedHow // Assuming these are part of the request body
+  } = req.body;
+
+  // Start a transaction
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const updateJobQuery = `
+      UPDATE jobs
+      SET 
+        status = $2,
+        address = $3,
+        drawing = $4,
+        estdate = TO_DATE($5, 'YYYY-MM-DD'),
+        insdate = TO_DATE($6, 'YYYY-MM-DD'),
+        price = $7,
+        notes = $8
+      WHERE id = $1 RETURNING customerid;
+    `;
+    const jobResult = await client.query(updateJobQuery, [jobId, status, address, drawing, estdate, insdate, price, notes]);
+    const customerId = jobResult.rows[0].customerid; // Extract customerId from the job update result
+    console.log(customerId);
+
+    const updateCustomerQuery = `
+      UPDATE customer
+      SET 
+        customername = $2,
+        customerphonenumber = $3,
+        customeremail = $4,
+        obtainedhow = $5
+      WHERE id = $1;
+    `;
+
+    await client.query(updateCustomerQuery, [customerId, name, phone, email, obtainedHow]);
+    console.log(updateCustomerQuery);
+    console.log([customerId, name, phone, email, obtainedHow]);
+    await client.query('COMMIT');
+    res.json({ message: 'Job and customer updated successfully' });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error executing transaction', err.stack);
+    res.status(500).json({ error: 'Failed to update the job and customer.' });
+  } finally {
+    client.release();
+  }
 });

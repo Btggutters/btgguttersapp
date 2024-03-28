@@ -1,9 +1,9 @@
--i will have our customers data in a database so please make sure all connections are secure  
--postgres is my database so if you need to make a new table or change a table please give me the sql query to do so
+ 
 
--Here is the current structure of the database, if anything is changed we need to update this document
-
-
+<IMPORTANT>
+Here is the current living document of the postgres database, if any SQL Query is generated we need to make sure its correct here
+,always give me the current table im working with select statement after giving any querys
+</IMPORTANT>
 
 CREATE TABLE material (
     id SERIAL PRIMARY KEY,
@@ -63,11 +63,23 @@ CREATE TABLE job_orders (
     id SERIAL PRIMARY KEY,
     job_id INT NOT NULL,
     size INT CHECK (size > 0),
-    name VARCHAR(255),
-    qty INT CHECK (qty >= 0),
     ready BOOLEAN,
+    GutterFt INT CHECK (GutterFt >= 0),
+    Downspout INT CHECK (Downspout >= 0),
+    AElbow INT CHECK (AElbow >= 0),
+    BElbow INT CHECK (BElbow >= 0),
+    OutMiter INT CHECK (OutMiter >= 0),
+    InMiter INT CHECK (InMiter >= 0),
+    Filter INT CHECK (Filter >= 0),
+    color VARCHAR(255),
+    BigScrews INT CHECK (BigScrews >= 0),
+    SmallScrews INT CHECK (SmallScrews >= 0),
+    Caulk INT CHECK (Caulk >= 0),
+    Adapter INT CHECK (Adapters >= 0),
+    expect_cost DECIMAL(10, 2)
     FOREIGN KEY (job_id) REFERENCES jobs(id)
 );
+
 
 CREATE TABLE material_prices (
     id SERIAL PRIMARY KEY,
@@ -76,5 +88,6 @@ CREATE TABLE material_prices (
     price_6in NUMERIC,
     price NUMERIC
 );
+
 
 
