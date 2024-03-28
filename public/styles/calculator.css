@@ -150,12 +150,12 @@ main {
 .pricePerFoot::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     background: var(--first-color);
     cursor: pointer;
     border-radius: 50%;
-    margin-top: -11px;
+    margin-top: -19px;
 
 }
 
